@@ -16,5 +16,4 @@ class lock_protocol {
     stat
   };
 };
-
 #endif 
