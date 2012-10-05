@@ -34,7 +34,7 @@ lock_server::release(int clt, lock_protocol::lockid_t lid, int &r)
 {
   	lock_protocol::status ret = lock_protocol::OK;
   	printf("release request from clt %d\n", clt);
-	r = 9;
+	r = 99;
 	return ret;
 }
 
