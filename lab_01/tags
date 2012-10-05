@@ -88,6 +88,7 @@ a2	rpc/method_thread.h	/^				A2  a2;$/;"	m	class:__anon2::XXX
 accept_conn	rpc/connection.cc	/^tcpsconn::accept_conn()$/;"	f	class:tcpsconn
 acquire	lock_client.cc	/^lock_client::acquire(lock_protocol::lockid_t lid)$/;"	f	class:lock_client
 acquire	lock_protocol.h	/^    acquire = 0x7001,$/;"	e	enum:lock_protocol::rpc_numbers
+acquire	lock_server.cc	/^lock_server::acquire(int clt, lock_protocol::lockid_t lid, int &r)$/;"	f	class:lock_server
 addJob	rpc/thr_pool.cc	/^ThrPool::addJob(void *(*f)(void *), void *a)$/;"	f	class:ThrPool
 addObjJob	rpc/thr_pool.h	/^ThrPool::addObjJob(C *o, void (C::*m)(A), A a)$/;"	f	class:ThrPool
 add_callback	rpc/pollmgr.cc	/^PollMgr::add_callback(int fd, poll_flag flag, aio_callback *ch)$/;"	f	class:PollMgr
@@ -355,6 +356,7 @@ reg	rpc/rpc.h	/^rpcs::reg(unsigned int proc, S*sob, int (S::*meth)(const A1 a1, 
 reg1	rpc/rpc.cc	/^rpcs::reg1(unsigned int proc, handler *h)$/;"	f	class:rpcs
 release	lock_client.cc	/^lock_client::release(lock_protocol::lockid_t lid)$/;"	f	class:lock_client
 release	lock_protocol.h	/^    release,$/;"	e	enum:lock_protocol::rpc_numbers
+release	lock_server.cc	/^lock_server::release(int clt, lock_protocol::lockid_t lid, int &r)$/;"	f	class:lock_server
 reply_header	rpc/marshall.h	/^	reply_header(int x=0, int r=0): xid(x), ret(r) {}$/;"	f	struct:reply_header
 reply_header	rpc/marshall.h	/^struct reply_header {$/;"	s
 reply_t	rpc/rpc.h	/^		reply_t (unsigned int _xid) {$/;"	f	struct:rpcs::reply_t
