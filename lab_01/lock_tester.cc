@@ -29,7 +29,6 @@ pthread_mutex_t count_mutex;
 void
 check_grant(lock_protocol::lockid_t lid)
 {
-	printf("check_grant entry\n");
 	ScopedLock ml(&count_mutex);
 	int x = lid & 0xff;
 	if(ct[x] != 0){
@@ -43,7 +42,6 @@ check_grant(lock_protocol::lockid_t lid)
 void
 check_release(lock_protocol::lockid_t lid)
 {
-	printf("check_relaese entry\n");
 	ScopedLock ml(&count_mutex);
 	int x = lid & 0xff;
 	if(ct[x] != 1){

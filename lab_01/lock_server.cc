@@ -29,7 +29,7 @@ lock_protocol::status
 lock_server::acquire(int clt, lock_protocol::lockid_t lid, int &r)
 {
   	lock_protocol::status ret = lock_protocol::OK;
-  	printf("acquire request from clt %d\n", clt);
+  	//printf("acquire request from clt %d\n", clt);
 	locker(clt, lid);
 	nacquire += 1;
 	r = nacquire;
@@ -86,10 +86,12 @@ lock_server::locker(int clt, lock_protocol::lockid_t lid)
 {
 	if(is_lock_existed(lid)){
 		if(is_locked(lid)){
+			pthread_mutex_lock(&count_mutex);
 			printf("%d wait for the signal\n", clt);
 			pthread_cond_wait(&count_threshold_cv, &count_mutex);
 			printf("%d get the signal\n", clt);
 			create_lock(clt, lid);
+			pthread_mutex_unlock(&count_mutex);
 		}else{
 			pthread_mutex_lock(&count_mutex);
 			create_lock(clt, lid);
