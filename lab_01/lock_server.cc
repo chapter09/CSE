@@ -9,6 +9,7 @@
 lock_server::lock_server():
   nacquire (0)
 {
+	table_lk[12345] = 54321;
 }
 
 lock_protocol::status
@@ -34,7 +35,9 @@ lock_server::release(int clt, lock_protocol::lockid_t lid, int &r)
 {
   	lock_protocol::status ret = lock_protocol::OK;
   	printf("release request from clt %d\n", clt);
-	r = 99;
+	table_lk[lid] = FREE;
+    printf("%ll", lid);
+	r = table_lk[lid];
 	return ret;
 }
 
