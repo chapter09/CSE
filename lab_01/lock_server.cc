@@ -1,5 +1,5 @@
 // the lock server implementation
-
+//Todo: 1. ~lcok_server(); 2. the loop for the signal waiting thread.
 #include "lock_server.h"
 #include <sstream>
 #include <stdio.h>
@@ -12,8 +12,8 @@
 lock_server::lock_server():
   nacquire (0)
 {
-	pthread_mutex_init(&count_mutex, NULL);
-	pthread_cond_init(&count_threshold_cv, NULL);	
+	VERIFY(pthread_mutex_init(&mutex, NULL) == 0);
+	VERIFY(pthread_cond_init(&cv, NULL) == 0);	
 }
 
 lock_protocol::status
@@ -41,15 +41,15 @@ lock_server::release(int clt, lock_protocol::lockid_t lid, int &r)
 {
   	lock_protocol::status ret = lock_protocol::OK;
   	printf("release request from clt %d\n", clt);
-	pthread_mutex_lock(&count_mutex);
+	pthread_mutex_lock(&mutex);
 	
 	table_lk[lid] = FREE;
 	nacquire -= 1;
 	r = nacquire;
   	printf("[send signal] thread %d\n", clt);
 	
-	pthread_cond_signal(&count_threshold_cv);
-	pthread_mutex_unlock(&count_mutex);
+	pthread_cond_signal(&cv);
+	pthread_mutex_unlock(&mutex);
 	return ret;
 }
 
@@ -86,21 +86,21 @@ lock_server::locker(int clt, lock_protocol::lockid_t lid)
 {
 	if(is_lock_existed(lid)){
 		if(is_locked(lid)){
-			pthread_mutex_lock(&count_mutex);
+			pthread_mutex_lock(&mutex);
 			printf("%d wait for the signal\n", clt);
-			pthread_cond_wait(&count_threshold_cv, &count_mutex);
+			pthread_cond_wait(&cv, &mutex);
 			printf("%d get the signal\n", clt);
 			create_lock(clt, lid);
-			pthread_mutex_unlock(&count_mutex);
+			pthread_mutex_unlock(&mutex);
 		}else{
-			pthread_mutex_lock(&count_mutex);
+			pthread_mutex_lock(&mutex);
 			create_lock(clt, lid);
-			pthread_mutex_unlock(&count_mutex);
+			pthread_mutex_unlock(&mutex);
 		}
 	}
 	else{
-		pthread_mutex_lock(&count_mutex);
+		pthread_mutex_lock(&mutex);
 		create_lock(clt, lid);
-		pthread_mutex_unlock(&count_mutex);
+		pthread_mutex_unlock(&mutex);
 	}
 }

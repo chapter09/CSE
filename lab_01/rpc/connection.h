@@ -43,8 +43,8 @@ class connection : public aio_callback {
 		void incref();
 		void decref();
 		int ref();
-                
-                int compare(connection *another);
+
+		int compare(connection *another);
 	private:
 
 		bool readpdu();
@@ -56,8 +56,8 @@ class connection : public aio_callback {
 
 		charbuf wpdu_;
 		charbuf rpdu_;
-                
-                struct timeval create_time_;
+
+		struct timeval create_time_;
 
 		int waiters_;
 		int refno_;

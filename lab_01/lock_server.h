@@ -21,8 +21,8 @@ class lock_server {
 		bool is_locked(lock_protocol::lockid_t lid);
 		void create_lock(int, lock_protocol::lockid_t lid);
 		void locker(int, lock_protocol::lockid_t lid);
-		pthread_mutex_t count_mutex;
-		pthread_cond_t count_threshold_cv;
+		pthread_mutex_t mutex;
+		pthread_cond_t cv;
 
 	protected:
 		int nacquire;
