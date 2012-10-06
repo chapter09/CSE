@@ -9,15 +9,23 @@
 #include "lock_client.h"
 #include "rpc.h"
 #include <map>
+#include <pthread.h>
 
 #define FREE 1
 #define LOCKED 0
 
 class lock_server {
+	private:
+		std::map<lock_protocol::lockid_t, int> table_lk;
+		bool is_lock_existed(lock_protocol::lockid_t lid);
+		bool is_locked(lock_protocol::lockid_t lid);
+		void create_lock(int, lock_protocol::lockid_t lid);
+		void locker(int, lock_protocol::lockid_t lid);
+		pthread_mutex_t count_mutex;
+		pthread_cond_t count_threshold_cv;
 
 	protected:
 		int nacquire;
-		std::map<lock_protocol::lockid_t, int> table_lk;
 
 	public:
 		lock_server();

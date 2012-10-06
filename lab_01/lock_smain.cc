@@ -8,7 +8,7 @@
 
 // Main loop of lock_server
 
-	int
+int
 main(int argc, char *argv[])
 {
 	int count = 0;

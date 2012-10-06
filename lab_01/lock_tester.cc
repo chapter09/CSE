@@ -29,26 +29,28 @@ pthread_mutex_t count_mutex;
 void
 check_grant(lock_protocol::lockid_t lid)
 {
-  ScopedLock ml(&count_mutex);
-  int x = lid & 0xff;
-  if(ct[x] != 0){
-    fprintf(stderr, "error: server granted %016llx twice\n", lid);
-    fprintf(stdout, "error: server granted %016llx twice\n", lid);
-    exit(1);
-  }
-  ct[x] += 1;
+	printf("check_grant entry\n");
+	ScopedLock ml(&count_mutex);
+	int x = lid & 0xff;
+	if(ct[x] != 0){
+		fprintf(stderr, "error: server granted %016llx twice\n", lid);
+		fprintf(stdout, "error: server granted %016llx twice\n", lid);
+		exit(1);
+	}
+	ct[x] += 1;
 }
 
 void
 check_release(lock_protocol::lockid_t lid)
 {
-  ScopedLock ml(&count_mutex);
-  int x = lid & 0xff;
-  if(ct[x] != 1){
-    fprintf(stderr, "error: client released un-held lock %016llx\n",  lid);
-    exit(1);
-  }
-  ct[x] -= 1;
+	printf("check_relaese entry\n");
+	ScopedLock ml(&count_mutex);
+	int x = lid & 0xff;
+	if(ct[x] != 1){
+		fprintf(stderr, "error: client released un-held lock %016llx\n",  lid);
+		exit(1);
+	}
+	ct[x] -= 1;
 }
 
 void
@@ -188,6 +190,7 @@ main(int argc, char *argv[])
       for (int i = 0; i < nt; i++) {
 	pthread_join(th[i], NULL);
       }
+		printf("test2 end\n");
     }
 
     if(!test || test == 3){
