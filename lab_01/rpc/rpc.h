@@ -70,16 +70,16 @@ class rpcc : public chanmgr {
 
 		std::map<int, caller *> calls_;
 		std::list<unsigned int> xid_rep_window_;
-                
-                struct request {
-                    request() { clear(); }
-                    void clear() { buf.clear(); xid = -1; }
-                    bool isvalid() { return xid != -1; }
-                    std::string buf;
-                    int xid;
-                };
-                struct request dup_req_;
-                int xid_rep_done_;
+
+		struct request {
+			request() { clear(); }
+			void clear() { buf.clear(); xid = -1; }
+			bool isvalid() { return xid != -1; }
+			std::string buf;
+			int xid;
+		};
+		struct request dup_req_;
+		int xid_rep_done_;
 	public:
 
 		rpcc(sockaddr_in d, bool retrans=true);
@@ -99,8 +99,8 @@ class rpcc : public chanmgr {
 		void set_reachable(bool r) { reachable_ = r; }
 
 		void cancel();
-                
-                int islossy() { return lossytest_ > 0; }
+
+		int islossy() { return lossytest_ > 0; }
 
 		int call1(unsigned int proc, 
 				marshall &req, unmarshall &rep, TO to);
@@ -140,7 +140,7 @@ class rpcc : public chanmgr {
 
 };
 
-template<class R> int 
+	template<class R> int 
 rpcc::call_m(unsigned int proc, marshall &req, R & r, TO to) 
 {
 	unmarshall u;
@@ -148,23 +148,23 @@ rpcc::call_m(unsigned int proc, marshall &req, R & r, TO to)
 	if (intret < 0) return intret;
 	u >> r;
 	if(u.okdone() != true) {
-                fprintf(stderr, "rpcc::call_m: failed to unmarshall the reply."
-                       "You are probably calling RPC 0x%x with wrong return "
-                       "type.\n", proc);
-                VERIFY(0);
+		fprintf(stderr, "rpcc::call_m: failed to unmarshall the reply."
+				"You are probably calling RPC 0x%x with wrong return "
+				"type.\n", proc);
+		VERIFY(0);
 		return rpc_const::unmarshal_reply_failure;
-        }
+	}
 	return intret;
 }
 
-template<class R> int
+	template<class R> int
 rpcc::call(unsigned int proc, R & r, TO to) 
 {
 	marshall m;
 	return call_m(proc, m, r, to);
 }
 
-template<class R, class A1> int
+	template<class R, class A1> int
 rpcc::call(unsigned int proc, const A1 & a1, R & r, TO to) 
 {
 	marshall m;
@@ -172,7 +172,7 @@ rpcc::call(unsigned int proc, const A1 & a1, R & r, TO to)
 	return call_m(proc, m, r, to);
 }
 
-template<class R, class A1, class A2> int
+	template<class R, class A1, class A2> int
 rpcc::call(unsigned int proc, const A1 & a1, const A2 & a2,
 		R & r, TO to) 
 {
@@ -182,7 +182,7 @@ rpcc::call(unsigned int proc, const A1 & a1, const A2 & a2,
 	return call_m(proc, m, r, to);
 }
 
-template<class R, class A1, class A2, class A3> int
+	template<class R, class A1, class A2, class A3> int
 rpcc::call(unsigned int proc, const A1 & a1, const A2 & a2,
 		const A3 & a3, R & r, TO to) 
 {
@@ -193,7 +193,7 @@ rpcc::call(unsigned int proc, const A1 & a1, const A2 & a2,
 	return call_m(proc, m, r, to);
 }
 
-template<class R, class A1, class A2, class A3, class A4> int
+	template<class R, class A1, class A2, class A3, class A4> int
 rpcc::call(unsigned int proc, const A1 & a1, const A2 & a2,
 		const A3 & a3, const A4 & a4, R & r, TO to) 
 {
@@ -205,7 +205,7 @@ rpcc::call(unsigned int proc, const A1 & a1, const A2 & a2,
 	return call_m(proc, m, r, to);
 }
 
-template<class R, class A1, class A2, class A3, class A4, class A5> int
+	template<class R, class A1, class A2, class A3, class A4, class A5> int
 rpcc::call(unsigned int proc, const A1 & a1, const A2 & a2,
 		const A3 & a3, const A4 & a4, const A5 & a5, R & r, TO to) 
 {
@@ -274,10 +274,10 @@ class rpcs : public chanmgr {
 
 	private:
 
-        // state about an in-progress or completed RPC, for at-most-once.
-        // if cb_present is true, then the RPC is complete and a reply
-        // has been sent; in that case buf points to a copy of the reply,
-        // and sz holds the size of the reply.
+	// state about an in-progress or completed RPC, for at-most-once.
+	// if cb_present is true, then the RPC is complete and a reply
+	// has been sent; in that case buf points to a copy of the reply,
+	// and sz holds the size of the reply.
 	struct reply_t {
 		reply_t (unsigned int _xid) {
 			xid = _xid;
@@ -296,7 +296,7 @@ class rpcs : public chanmgr {
 
 	// provide at most once semantics by maintaining a window of replies
 	// per client that that client hasn't acknowledged receiving yet.
-        // indexed by client nonce.
+	// indexed by client nonce.
 	std::map<unsigned int, std::list<reply_t> > reply_window_;
 
 	void free_reply_window(void);
@@ -384,7 +384,7 @@ class rpcs : public chanmgr {
 						R & r));
 };
 
-template<class S, class A1, class R> void
+	template<class S, class A1, class R> void
 rpcs::reg(unsigned int proc, S*sob, int (S::*meth)(const A1 a1, R & r))
 {
 	class h1 : public handler {
@@ -408,7 +408,7 @@ rpcs::reg(unsigned int proc, S*sob, int (S::*meth)(const A1 a1, R & r))
 	reg1(proc, new h1(sob, meth));
 }
 
-template<class S, class A1, class A2, class R> void
+	template<class S, class A1, class A2, class R> void
 rpcs::reg(unsigned int proc, S*sob, int (S::*meth)(const A1 a1, const A2 a2, 
 			R & r))
 {
@@ -435,7 +435,7 @@ rpcs::reg(unsigned int proc, S*sob, int (S::*meth)(const A1 a1, const A2 a2,
 	reg1(proc, new h1(sob, meth));
 }
 
-template<class S, class A1, class A2, class A3, class R> void
+	template<class S, class A1, class A2, class A3, class R> void
 rpcs::reg(unsigned int proc, S*sob, int (S::*meth)(const A1 a1, const A2 a2, 
 			const A3 a3, R & r))
 {
@@ -464,7 +464,7 @@ rpcs::reg(unsigned int proc, S*sob, int (S::*meth)(const A1 a1, const A2 a2,
 	reg1(proc, new h1(sob, meth));
 }
 
-template<class S, class A1, class A2, class A3, class A4, class R> void
+	template<class S, class A1, class A2, class A3, class A4, class R> void
 rpcs::reg(unsigned int proc, S*sob, int (S::*meth)(const A1 a1, const A2 a2, 
 			const A3 a3, const A4 a4, 
 			R & r))
@@ -497,7 +497,7 @@ rpcs::reg(unsigned int proc, S*sob, int (S::*meth)(const A1 a1, const A2 a2,
 	reg1(proc, new h1(sob, meth));
 }
 
-template<class S, class A1, class A2, class A3, class A4, class A5, class R> void
+	template<class S, class A1, class A2, class A3, class A4, class A5, class R> void
 rpcs::reg(unsigned int proc, S*sob, int (S::*meth)(const A1 a1, const A2 a2, 
 			const A3 a3, const A4 a4, 
 			const A5 a5, R & r))
@@ -533,7 +533,7 @@ rpcs::reg(unsigned int proc, S*sob, int (S::*meth)(const A1 a1, const A2 a2,
 	reg1(proc, new h1(sob, meth));
 }
 
-template<class S, class A1, class A2, class A3, class A4, class A5, class A6, class R> void
+	template<class S, class A1, class A2, class A3, class A4, class A5, class A6, class R> void
 rpcs::reg(unsigned int proc, S*sob, int (S::*meth)(const A1 a1, const A2 a2, 
 			const A3 a3, const A4 a4, 
 			const A5 a5, const A6 a6, 

@@ -29,7 +29,7 @@ class lock_server {
 
 	public:
 		lock_server();
-		~lock_server() {};
+		~lock_server();
 		//clt : the thread_id of lock_client
 		//lid : the id of lock requested
 		//int &: the return value type

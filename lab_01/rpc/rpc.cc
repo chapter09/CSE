@@ -77,7 +77,7 @@
 const rpcc::TO rpcc::to_max = { 120000 };
 const rpcc::TO rpcc::to_min = { 1000 };
 
-rpcc::caller::caller(unsigned int xxid, unmarshall *xun)
+	rpcc::caller::caller(unsigned int xxid, unmarshall *xun)
 : xid(xxid), un(xun), done(false)
 {
 	VERIFY(pthread_mutex_init(&m,0) == 0);
@@ -90,7 +90,7 @@ rpcc::caller::~caller()
 	VERIFY(pthread_cond_destroy(&c) == 0);
 }
 
-inline
+	inline
 void set_rand_seed()
 {
 	struct timespec ts;
@@ -143,7 +143,7 @@ rpcc::~rpcc()
 	VERIFY(pthread_mutex_destroy(&chan_m_) == 0);
 }
 
-int
+	int
 rpcc::bind(TO to)
 {
 	int r;
@@ -160,38 +160,38 @@ rpcc::bind(TO to)
 };
 
 // Cancel all outstanding calls
-void
+	void
 rpcc::cancel(void)
 {
-  ScopedLock ml(&m_);
-  printf("rpcc::cancel: force callers to fail\n");
-  std::map<int,caller*>::iterator iter;
-  for(iter = calls_.begin(); iter != calls_.end(); iter++){
-    caller *ca = iter->second;
+	ScopedLock ml(&m_);
+	printf("rpcc::cancel: force callers to fail\n");
+	std::map<int,caller*>::iterator iter;
+	for(iter = calls_.begin(); iter != calls_.end(); iter++){
+		caller *ca = iter->second;
 
-    jsl_log(JSL_DBG_2, "rpcc::cancel: force caller to fail\n");
-    {
-      ScopedLock cl(&ca->m);
-      ca->done = true;
-      ca->intret = rpc_const::cancel_failure;
-      VERIFY(pthread_cond_signal(&ca->c) == 0);
-    }
-  }
+		jsl_log(JSL_DBG_2, "rpcc::cancel: force caller to fail\n");
+		{
+			ScopedLock cl(&ca->m);
+			ca->done = true;
+			ca->intret = rpc_const::cancel_failure;
+			VERIFY(pthread_cond_signal(&ca->c) == 0);
+		}
+	}
 
-  while (calls_.size () > 0){
-    destroy_wait_ = true;
-    VERIFY(pthread_cond_wait(&destroy_wait_c_,&m_) == 0);
-  }
-  printf("rpcc::cancel: done\n");
+	while (calls_.size () > 0){
+		destroy_wait_ = true;
+		VERIFY(pthread_cond_wait(&destroy_wait_c_,&m_) == 0);
+	}
+	printf("rpcc::cancel: done\n");
 }
 
-int
+	int
 rpcc::call1(unsigned int proc, marshall &req, unmarshall &rep,
 		TO to)
 {
 
 	caller ca(0, &rep);
-        int xid_rep;
+	int xid_rep;
 	{
 		ScopedLock ml(&m_);
 
@@ -202,16 +202,16 @@ rpcc::call1(unsigned int proc, marshall &req, unmarshall &rep,
 		}
 
 		if(destroy_wait_){
-		  return rpc_const::cancel_failure;
+			return rpc_const::cancel_failure;
 		}
 
 		ca.xid = xid_++;
 		calls_[ca.xid] = &ca;
 
 		req_header h(ca.xid, proc, clt_nonce_, srv_nonce_,
-                             xid_rep_window_.front());
+				xid_rep_window_.front());
 		req.pack_req_header(h);
-                xid_rep = xid_rep_window_.front();
+		xid_rep = xid_rep_window_.front();
 	}
 
 	TO curr_to;
@@ -228,19 +228,19 @@ rpcc::call1(unsigned int proc, marshall &req, unmarshall &rep,
 		if(transmit){
 			get_refconn(&ch);
 			if(ch){
-			        if(reachable_) {
-                                        request forgot;
-                                        {
-                                                ScopedLock ml(&m_);
-                                                if (dup_req_.isvalid() && xid_rep_done_ > dup_req_.xid) {
-                                                        forgot = dup_req_;
-                                                        dup_req_.clear();
-                                                }
-                                        }
-                                        if (forgot.isvalid()) 
-                                                ch->send((char *)forgot.buf.c_str(), forgot.buf.size());
-                                        ch->send(req.cstr(), req.size());
-                                }
+				if(reachable_) {
+					request forgot;
+					{
+						ScopedLock ml(&m_);
+						if (dup_req_.isvalid() && xid_rep_done_ > dup_req_.xid) {
+							forgot = dup_req_;
+							dup_req_.clear();
+						}
+					}
+					if (forgot.isvalid()) 
+						ch->send((char *)forgot.buf.c_str(), forgot.buf.size());
+					ch->send(req.cstr(), req.size());
+				}
 				else jsl_log(JSL_DBG_1, "not reachable\n");
 				jsl_log(JSL_DBG_2, 
 						"rpcc::call1 %u just sent req proc %x xid %u clt_nonce %d\n", 
@@ -262,29 +262,29 @@ rpcc::call1(unsigned int proc, marshall &req, unmarshall &rep,
 		{
 			ScopedLock cal(&ca.m);
 			while (!ca.done){
-			        jsl_log(JSL_DBG_2, "rpcc:call1: wait\n");
+				jsl_log(JSL_DBG_2, "rpcc:call1: wait\n");
 				if(pthread_cond_timedwait(&ca.c, &ca.m,
-                                                 &nextdeadline) == ETIMEDOUT){
-				  	jsl_log(JSL_DBG_2, "rpcc::call1: timeout\n");
+							&nextdeadline) == ETIMEDOUT){
+					jsl_log(JSL_DBG_2, "rpcc::call1: timeout\n");
 					break;
 				}
 			}
 			if(ca.done){
-			        jsl_log(JSL_DBG_2, "rpcc::call1: reply received\n");
+				jsl_log(JSL_DBG_2, "rpcc::call1: reply received\n");
 				break;
 			}
 		}
 
 		if(retrans_ && (!ch || ch->isdead())){
 			// since connection is dead, retransmit
-                        // on the new connection 
+			// on the new connection 
 			transmit = true; 
 		}
 		curr_to.to <<= 1;
 	}
 
 	{ 
-                // no locking of ca.m since only this thread changes ca.xid 
+		// no locking of ca.m since only this thread changes ca.xid 
 		ScopedLock ml(&m_);
 		calls_.erase(ca.xid);
 		// may need to update the xid again here, in case the
@@ -293,20 +293,20 @@ rpcc::call1(unsigned int proc, marshall &req, unmarshall &rep,
 		update_xid_rep(ca.xid);
 
 		if(destroy_wait_){
-		  VERIFY(pthread_cond_signal(&destroy_wait_c_) == 0);
+			VERIFY(pthread_cond_signal(&destroy_wait_c_) == 0);
 		}
 	}
 
-        if (ca.done && lossytest_)
-        {
-                ScopedLock ml(&m_);
-                if (!dup_req_.isvalid()) {
-                        dup_req_.buf.assign(req.cstr(), req.size());
-                        dup_req_.xid = ca.xid;
-                }
-                if (xid_rep > xid_rep_done_)
-                        xid_rep_done_ = xid_rep;
-        }
+	if (ca.done && lossytest_)
+	{
+		ScopedLock ml(&m_);
+		if (!dup_req_.isvalid()) {
+			dup_req_.buf.assign(req.cstr(), req.size());
+			dup_req_.xid = ca.xid;
+		}
+		if (xid_rep > xid_rep_done_)
+			xid_rep_done_ = xid_rep;
+	}
 
 	ScopedLock cal(&ca.m);
 
@@ -322,7 +322,7 @@ rpcc::call1(unsigned int proc, marshall &req, unmarshall &rep,
 	return (ca.done? ca.intret : rpc_const::timeout_failure);
 }
 
-void
+	void
 rpcc::get_refconn(connection **ch)
 {
 	ScopedLock ml(&chan_m_);
@@ -345,7 +345,7 @@ rpcc::get_refconn(connection **ch)
 // this funtion must not block.
 //
 // this function keeps no reference for connection *c 
-bool
+	bool
 rpcc::got_pdu(connection *c, char *b, int sz)
 {
 	unmarshall rep(b, sz);
@@ -382,7 +382,7 @@ rpcc::got_pdu(connection *c, char *b, int sz)
 }
 
 // assumes thread holds mutex m
-void 
+	void 
 rpcc::update_xid_rep(unsigned int xid)
 {
 	std::list<unsigned int>::iterator it;
@@ -408,8 +408,8 @@ compress:
 }
 
 
-rpcs::rpcs(unsigned int p1, int count)
-  : port_(p1), counting_(count), curr_counts_(count), lossytest_(0), reachable_ (true)
+	rpcs::rpcs(unsigned int p1, int count)
+: port_(p1), counting_(count), curr_counts_(count), lossytest_(0), reachable_ (true)
 {
 	VERIFY(pthread_mutex_init(&procs_m_, 0) == 0);
 	VERIFY(pthread_mutex_init(&count_m_, 0) == 0);
@@ -439,13 +439,13 @@ rpcs::~rpcs()
 	free_reply_window();
 }
 
-bool
+	bool
 rpcs::got_pdu(connection *c, char *b, int sz)
 {
-        if(!reachable_){
-            jsl_log(JSL_DBG_1, "rpcss::got_pdu: not reachable\n");
-            return true;
-        }
+	if(!reachable_){
+		jsl_log(JSL_DBG_1, "rpcss::got_pdu: not reachable\n");
+		return true;
+	}
 
 	djob_t *j = new djob_t(c, b, sz);
 	c->incref();
@@ -457,7 +457,7 @@ rpcs::got_pdu(connection *c, char *b, int sz)
 	return succ; 
 }
 
-void
+	void
 rpcs::reg1(unsigned int proc, handler *h)
 {
 	ScopedLock pl(&procs_m_);
@@ -466,7 +466,7 @@ rpcs::reg1(unsigned int proc, handler *h)
 	VERIFY(procs_.count(proc) >= 1);
 }
 
-void
+	void
 rpcs::updatestat(unsigned int proc)
 {
 	ScopedLock cl(&count_m_);
@@ -490,12 +490,12 @@ rpcs::updatestat(unsigned int proc)
 				maxrep = clt->second.size();
 		}
 		jsl_log(JSL_DBG_1, "REPLY WINDOW: clients %d total reply %d max per client %d\n", 
-                        (int) reply_window_.size(), totalrep, maxrep);
+				(int) reply_window_.size(), totalrep, maxrep);
 		curr_counts_ = counting_;
 	}
 }
 
-void
+	void
 rpcs::dispatch(djob_t *j)
 {
 	connection *c = j->conn;
@@ -536,9 +536,9 @@ rpcs::dispatch(djob_t *j)
 		ScopedLock pl(&procs_m_);
 		if(procs_.count(proc) < 1){
 			fprintf(stderr, "rpcs::dispatch: unknown proc %x.\n",
-				proc);
+					proc);
 			c->decref();
-                        VERIFY(0);
+			VERIFY(0);
 			return;
 		}
 
@@ -576,7 +576,7 @@ rpcs::dispatch(djob_t *j)
 		}
 
 		stat = checkduplicate_and_update(h.clt_nonce, h.xid,
-                                                 h.xid_rep, &b1, &sz1);
+				h.xid_rep, &b1, &sz1);
 	} else {
 		// this client does not require at most once logic
 		stat = NEW;
@@ -589,13 +589,13 @@ rpcs::dispatch(djob_t *j)
 			}
 
 			rh.ret = f->fn(req, rep);
-                        if (rh.ret == rpc_const::unmarshal_args_failure) {
-                                fprintf(stderr, "rpcs::dispatch: failed to"
-                                       " unmarshall the arguments. You are"
-                                       " probably calling RPC 0x%x with wrong"
-                                       " types of arguments.\n", proc);
-                                VERIFY(0);
-                        }
+			if (rh.ret == rpc_const::unmarshal_args_failure) {
+				fprintf(stderr, "rpcs::dispatch: failed to"
+						" unmarshall the arguments. You are"
+						" probably calling RPC 0x%x with wrong"
+						" types of arguments.\n", proc);
+				VERIFY(0);
+			}
 			VERIFY(rh.ret >= 0);
 
 			rep.pack_reply_header(rh);
@@ -660,9 +660,18 @@ rpcs::rpcstate_t
 rpcs::checkduplicate_and_update(unsigned int clt_nonce, unsigned int xid,
 		unsigned int xid_rep, char **b, int *sz)
 {
-	ScopedLock rwl(&reply_window_m_);
+	reply_t rep(xid);
+	rep.xid = xid;
+	rep.buf = *b;
+	rep.sz = *sz;
 
-        // You fill this in for Lab 1.
+	printf("TEST: %d\t%u\n", clt_nonce, xid);
+	ScopedLock rwl(&reply_window_m_);
+	//printf("TEST: %d\t%u\n", reply_window_[clt_nonce], xid);
+	std::list<reply_t>* rep_list;
+	rep_list = &reply_window_[clt_nonce];
+	printf("%d\n", ((*rep_list).end())->xid);
+	// You fill this in for Lab 1.
 	return NEW;
 }
 
@@ -676,10 +685,10 @@ rpcs::add_reply(unsigned int clt_nonce, unsigned int xid,
 		char *b, int sz)
 {
 	ScopedLock rwl(&reply_window_m_);
-        // You fill this in for Lab 1.
+	// You fill this in for Lab 1.
 }
 
-void
+	void
 rpcs::free_reply_window(void)
 {
 	std::map<unsigned int,std::list<reply_t> >::iterator clt;
@@ -696,7 +705,7 @@ rpcs::free_reply_window(void)
 }
 
 // rpc handler
-int 
+	int 
 rpcs::rpcbind(int a, int &r)
 {
 	jsl_log(JSL_DBG_2, "rpcs::rpcbind called return nonce %u\n", nonce_);
@@ -704,7 +713,7 @@ rpcs::rpcbind(int a, int &r)
 	return 0;
 }
 
-void
+	void
 marshall::rawbyte(unsigned char x)
 {
 	if(_ind >= _capa){
@@ -716,7 +725,7 @@ marshall::rawbyte(unsigned char x)
 	_buf[_ind++] = x;
 }
 
-void
+	void
 marshall::rawbytes(const char *p, int n)
 {
 	if((_ind+n) > _capa){
@@ -729,21 +738,21 @@ marshall::rawbytes(const char *p, int n)
 	_ind += n;
 }
 
-marshall &
+	marshall &
 operator<<(marshall &m, bool x)
 {
 	m.rawbyte(x);
 	return m;
 }
 
-marshall &
+	marshall &
 operator<<(marshall &m, unsigned char x)
 {
 	m.rawbyte(x);
 	return m;
 }
 
-marshall &
+	marshall &
 operator<<(marshall &m, char x)
 {
 	m << (unsigned char) x;
@@ -751,7 +760,7 @@ operator<<(marshall &m, char x)
 }
 
 
-marshall &
+	marshall &
 operator<<(marshall &m, unsigned short x)
 {
 	m.rawbyte((x >> 8) & 0xff);
@@ -759,14 +768,14 @@ operator<<(marshall &m, unsigned short x)
 	return m;
 }
 
-marshall &
+	marshall &
 operator<<(marshall &m, short x)
 {
 	m << (unsigned short) x;
 	return m;
 }
 
-marshall &
+	marshall &
 operator<<(marshall &m, unsigned int x)
 {
 	// network order is big-endian
@@ -777,14 +786,14 @@ operator<<(marshall &m, unsigned int x)
 	return m;
 }
 
-marshall &
+	marshall &
 operator<<(marshall &m, int x)
 {
 	m << (unsigned int) x;
 	return m;
 }
 
-marshall &
+	marshall &
 operator<<(marshall &m, const std::string &s)
 {
 	m << (unsigned int) s.size();
@@ -792,7 +801,7 @@ operator<<(marshall &m, const std::string &s)
 	return m;
 }
 
-marshall &
+	marshall &
 operator<<(marshall &m, unsigned long long x)
 {
 	m << (unsigned int) (x >> 32);
@@ -800,7 +809,7 @@ operator<<(marshall &m, unsigned long long x)
 	return m;
 }
 
-void
+	void
 marshall::pack(int x)
 {
 	rawbyte((x >> 24) & 0xff);
@@ -809,7 +818,7 @@ marshall::pack(int x)
 	rawbyte(x & 0xff);
 }
 
-void
+	void
 unmarshall::unpack(int *x)
 {
 	(*x) = (rawbyte() & 0xff) << 24;
@@ -819,7 +828,7 @@ unmarshall::unpack(int *x)
 }
 
 // take the contents from another unmarshall object
-void
+	void
 unmarshall::take_in(unmarshall &another)
 {
 	if(_buf)
@@ -829,7 +838,7 @@ unmarshall::take_in(unmarshall &another)
 	_ok = _sz >= RPC_HEADER_SZ?true:false;
 }
 
-bool
+	bool
 unmarshall::okdone()
 {
 	if(ok() && _ind == _sz){
@@ -839,7 +848,7 @@ unmarshall::okdone()
 	}
 }
 
-unsigned int
+	unsigned int
 unmarshall::rawbyte()
 {
 	char c = 0;
@@ -850,21 +859,21 @@ unmarshall::rawbyte()
 	return c;
 }
 
-unmarshall &
+	unmarshall &
 operator>>(unmarshall &u, bool &x)
 {
 	x = (bool) u.rawbyte() ;
 	return u;
 }
 
-unmarshall &
+	unmarshall &
 operator>>(unmarshall &u, unsigned char &x)
 {
 	x = (unsigned char) u.rawbyte() ;
 	return u;
 }
 
-unmarshall &
+	unmarshall &
 operator>>(unmarshall &u, char &x)
 {
 	x = (char) u.rawbyte();
@@ -872,7 +881,7 @@ operator>>(unmarshall &u, char &x)
 }
 
 
-unmarshall &
+	unmarshall &
 operator>>(unmarshall &u, unsigned short &x)
 {
 	x = (u.rawbyte() & 0xff) << 8;
@@ -880,7 +889,7 @@ operator>>(unmarshall &u, unsigned short &x)
 	return u;
 }
 
-unmarshall &
+	unmarshall &
 operator>>(unmarshall &u, short &x)
 {
 	x = (u.rawbyte() & 0xff) << 8;
@@ -888,7 +897,7 @@ operator>>(unmarshall &u, short &x)
 	return u;
 }
 
-unmarshall &
+	unmarshall &
 operator>>(unmarshall &u, unsigned int &x)
 {
 	x = (u.rawbyte() & 0xff) << 24;
@@ -898,7 +907,7 @@ operator>>(unmarshall &u, unsigned int &x)
 	return u;
 }
 
-unmarshall &
+	unmarshall &
 operator>>(unmarshall &u, int &x)
 {
 	x = (u.rawbyte() & 0xff) << 24;
@@ -908,7 +917,7 @@ operator>>(unmarshall &u, int &x)
 	return u;
 }
 
-unmarshall &
+	unmarshall &
 operator>>(unmarshall &u, unsigned long long &x)
 {
 	unsigned int h, l;
@@ -918,7 +927,7 @@ operator>>(unmarshall &u, unsigned long long &x)
 	return u;
 }
 
-unmarshall &
+	unmarshall &
 operator>>(unmarshall &u, std::string &s)
 {
 	unsigned sz;
@@ -928,7 +937,7 @@ operator>>(unmarshall &u, std::string &s)
 	return u;
 }
 
-void
+	void
 unmarshall::rawbytes(std::string &ss, unsigned int n)
 {
 	if((_ind+n) > (unsigned)_sz){
@@ -989,7 +998,7 @@ make_sockaddr(const char *host, const char *port, struct sockaddr_in *dst){
 	dst->sin_port = htons(atoi(port));
 }
 
-int
+	int
 cmp_timespec(const struct timespec &a, const struct timespec &b)
 {
 	if(a.tv_sec > b.tv_sec)
@@ -1006,7 +1015,7 @@ cmp_timespec(const struct timespec &a, const struct timespec &b)
 	}
 }
 
-void
+	void
 add_timespec(const struct timespec &a, int b, struct timespec *result)
 {
 	// convert to millisec, add timeout, convert back
@@ -1019,7 +1028,7 @@ add_timespec(const struct timespec &a, int b, struct timespec *result)
 	}
 }
 
-int
+	int
 diff_timespec(const struct timespec &end, const struct timespec &start)
 {
 	int diff = (end.tv_sec > start.tv_sec)?(end.tv_sec-start.tv_sec)*1000:0;
