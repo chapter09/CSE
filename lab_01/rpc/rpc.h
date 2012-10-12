@@ -308,7 +308,8 @@ class rpcs : public chanmgr {
 			char **b, int *sz);
 
 	void updatestat(unsigned int proc);
-
+	void clean_window(std::list<reply_t>*, unsigned int);
+	
 	// latest connection to the client
 	std::map<unsigned int, connection *> conns_;
 
