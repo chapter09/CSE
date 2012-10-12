@@ -424,7 +424,7 @@ compress:
 	if(loss_env != NULL){
 		lossytest_ = atoi(loss_env);
 	}
-
+	
 	reg(rpc_const::bind, this, &rpcs::rpcbind);
 	dispatchpool_ = new ThrPool(6,false);
 
@@ -661,19 +661,78 @@ rpcs::checkduplicate_and_update(unsigned int clt_nonce, unsigned int xid,
 		unsigned int xid_rep, char **b, int *sz)
 {
 	reply_t rep(xid);
-	rep.xid = xid;
-	rep.buf = *b;
-	rep.sz = *sz;
-
-	printf("TEST: %d\t%u\n", clt_nonce, xid);
+	
 	ScopedLock rwl(&reply_window_m_);
-	//printf("TEST: %d\t%u\n", reply_window_[clt_nonce], xid);
-	std::list<reply_t>* rep_list;
-	rep_list = &reply_window_[clt_nonce];
-	printf("%d\n", ((*rep_list).end())->xid);
+//	printf("TEST: %d\t%u\t%u\n", clt_nonce, xid, xid_rep);
+	std::list<reply_t>* rep_list = &reply_window_[clt_nonce];
+
+	if(xid_rep_map.find(clt_nonce) == xid_rep_map.end()) {
+		xid_rep_map[clt_nonce] = xid_rep;
+	} else {
+		if(xid_rep_map[clt_nonce] < xid_rep) {
+			xid_rep_map[clt_nonce] = xid_rep;
+		}
+	}
+	
+	if((*rep_list).size() == 0) {
+		printf("NEW\n");
+		(*rep_list).push_back(rep);
+		return NEW;
+	} else {
+		std::list<unsigned int> xid_list;
+		std::list<reply_t>::iterator t;
+
+		for(t = (*rep_list).begin(); t != (*rep_list).end(); t++) {
+			xid_list.push_back((*t).xid);
+		}
+		xid_list.sort();
+
+		unsigned int last_xid = xid_list.back();
+		unsigned int first_xid = xid_list.front();
+	
+		printf("RANGE: %u\t%u\n", first_xid, last_xid);
+		std::list<reply_t>::iterator it;
+
+		printf("NEW\n");
+		if(xid > last_xid) {
+			(*rep_list).push_back(rep);
+			for(it = (*rep_list).begin(); it != (*rep_list).end();) {
+				if((*it).xid <= xid_rep_map[clt_nonce]){ 
+					//how to free buf?
+					printf("DELETE %u\n", (*it).xid);			
+					(*rep_list).erase(it++);
+				} else {
+					it++;
+				}
+			}
+//			printf("2TEST: %d\t%u\n", clt_nonce, xid);
+			return NEW;
+		} else if (xid < first_xid) {
+			printf("forget %u\n", xid);
+			return FORGOTTEN;	
+		} else {
+			printf("DONE\n");
+			for(it = (*rep_list).begin(); it != (*rep_list).end(); it++) {
+				if((*it).xid == xid) {
+					if((*it).cb_present) {
+						*b = (*it).buf;
+						*sz = (*it).sz;
+						return DONE;
+					} else {
+						printf("INPROGRESS\n");
+						return INPROGRESS;
+					}
+				}
+			}
+			printf("NEW_3\n");
+			(*rep_list).push_back(rep);
+			return NEW;
+		}
+	}
 	// You fill this in for Lab 1.
 	return NEW;
 }
+
 
 // rpcs::dispatch calls add_reply when it is sending a reply to an RPC,
 // and passes the return value in b and sz.
@@ -686,6 +745,17 @@ rpcs::add_reply(unsigned int clt_nonce, unsigned int xid,
 {
 	ScopedLock rwl(&reply_window_m_);
 	// You fill this in for Lab 1.
+	std::list<reply_t>* rep_list = &reply_window_[clt_nonce];
+	std::list<reply_t>::iterator it;
+	for(it = (*rep_list).begin(); it != (*rep_list).end(); it++) {
+		if((*it).xid == xid) {
+			if(!(*it).cb_present) {
+				(*it).buf = b;
+				(*it).sz = sz;
+				(*it).cb_present = true;
+			}
+		}
+	}
 }
 
 	void
