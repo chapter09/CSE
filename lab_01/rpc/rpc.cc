@@ -649,6 +649,7 @@ rpcs::clean_window(std::list<reply_t> *rep_list, unsigned int xid_rep)
 	for(it = (*rep_list).begin(); it != (*rep_list).end();) {
 		if((*it).xid <= xid_rep){ 
 			//how to free buf?
+			delete();		
 			(*rep_list).erase(it++);
 		} else {
 			it++;
