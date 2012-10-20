@@ -8,15 +8,17 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
-
+#include <stdlib.h>
+#include <time.h>
 
 yfs_client::yfs_client(std::string extent_dst, std::string lock_dst)
 {
 	ec = new extent_client(extent_dst);
-
+	srandom(time(NULL));
+	build_root();
 }
 
-	yfs_client::inum
+yfs_client::inum
 yfs_client::n2i(std::string n)
 {
 	std::istringstream ist(n);
@@ -25,7 +27,14 @@ yfs_client::n2i(std::string n)
 	return finum;
 }
 
-	std::string
+void
+yfs_client::build_root()
+{
+	inum num =  0x0000000000000001;
+	VERIFY(ec->put(num, "") == extent_protocol::OK);
+}
+
+std::string
 yfs_client::filename(inum inum)
 {
 	std::ostringstream ost;
@@ -33,7 +42,7 @@ yfs_client::filename(inum inum)
 	return ost.str();
 }
 
-	bool
+bool
 yfs_client::isfile(inum inum)
 {
 	if(inum & 0x80000000)
@@ -41,13 +50,13 @@ yfs_client::isfile(inum inum)
 	return false;
 }
 
-	bool
+bool
 yfs_client::isdir(inum inum)
 {
 	return ! isfile(inum);
 }
 
-	int
+int
 yfs_client::getfile(inum inum, fileinfo &fin)
 {
 	int r = OK;
@@ -70,11 +79,10 @@ release:
 	return r;
 }
 
-	int
+int
 yfs_client::getdir(inum inum, dirinfo &din)
 {
 	int r = OK;
-
 	printf("getdir %016llx\n", inum);
 	extent_protocol::attr a;
 	if (ec->getattr(inum, a) != extent_protocol::OK) {
@@ -90,7 +98,73 @@ release:
 }
 
 int
-yfs_client::create(inum inum, )
+yfs_client::create(inum dir_inum, const char *name, inum *f)
 {
+	int r = OK;
+	extent_protocol::attr a;
+	std::string v = "";
+	std::string *value = &v;
+	if (ec->getattr(dir_inum, a) != extent_protocol::OK) {
+		r = IOERR;
+		printf("directory %016llx does not exist\n", dir_inum);
+		goto release;
+	}
+	
+	extent_protocol::status ret;
+	printf("[i] create_yfs_client\n");	
+	ret = ec->get(dir_inum, *value);
+	printf("[i] %d\n", ret);
+
+	if(lookup(dir_inum, name)) {
+		r = EXIST;
+		goto release;
+	} else {
+		*f = gen_inum(false);	//not generate dir inum
+		(*value).append(filename(*f));
+		(*value).append(" ");
+		(*value).append(name);
+		(*value).append("\n");
+		r = ec->put(*f, *value);	
+		goto release;	
+	}
+
+release:
+	return r;
 }
 
+bool
+yfs_client::lookup(inum dir_inum, const char *name)
+{
+	bool r;
+	std::string v = "";
+	std::string *value = &v;
+	printf("[i] lookup_yfs_client A\n");	
+	printf("[i] %016llx\n", dir_inum);
+	printf("[i] %s\n", name);
+	ec->get(dir_inum, *value);
+	printf("[i] lookup_yfs_client B\n");	
+	
+	if((*value).find(name) != std::string::npos) {
+		r = true;
+		goto release;
+	} else {
+		r = false;
+		goto release;
+	}
+
+release:
+	return r;
+}
+
+yfs_client::inum
+yfs_client::gen_inum(bool is_dir)
+{
+	inum inum;
+	inum = rand() % 2147483648U;
+	if(!is_dir) {
+		inum = inum | 0x0000000080000000;
+	} else {
+		inum = inum & 0x000000000FFFFFFF;
+	}
+	return inum;
+}

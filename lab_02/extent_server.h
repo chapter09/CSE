@@ -11,13 +11,13 @@
 class extent_server {
 
 	private:
-		std::map<extent_protocol::extentid_t, std::string> file_map;
+		std::map<extent_protocol::extentid_t, std::string> ctnt_map;
 		std::map<extent_protocol::extentid_t, extent_protocol::attr> info_map;
 		pthread_mutex_t mutex;
 	
 	public:
 		extent_server();
-
+		~extent_server();
 		int put(extent_protocol::extentid_t id, std::string, int &);
 		int get(extent_protocol::extentid_t id, std::string &);
 		int getattr(extent_protocol::extentid_t id, extent_protocol::attr &);

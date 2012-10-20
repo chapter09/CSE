@@ -220,12 +220,24 @@ fuseserver_createhelper(fuse_ino_t parent, const char *name,
 	e->entry_timeout = 0.0;
 	e->generation = 0;
 	// You fill this in for Lab 2
+	
+	yfs_client::status ret;	
+	yfs_client::inum inum = parent;
+	yfs_client::inum f_inum;
+	struct stat st;
 		
-
-	return yfs_client::NOENT;
+	printf("[i] fuse_before create\n");
+	ret = yfs->create(parent, name, &f_inum);
+	VERIFY(getattr(f_inum, st) == yfs_client::OK);	
+	e->ino = f_inum;
+	e->attr = st; 	
+	
+	printf("[i] fuse_after create\n");
+	return ret;
+//	return yfs_client::NOENT;
 }
 
-	void
+void
 fuseserver_create(fuse_req_t req, fuse_ino_t parent, const char *name,
 		mode_t mode, struct fuse_file_info *fi)
 {
@@ -262,7 +274,7 @@ void fuseserver_mknod( fuse_req_t req, fuse_ino_t parent,
 // found, set e.attr (using getattr) and e.ino to the attribute and inum of
 // the file.
 //
-	void
+void
 fuseserver_lookup(fuse_req_t req, fuse_ino_t parent, const char *name)
 {
 	struct fuse_entry_param e;
@@ -271,6 +283,8 @@ fuseserver_lookup(fuse_req_t req, fuse_ino_t parent, const char *name)
 	e.entry_timeout = 0.0;
 	e.generation = 0;
 	bool found = false;
+	
+	found = yfs->lookup(parent, name);
 
 	// You fill this in for Lab 2
 	if (found)
@@ -332,7 +346,7 @@ fuseserver_readdir(fuse_req_t req, fuse_ino_t ino, size_t size,
 
 	memset(&b, 0, sizeof(b));
 
-
+	
 	// You fill this in for Lab 2
 
 

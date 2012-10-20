@@ -34,16 +34,20 @@ class yfs_client {
 	private:
 	static std::string filename(inum);
 	static inum n2i(std::string);
-
+	inum gen_inum(bool);
+	void build_root();
+	
 	public:
 
 	yfs_client(std::string, std::string);
 
 	bool isfile(inum);
 	bool isdir(inum);
+	bool lookup(inum, const char*);
 
 	int getfile(inum, fileinfo &);
 	int getdir(inum, dirinfo &);
+	int create(inum, const char*, inum*);
 };
 
 #endif 
