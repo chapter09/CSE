@@ -102,8 +102,7 @@ yfs_client::create(inum dir_inum, const char *name, inum *f)
 {
 	int r = OK;
 	extent_protocol::attr a;
-	std::string v = "";
-	std::string *value = &v;
+	std::string value;
 	if (ec->getattr(dir_inum, a) != extent_protocol::OK) {
 		r = IOERR;
 		printf("directory %016llx does not exist\n", dir_inum);
@@ -112,7 +111,7 @@ yfs_client::create(inum dir_inum, const char *name, inum *f)
 	
 	extent_protocol::status ret;
 	printf("[i] create_yfs_client\n");	
-	ret = ec->get(dir_inum, *value);
+	ret = ec->get(dir_inum, value);
 	printf("[i] %d\n", ret);
 
 	if(lookup(dir_inum, name)) {
@@ -120,11 +119,12 @@ yfs_client::create(inum dir_inum, const char *name, inum *f)
 		goto release;
 	} else {
 		*f = gen_inum(false);	//not generate dir inum
-		(*value).append(filename(*f));
-		(*value).append(" ");
-		(*value).append(name);
-		(*value).append("\n");
-		r = ec->put(*f, *value);	
+		value.append(filename(*f));
+		value.append(":");
+		value.append(name);
+		value.append("\n");
+		printf("[value] %s\n", value.c_str());
+		r = ec->put(*f, value);	
 		goto release;	
 	}
 
@@ -132,19 +132,39 @@ release:
 	return r;
 }
 
+int 
+yfs_client::read_dir(inum dir_inum, std::list<struct dirent> *list_dir)
+{
+	std::string value = "";
+	printf("[i] readdir_yfs_client\n");	
+	printf("[i] %016llx\n", dir_inum);
+	ec->get(dir_inum, value);
+
+	std::string line;
+	std::stringstream stream;
+	stream << value;
+	while(getline(stream, line)) {
+		size_t pos;
+		struct dirent dir_ent;
+		pos = line.find(':');
+		dir_ent.name = line.substr(pos+1);
+		dir_ent.inum = n2i(line.substr(0, pos));
+		(*list_dir).push_back(dir_ent);		
+	}
+}
+
 bool
 yfs_client::lookup(inum dir_inum, const char *name)
 {
 	bool r;
-	std::string v = "";
-	std::string *value = &v;
-	printf("[i] lookup_yfs_client A\n");	
+	std::string value;
+	printf("[i] lookup_yfs_client B\n");	
 	printf("[i] %016llx\n", dir_inum);
 	printf("[i] %s\n", name);
-	ec->get(dir_inum, *value);
-	printf("[i] lookup_yfs_client B\n");	
+	VERIFY(ec->get(dir_inum, value) == extent_protocol::OK);
+	printf("[value] %s\n", value.c_str());
 	
-	if((*value).find(name) != std::string::npos) {
+	if((value).find(name) != std::string::npos) {
 		r = true;
 		goto release;
 	} else {

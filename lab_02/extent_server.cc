@@ -22,9 +22,10 @@ int extent_server::put(extent_protocol::extentid_t id, std::string buf, int &)
 {
 	// You fill this in for Lab 2.
 	// Set mtime and ctime
-	printf("extent_server \n");
+	printf("[PUT] buf is %s \n", buf.c_str());
 //	return extent_protocol::IOERR;
 	if(info_map.find(id) == info_map.end()) {
+		printf("[PUT] new \n");
 		extent_protocol::attr a;
 		a.mtime = time(NULL);
 		a.ctime = time(NULL);
@@ -36,6 +37,7 @@ int extent_server::put(extent_protocol::extentid_t id, std::string buf, int &)
 		pthread_mutex_unlock(&mutex);
 		return extent_protocol::OK;
 	} else {
+		printf("[PUT] append \n");
 		pthread_mutex_lock(&mutex);
 		info_map[id].mtime = time(NULL);
 		ctnt_map[id] = buf;
@@ -53,10 +55,10 @@ int extent_server::get(extent_protocol::extentid_t id, std::string &buf)
 	if(info_map.find(id) == info_map.end()) {
 		return extent_protocol::NOENT;
 	}
-
 	pthread_mutex_lock(&mutex);		
 	info_map[id].atime = time(NULL);
 	buf = ctnt_map[id];
+	printf("[GET] buf is %s \n", buf.c_str());
 	pthread_mutex_unlock(&mutex);		
 
 	return extent_protocol::OK;
