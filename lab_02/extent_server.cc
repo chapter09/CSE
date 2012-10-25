@@ -22,7 +22,7 @@ int extent_server::put(extent_protocol::extentid_t id, std::string buf, int &)
 {
 	// You fill this in for Lab 2.
 	// Set mtime and ctime
-	printf("[PUT] buf is %s \n", buf.c_str());
+//	printf("[PUT] buf is %s \n", buf.c_str());
 //	return extent_protocol::IOERR;
 	if(info_map.find(id) == info_map.end()) {
 		printf("[PUT] new \n");
@@ -58,7 +58,7 @@ int extent_server::get(extent_protocol::extentid_t id, std::string &buf)
 	pthread_mutex_lock(&mutex);		
 	info_map[id].atime = time(NULL);
 	buf = ctnt_map[id];
-	printf("[GET] buf is %s \n", buf.c_str());
+//	printf("[GET] buf is %s \n", buf.c_str());
 	pthread_mutex_unlock(&mutex);		
 
 	return extent_protocol::OK;
@@ -71,8 +71,10 @@ int extent_server::getattr(extent_protocol::extentid_t id, extent_protocol::attr
 	// for now because it's difficult to get FUSE to do anything (including
 	// unmount) if getattr fails.
 	if(info_map.find(id) == info_map.end()) {
+		printf("[E] extent_server getattr failed\n");
 		return extent_protocol::IOERR;
 	} else {
+		printf("[E] extent_server getattr success\n");
 		a = info_map[id];
 		return extent_protocol::OK;
 	}

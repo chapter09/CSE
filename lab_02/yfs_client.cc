@@ -112,9 +112,9 @@ yfs_client::create(inum dir_inum, const char *name, inum *f)
 	extent_protocol::status ret;
 	printf("[i] create_yfs_client\n");	
 	ret = ec->get(dir_inum, value);
-	printf("[i] %d\n", ret);
+	inum f_inum;
 
-	if(lookup(dir_inum, name)) {
+	if(lookup(dir_inum, name, f_inum)) {
 		r = EXIST;
 		goto release;
 	} else {
@@ -123,17 +123,17 @@ yfs_client::create(inum dir_inum, const char *name, inum *f)
 		value.append(":");
 		value.append(name);
 		value.append("\n");
-		printf("[value] %s\n", value.c_str());
-		r = ec->put(*f, value);	
-		goto release;	
+		ec->put(dir_inum, value);	
+		ec->put(*f, "");	
+		r = OK;	
+		goto release;
 	}
-
 release:
 	return r;
 }
 
 int 
-yfs_client::read_dir(inum dir_inum, std::list<struct dirent> *list_dir)
+yfs_client::read_dir(inum dir_inum, std::list<struct yfs_client::dirent> &list_dir)
 {
 	std::string value = "";
 	printf("[i] readdir_yfs_client\n");	
@@ -149,25 +149,33 @@ yfs_client::read_dir(inum dir_inum, std::list<struct dirent> *list_dir)
 		pos = line.find(':');
 		dir_ent.name = line.substr(pos+1);
 		dir_ent.inum = n2i(line.substr(0, pos));
-		(*list_dir).push_back(dir_ent);		
+		list_dir.push_back(dir_ent);		
 	}
+	return extent_protocol::OK;
 }
 
 bool
-yfs_client::lookup(inum dir_inum, const char *name)
+yfs_client::lookup(inum dir_inum, const char *name, inum &f_inum)
 {
 	bool r;
 	std::string value;
+	size_t found;
 	printf("[i] lookup_yfs_client B\n");	
-	printf("[i] %016llx\n", dir_inum);
+	printf("[LOOK UP] %016llx\n", dir_inum);
 	printf("[i] %s\n", name);
 	VERIFY(ec->get(dir_inum, value) == extent_protocol::OK);
-	printf("[value] %s\n", value.c_str());
 	
-	if((value).find(name) != std::string::npos) {
+//	printf("[value]\n");
+	printf("%s\n", value.c_str());
+//	printf("[value]\n");
+	found = value.find(name);
+	if(found != std::string::npos) {
+		printf("have found %s\n", name);
 		r = true;
+		f_inum = n2i(value.substr(found-11, 10));
 		goto release;
 	} else {
+		printf("have not found %s\n", name);
 		r = false;
 		goto release;
 	}

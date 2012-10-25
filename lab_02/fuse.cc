@@ -41,7 +41,6 @@ yfs_client::status
 getattr(yfs_client::inum inum, struct stat &st)
 {
 	yfs_client::status ret;
-
 	bzero(&st, sizeof(st));
 
 	st.st_ino = inum;
@@ -95,12 +94,14 @@ fuseserver_getattr(fuse_req_t req, fuse_ino_t ino,
 	struct stat st;
 	yfs_client::inum inum = ino; // req->in.h.nodeid;
 	yfs_client::status ret;
-
+	
+	printf("get_attr start\n");
 	ret = getattr(inum, st);
 	if(ret != yfs_client::OK){
 		fuse_reply_err(req, ENOENT);
 		return;
 	}
+	printf("get_attr done\n");
 	fuse_reply_attr(req, &st, 0);
 }
 
@@ -160,6 +161,7 @@ fuseserver_read(fuse_req_t req, fuse_ino_t ino, size_t size,
 	// Change the above "#if 0" to "#if 1", and your code goes here
 	fuse_reply_buf(req, buf.data(), buf.size());
 #else
+	printf("[i] fuseserver_read\n");
 	fuse_reply_err(req, ENOSYS);
 #endif
 }
@@ -234,7 +236,6 @@ fuseserver_createhelper(fuse_ino_t parent, const char *name,
 	
 	printf("[i] fuse_after create\n");
 	return ret;
-//	return yfs_client::NOENT;
 }
 
 void
@@ -283,14 +284,20 @@ fuseserver_lookup(fuse_req_t req, fuse_ino_t parent, const char *name)
 	e.entry_timeout = 0.0;
 	e.generation = 0;
 	bool found = false;
+	yfs_client::inum f_inum;
+	struct stat st;
 	
-	found = yfs->lookup(parent, name);
+	found = yfs->lookup(parent, name, f_inum);
+	getattr(f_inum, st);	
 
 	// You fill this in for Lab 2
-	if (found)
+	if (found) {
+		e.ino = f_inum;
+		e.attr = st; 	
 		fuse_reply_entry(req, &e);
-	else
+	} else {
 		fuse_reply_err(req, ENOENT);
+	}
 }
 
 
@@ -348,14 +355,11 @@ fuseserver_readdir(fuse_req_t req, fuse_ino_t ino, size_t size,
 
 	memset(&b, 0, sizeof(b));
 
-	yfs->read_dir(inum, &list_dir);
+	yfs->read_dir(inum, list_dir);
 	// You fill this in for Lab 2
-	
-	printf("[it]\n");
-//	printf("%d", list_dir.size());
 	for(ld_t = list_dir.begin(); ld_t != list_dir.end(); ld_t++){
-		printf("[it] %016llx\n", (*ld_t).inum);
-//		dirbuf_add(&b, (*ld_t).name, (*ld_t).inum);
+	//	printf("[it] %016llx\n", (*ld_t).inum);
+		dirbuf_add(&b, (*ld_t).name.c_str(), (*ld_t).inum);
 	}
 
 	reply_buf_limited(req, b.p, b.size, off, size);
@@ -363,10 +367,11 @@ fuseserver_readdir(fuse_req_t req, fuse_ino_t ino, size_t size,
 }
 
 
-	void
+void
 fuseserver_open(fuse_req_t req, fuse_ino_t ino,
 		struct fuse_file_info *fi)
 {
+	printf("Open_fuse\n");
 	fuse_reply_open(req, fi);
 }
 
