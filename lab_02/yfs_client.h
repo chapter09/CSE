@@ -51,6 +51,7 @@ class yfs_client {
 	int read_dir(inum, std::list<struct yfs_client::dirent> &);
 	int write(inum, size_t, off_t, const char *);
 	int read(inum, size_t, off_t, std::string &);
+	int setattr(inum, long long int);
 };
 
 #endif 

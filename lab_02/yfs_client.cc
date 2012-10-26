@@ -151,12 +151,13 @@ yfs_client::write(inum inum, size_t size, off_t off, const char *buf)
 			value.push_back(*(buf++));
 		}	
 	} else if((off+size) > v_size) {
-		value.erase(off, v_size - off);
+		value.erase(off, v_size-off);
 		for(t = 0; t < int(size); t++) {
 			value.push_back(*(buf++));
 		}	
 	} else {
-		value.replace(off, size, buf, size);	
+		value.replace(off, size, buf, size);
+			
 	}
 	printf("[i] write_yfs_client new value: %s size: %d\n", value.c_str(), value.size());	
 	if (ec->put(inum, value) != extent_protocol::OK) {
@@ -184,9 +185,36 @@ yfs_client::read(inum inum, size_t size, off_t off, std::string &buf)
 	} else {
 		buf = value.substr(off, size);
 	}
-		printf("[yfs_client] %016llx read\n", inum);
-	printf("[i] read_yfs_client value: %s size: %d\n", value.c_str(), value.size());	
+//	printf("[yfs_client] %016llx read\n", inum);
+//	printf("[i] read_yfs_client value: %s size: %d\n", value.c_str(), value.size());	
+	return r;
+}
+
+int
+yfs_client::setattr(inum inum, long long int size)
+{
+	int r = OK;
+	printf("[i] setattr_yfs_client\n");
+	std::string value;	
+	VERIFY(ec->get(inum, value) == extent_protocol::OK);
+	size_t v_size = value.size();
+	int t;
+	if(size > v_size) {
+		for(t = v_size; t < size; t++) {
+			value.push_back('\0');
+		}
+	} else {
+		value.erase(size, v_size-size);	
+	}	
+			
+	if (ec->put(inum, value) != extent_protocol::OK) {
+		r = IOERR;
+		printf("[yfs_client] %016llx write_put failed\n", inum);
+		goto release;
+	}
 	
+release:
+
 	return r;
 }
 

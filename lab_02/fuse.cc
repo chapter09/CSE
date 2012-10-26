@@ -127,8 +127,10 @@ fuseserver_setattr(fuse_req_t req, fuse_ino_t ino, struct stat *attr,
 
 	if(FUSE_SET_ATTR_SIZE & to_set) {
 		printf("   fuseserver_setattr set size to %lld\n", attr->st_size);
+		printf(" FUSE_SET_ATTR_SIZE %d\n", FUSE_SET_ATTR_SIZE);
 		struct stat st;
-
+	
+		yfs->setattr(inum, attr->st_size);	
 		// You fill this in for Lab 2
 #if 1
 		// Change the above line to "#if 1", and your code goes here
