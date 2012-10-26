@@ -250,7 +250,7 @@ fuseserver_createhelper(fuse_ino_t parent, const char *name,
 	struct stat st;
 		
 	printf("[i] fuse_before create\n");
-	ret = yfs->create(inum, name, &f_inum);
+	ret = yfs->create(inum, name, f_inum, false);
 	VERIFY(getattr(f_inum, st) == yfs_client::OK);	
 	e->ino = f_inum;
 	e->attr = st; 	
@@ -406,11 +406,8 @@ fuseserver_open(fuse_req_t req, fuse_ino_t ino,
 //
 // Ignore mode.
 //
-<<<<<<< HEAD
+
 void
-=======
-	void
->>>>>>> lab2
 fuseserver_mkdir(fuse_req_t req, fuse_ino_t parent, const char *name,
 		mode_t mode)
 {
@@ -421,9 +418,13 @@ fuseserver_mkdir(fuse_req_t req, fuse_ino_t parent, const char *name,
 	e.generation = 0;
 	// Suppress compiler warning of unused e.
 	(void) e;
+	//yfs_client::inum p_inum = parent;
+	//yfs_client::inum inum;
+	
+	//ret = yfs->mkdir(p_inum, name, inum);
 
 	// You fill this in for Lab 3
-#if 0
+#if 1 
 	fuse_reply_entry(req, &e);
 #else
 	fuse_reply_err(req, ENOSYS);
@@ -437,11 +438,8 @@ fuseserver_mkdir(fuse_req_t req, fuse_ino_t parent, const char *name,
 //
 // Do *not* allow unlinking of a directory.
 //
-<<<<<<< HEAD
+
 void
-=======
-	void
->>>>>>> lab2
 fuseserver_unlink(fuse_req_t req, fuse_ino_t parent, const char *name)
 {
 

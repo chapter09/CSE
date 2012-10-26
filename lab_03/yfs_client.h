@@ -49,11 +49,12 @@ class yfs_client {
 
 	int getfile(inum, fileinfo &);
 	int getdir(inum, dirinfo &);
-	int create(inum, const char*, inum*);
+	int create(inum, const char*, inum &, bool);
 	int read_dir(inum, std::list<struct yfs_client::dirent> &);
 	int write(inum, size_t, off_t, const char *);
 	int read(inum, size_t, off_t, std::string &);
 	int setattr(inum, long long int);
+	int mkdir(inum, const char *, inum &);
 };
 
 #endif 

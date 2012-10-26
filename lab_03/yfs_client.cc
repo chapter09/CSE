@@ -60,13 +60,9 @@ yfs_client::isdir(inum inum)
 int
 yfs_client::getfile(inum inum, fileinfo &fin)
 {
-<<<<<<< HEAD
-  int r = OK;
+	int r = OK;
   // You modify this function for Lab 3
   // - hold and release the file lock
-=======
-	int r = OK;
->>>>>>> lab2
 
 	printf("getfile %016llx\n", inum);
 	extent_protocol::attr a;
@@ -89,25 +85,10 @@ release:
 int
 yfs_client::getdir(inum inum, dirinfo &din)
 {
-<<<<<<< HEAD
-  int r = OK;
-  // You modify this function for Lab 3
-  // - hold and release the directory lock
-
-  printf("getdir %016llx\n", inum);
-  extent_protocol::attr a;
-  if (ec->getattr(inum, a) != extent_protocol::OK) {
-    r = IOERR;
-    goto release;
-  }
-  din.atime = a.atime;
-  din.mtime = a.mtime;
-  din.ctime = a.ctime;
-
- release:
-  return r;
-=======
 	int r = OK;
+	// You modify this function for Lab 3
+	// - hold and release the directory lock
+
 	printf("getdir %016llx\n", inum);
 	extent_protocol::attr a;
 	if (ec->getattr(inum, a) != extent_protocol::OK) {
@@ -123,7 +104,7 @@ release:
 }
 
 int
-yfs_client::create(inum dir_inum, const char *name, inum *f)
+yfs_client::create(inum dir_inum, const char *name, inum &f, bool is_f)
 {
 	int r = OK;
 	extent_protocol::attr a;
@@ -143,19 +124,18 @@ yfs_client::create(inum dir_inum, const char *name, inum *f)
 		r = EXIST;
 		goto release;
 	} else {
-		*f = gen_inum(false);	//not generate dir inum
-		value.append(filename(*f));
+		f = gen_inum(is_f);	//not generate dir inum
+		value.append(filename(f));
 		value.append(":");
 		value.append(name);
 		value.append("\n");
 		ec->put(dir_inum, value);	
-		ec->put(*f, "");	
+		ec->put(f, "");	
 		r = OK;	
 		goto release;
 	}
 release:
 	return r;
->>>>>>> lab2
 }
 
 int
@@ -240,7 +220,16 @@ yfs_client::setattr(inum inum, long long int size)
 	}
 	
 release:
+	return r;
+}
 
+int
+yfs_client::mkdir(inum p_inum, const char *name, inum &inum)
+{
+	int r = OK;
+	//yfs_client::create(p_inum, name, inum);
+
+release:
 	return r;
 }
 
