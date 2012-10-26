@@ -49,6 +49,8 @@ class yfs_client {
 	int getdir(inum, dirinfo &);
 	int create(inum, const char*, inum*);
 	int read_dir(inum, std::list<struct yfs_client::dirent> &);
+	int write(inum, size_t, off_t, const char *);
+	int read(inum, size_t, off_t, std::string &);
 };
 
 #endif 

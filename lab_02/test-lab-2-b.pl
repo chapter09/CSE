@@ -103,6 +103,8 @@ sub writeone {
     $contents = substr($contents, 0, $len);
     $files->{$name} = $contents;
 
+	print "write $contents, $len\n";
+
     syswrite F, $files->{$name}, length($files->{$name}) 
 	or die "cannot write to $f";
     close(F);
@@ -119,6 +121,8 @@ sub checkcontent {
       $c2 .= $_;
     }
     close(F);
+	print "store $files->{$name} \n";
+	print "read $c2 \n";
     $files->{$name} eq $c2 or die "content of $f is incorrect\n";
 }
 

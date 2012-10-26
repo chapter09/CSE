@@ -101,7 +101,6 @@ fuseserver_getattr(fuse_req_t req, fuse_ino_t ino,
 		fuse_reply_err(req, ENOENT);
 		return;
 	}
-	printf("get_attr done\n");
 	fuse_reply_attr(req, &st, 0);
 }
 
@@ -123,13 +122,22 @@ fuseserver_setattr(fuse_req_t req, fuse_ino_t ino, struct stat *attr,
 		int to_set, struct fuse_file_info *fi)
 {
 	printf("fuseserver_setattr 0x%x\n", to_set);
-	if (FUSE_SET_ATTR_SIZE & to_set) {
-		printf("   fuseserver_setattr set size to %zu\n", attr->st_size);
+	yfs_client::inum inum = ino;
+	yfs_client::status ret;
+
+	if(FUSE_SET_ATTR_SIZE & to_set) {
+		printf("   fuseserver_setattr set size to %lld\n", attr->st_size);
 		struct stat st;
+
 		// You fill this in for Lab 2
-#if 0
+#if 1
 		// Change the above line to "#if 1", and your code goes here
 		// Note: fill st using getattr before fuse_reply_attr
+		ret = getattr(inum, st);
+		if(ret != yfs_client::OK) {   
+			fuse_reply_err(req, ENOENT); 
+			return; 
+		} 		
 		fuse_reply_attr(req, &st, 0);
 #else
 		fuse_reply_err(req, ENOSYS);
@@ -151,13 +159,17 @@ fuseserver_setattr(fuse_req_t req, fuse_ino_t ino, struct stat *attr,
 // @req identifies this request, and is used only to send a 
 // response back to fuse with fuse_reply_buf or fuse_reply_err.
 //
-	void
+void
 fuseserver_read(fuse_req_t req, fuse_ino_t ino, size_t size,
 		off_t off, struct fuse_file_info *fi)
 {
 	// You fill this in for Lab 2
-#if 0
+	
+#if 1
 	std::string buf;
+	yfs_client::inum inum = ino; 	
+	VERIFY(yfs->read(inum, size, off, buf) == yfs_client::OK);
+	printf("[i] read_read content: %s size: %d\n", buf.data(), buf.size());
 	// Change the above "#if 0" to "#if 1", and your code goes here
 	fuse_reply_buf(req, buf.data(), buf.size());
 #else
@@ -181,14 +193,21 @@ fuseserver_read(fuse_req_t req, fuse_ino_t ino, size_t size,
 // @req identifies this request, and is used only to send a 
 // response back to fuse with fuse_reply_buf or fuse_reply_err.
 //
-	void
+void
 fuseserver_write(fuse_req_t req, fuse_ino_t ino,
 		const char *buf, size_t size, off_t off,
 		struct fuse_file_info *fi)
 {
+	//Set mtime	
 	// You fill this in for Lab 2
-#if 0
+	printf("[FUSE] write %c\n", *buf);
+	yfs_client::inum inum = ino; 	
+//	printf("[FUSE] write %lld, size %d, offset %d\n", inum, *buf, size, off);
+	VERIFY(yfs->write(inum, size, off, buf) == yfs_client::OK); 
+
+#if 1
 	// Change the above line to "#if 1", and your code goes here
+	printf("[FUSE] write successful\n");
 	fuse_reply_write(req, size);
 #else
 	fuse_reply_err(req, ENOSYS);
@@ -229,7 +248,7 @@ fuseserver_createhelper(fuse_ino_t parent, const char *name,
 	struct stat st;
 		
 	printf("[i] fuse_before create\n");
-	ret = yfs->create(parent, name, &f_inum);
+	ret = yfs->create(inum, name, &f_inum);
 	VERIFY(getattr(f_inum, st) == yfs_client::OK);	
 	e->ino = f_inum;
 	e->attr = st; 	

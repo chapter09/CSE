@@ -25,7 +25,7 @@ int extent_server::put(extent_protocol::extentid_t id, std::string buf, int &)
 //	printf("[PUT] buf is %s \n", buf.c_str());
 //	return extent_protocol::IOERR;
 	if(info_map.find(id) == info_map.end()) {
-		printf("[PUT] new \n");
+		printf("[PUT] create \n");
 		extent_protocol::attr a;
 		a.mtime = time(NULL);
 		a.ctime = time(NULL);
@@ -37,9 +37,10 @@ int extent_server::put(extent_protocol::extentid_t id, std::string buf, int &)
 		pthread_mutex_unlock(&mutex);
 		return extent_protocol::OK;
 	} else {
-		printf("[PUT] append \n");
+		printf("[PUT] update \n");
 		pthread_mutex_lock(&mutex);
 		info_map[id].mtime = time(NULL);
+		info_map[id].size = buf.size();
 		ctnt_map[id] = buf;
 		pthread_mutex_unlock(&mutex);
 		return extent_protocol::OK;

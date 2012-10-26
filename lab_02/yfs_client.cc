@@ -132,6 +132,65 @@ release:
 	return r;
 }
 
+int
+yfs_client::write(inum inum, size_t size, off_t off, const char *buf)
+{
+	printf("[i] write_yfs_client\n");	
+	int r = OK;
+	size_t v_size;
+	int t;
+	std::string value;
+	VERIFY(ec->get(inum, value) == extent_protocol::OK);
+	v_size = value.size();
+	printf("[i] write_yfs_client value: %s size: %d\n", value.c_str(), v_size);	
+	if(off > v_size) {
+		for(t = v_size; t < off; t++) {
+			value.push_back('\0');
+		}
+		for(t = 0; t < int(size); t++) {
+			value.push_back(*(buf++));
+		}	
+	} else if((off+size) > v_size) {
+		value.erase(off, v_size - off);
+		for(t = 0; t < int(size); t++) {
+			value.push_back(*(buf++));
+		}	
+	} else {
+		value.replace(off, size, buf, size);	
+	}
+	printf("[i] write_yfs_client new value: %s size: %d\n", value.c_str(), value.size());	
+	if (ec->put(inum, value) != extent_protocol::OK) {
+		r = IOERR;
+		printf("[yfs_client] %016llx write_put failed\n", inum);
+		goto release;
+	}
+	
+release:
+	return r;
+}
+
+int
+yfs_client::read(inum inum, size_t size, off_t off, std::string &buf)
+{
+	printf("[i] read_yfs_client\n");	
+	int r = OK;
+	std::string value;
+	VERIFY(ec->get(inum, value) == extent_protocol::OK);
+	size_t v_size = value.size();
+	if(off >= v_size) {
+		buf = "";
+	} else if((off+size) > v_size) {
+		buf = value.substr(off, v_size-off);
+	} else {
+		buf = value.substr(off, size);
+	}
+		printf("[yfs_client] %016llx read\n", inum);
+	printf("[i] read_yfs_client value: %s size: %d\n", value.c_str(), value.size());	
+	
+	return r;
+}
+
+
 int 
 yfs_client::read_dir(inum dir_inum, std::list<struct yfs_client::dirent> &list_dir)
 {
@@ -166,7 +225,7 @@ yfs_client::lookup(inum dir_inum, const char *name, inum &f_inum)
 	VERIFY(ec->get(dir_inum, value) == extent_protocol::OK);
 	
 //	printf("[value]\n");
-	printf("%s\n", value.c_str());
+//	printf("%s\n", value.c_str());
 //	printf("[value]\n");
 	found = value.find(name);
 	if(found != std::string::npos) {
