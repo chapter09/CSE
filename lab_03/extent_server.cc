@@ -76,7 +76,7 @@ int extent_server::getattr(extent_protocol::extentid_t id, extent_protocol::attr
 		printf("[E] extent_server getattr failed\n");
 		return extent_protocol::IOERR;
 	} else {
-		printf("[E] extent_server getattr success\n");
+		printf("[E] extent_server %016llx getattr success\n", id);
 		a = info_map[id];
 		return extent_protocol::OK;
 	}

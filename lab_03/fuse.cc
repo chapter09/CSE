@@ -251,6 +251,7 @@ fuseserver_createhelper(fuse_ino_t parent, const char *name,
 		
 	printf("[i] fuse_before create\n");
 	ret = yfs->create(inum, name, f_inum, false);
+	printf("[i] before getattr the f_inum is: %016llx \n", f_inum);
 	VERIFY(getattr(f_inum, st) == yfs_client::OK);	
 	e->ino = f_inum;
 	e->attr = st; 	

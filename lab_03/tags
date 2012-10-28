@@ -1849,6 +1849,7 @@ lc	lab_03/lock_demo.cc	/^lock_client *lc;$/;"	v
 lc	lab_03/lock_tester.cc	/^lock_client **lc = new lock_client * [nt];$/;"	v
 lc	lock_demo.cc	/^lock_client *lc;$/;"	v
 lc	lock_tester.cc	/^lock_client **lc = new lock_client * [nt];$/;"	v
+lc	yfs_client.h	/^	lock_client *lc;$/;"	m	class:yfs_client
 listener_	lab_01/rpc/rpc.h	/^	tcpsconn* listener_;$/;"	m	class:rpcs
 listener_	lab_03/lab_01/rpc/rpc.h	/^	tcpsconn* listener_;$/;"	m	class:rpcs
 listener_	lab_03/lab_03/lab_01/rpc/rpc.h	/^	tcpsconn* listener_;$/;"	m	class:rpcs
@@ -2181,7 +2182,7 @@ mgr_	lab_03/rpc/connection.h	/^		chanmgr *mgr_;$/;"	m	class:connection
 mgr_	lab_03/rpc/connection.h	/^		chanmgr *mgr_;$/;"	m	class:tcpsconn
 mgr_	rpc/connection.h	/^		chanmgr *mgr_;$/;"	m	class:connection
 mgr_	rpc/connection.h	/^		chanmgr *mgr_;$/;"	m	class:tcpsconn
-min	fuse.cc	341;"	d	file:
+min	fuse.cc	343;"	d	file:
 min	lab_03/fuse.cc	341;"	d	file:
 min	lab_03/lab_03/fuse.cc	341;"	d	file:
 mkdir	yfs_client.cc	/^yfs_client::mkdir(inum p_inum, const char *name, inum &inum)$/;"	f	class:yfs_client
@@ -3596,6 +3597,8 @@ yfs_client	lab_03/yfs_client.cc	/^yfs_client::yfs_client(std::string extent_dst,
 yfs_client	yfs_client.cc	/^yfs_client::yfs_client(std::string extent_dst, std::string lock_dst)$/;"	f	class:yfs_client
 yfs_client	yfs_client.h	/^class yfs_client {$/;"	c
 yfs_client_h	yfs_client.h	2;"	d
+yfs_lookup	yfs_client.cc	/^yfs_client::yfs_lookup(inum dir_inum, const char *name, inum &f_inum)$/;"	f	class:yfs_client
+yfs_read_dir	yfs_client.cc	/^yfs_client::yfs_read_dir(inum dir_inum, std::list<struct yfs_client::dirent> &list_dir)$/;"	f	class:yfs_client
 yyy	lab_01/rpc/method_thread.h	/^				static void *yyy(void *vvv) {$/;"	f	class:__anon7::XXX
 yyy	lab_03/lab_01/rpc/method_thread.h	/^				static void *yyy(void *vvv) {$/;"	f	class:__anon18::XXX
 yyy	lab_03/lab_03/lab_01/rpc/method_thread.h	/^				static void *yyy(void *vvv) {$/;"	f	class:__anon29::XXX

@@ -11,6 +11,7 @@
 
 class yfs_client {
 	extent_client *ec;
+	lock_client *lc;
 	public:
 
 	typedef unsigned long long inum;
@@ -38,7 +39,9 @@ class yfs_client {
 	static inum n2i(std::string);
 	inum gen_inum(bool);
 	void build_root();
-	
+	bool yfs_lookup(inum, const char*, inum &);
+	int yfs_read_dir(inum, std::list<struct yfs_client::dirent> &);
+
 	public:
 
 	yfs_client(std::string, std::string);
