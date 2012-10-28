@@ -285,7 +285,6 @@ yfs_client::lookup(inum dir_inum, const char *name, inum &f_inum)
 {
 	bool r;
 	std::string value;
-//	size_t found;
 	printf("[LOOK UP] under dir %016llx\n", dir_inum);
 	printf("[i] look up %s\n", name);
 	std::list<struct yfs_client::dirent> list_dir;
@@ -345,11 +344,17 @@ yfs_client::inum
 yfs_client::gen_inum(bool is_dir)
 {
 	inum inum;
-	inum = rand() % 2147483648U;
-	if(!is_dir) {
-		inum = inum | 0x0000000080000000;
-	} else {
-		inum = inum & 0x000000007FFFFFFF;
+	std::string buf;
+	while(1) {
+		inum = rand() % 2147483648U;
+		if(!is_dir) {
+			inum = inum | 0x0000000080000000;
+		} else {
+			inum = inum & 0x000000007FFFFFFF;
+		}
+		if(ec->get(inum, buf) == extent_protocol::NOENT) {
+			break;
+		}
 	}
 	return inum;
 }
