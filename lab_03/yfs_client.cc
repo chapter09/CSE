@@ -237,6 +237,7 @@ yfs_client::unlink(inum p_inum, const char *name)
 {
 	inum f;
 
+	printf("[U] unlink %s\n", name);	
 	if(!lookup(p_inum, name, f)) return NOENT;	
 
 	if(!isfile(f)) {
@@ -247,13 +248,13 @@ yfs_client::unlink(inum p_inum, const char *name)
 		std::string value;
 		size_t found;
 		VERIFY(ec->get(p_inum, value) == extent_protocol::OK);
-		printf("[i] unlink_yfs_client value: %s size: %d f: %016llx\n", value.c_str(), value.size(), f);	
+		printf("[U] c_value:\n %s size: %d f: %016llx\n", value.c_str(), value.size(), f);	
 		found = value.find(name);
 		value.erase(found-11,12+strlen(name));
 		VERIFY(ec->put(p_inum, value) == extent_protocol::OK);
-		printf("[i] unlink_yfs_client new value: %s size: %d\n", value.c_str(), value.size());	
+		printf("[U] d_value\n: %s size: %d\n", value.c_str(), value.size());	
 	}
-		printf("[i] unlink_yfs_client done\n");	
+		printf("[U] done\n");	
 	return OK;
 }
 
@@ -284,27 +285,57 @@ yfs_client::lookup(inum dir_inum, const char *name, inum &f_inum)
 {
 	bool r;
 	std::string value;
-	size_t found;
-	printf("[i] lookup_yfs_client B\n");	
-	printf("[LOOK UP] %016llx\n", dir_inum);
-	printf("[i] %s\n", name);
-	VERIFY(ec->get(dir_inum, value) == extent_protocol::OK);
+//	size_t found;
+	printf("[LOOK UP] under dir %016llx\n", dir_inum);
+	printf("[i] look up %s\n", name);
+	std::list<struct yfs_client::dirent> list_dir;
+	std::list<struct yfs_client::dirent>::iterator dir_it;
+	std::string s = name;
+	VERIFY(read_dir(dir_inum, list_dir) == extent_protocol::OK);
+	
+	for(dir_it = list_dir.begin(); dir_it != list_dir.end(); dir_it++) {
+		if((*dir_it).name == s) {
+			f_inum = (*dir_it).inum;
+			printf("have found %s %016llx\n", (*dir_it).name.c_str(), f_inum);
+			r = true;
+			goto release;
+		}
+	}
+
+//	VERIFY(ec->get(dir_inum, value) == extent_protocol::OK);
 	
 //	printf("[value]\n");
 //	printf("%s\n", value.c_str());
 //	printf("[value]\n");
-	found = value.find(name);
-	if(found != std::string::npos) {
-		printf("have found %s\n", name);
-		r = true;
-		printf("have found %s off %d\n", value.c_str(), found);
-		f_inum = n2i(value.substr(found-11, 10));
-		goto release;
-	} else {
-		printf("have not found %s\n", name);
-		r = false;
-		goto release;
-	}
+//	std::string t_str;
+//	t_str.push_back(':');
+//	t_str.append(name);
+//	t_str.append("\n");
+//	found = value.find(t_str);
+//	printf("[LOOKUP] found = %d", found);
+//	if(found != std::string::npos) {
+//		r = true;
+//		printf("have found %s off %d\n", value.c_str(), found);
+		
+//		std::string line;
+//		std::stringstream stream;
+//		stream << value;
+//		while(getline(stream, line)) {
+//			size_t pos;
+//			struct dirent dir_ent;
+//			if(line.find(name) !=std::string::npos) {
+//				pos = line.find(':');
+//				f_inum = n2i(line.substr(0, pos));
+//				break;
+//			}
+//		}
+//		printf("have found %s\n", name);
+//		printf("have found %016llx\n", f_inum);
+//		//f_inum = n2i(value.substr(found-11, 10));
+//		goto release;
+	printf("have not found %s\n", name);
+	r = false;
+	goto release;
 
 release:
 	return r;

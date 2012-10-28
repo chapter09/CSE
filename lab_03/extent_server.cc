@@ -40,6 +40,7 @@ int extent_server::put(extent_protocol::extentid_t id, std::string buf, int &)
 		printf("[PUT] update \n");
 		pthread_mutex_lock(&mutex);
 		info_map[id].mtime = time(NULL);
+		info_map[id].ctime = time(NULL);
 		info_map[id].size = buf.size();
 		ctnt_map[id] = buf;
 		pthread_mutex_unlock(&mutex);
