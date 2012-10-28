@@ -3302,6 +3302,7 @@ un	lab_03/lab_03/lab_03/rpc/rpc.h	/^			unmarshall *un;$/;"	m	struct:rpcc::caller
 un	lab_03/lab_03/rpc/rpc.h	/^			unmarshall *un;$/;"	m	struct:rpcc::caller
 un	lab_03/rpc/rpc.h	/^			unmarshall *un;$/;"	m	struct:rpcc::caller
 un	rpc/rpc.h	/^			unmarshall *un;$/;"	m	struct:rpcc::caller
+unlink	yfs_client.cc	/^yfs_client::unlink(inum p_inum, const char *name)$/;"	f	class:yfs_client
 unlink1	test-lab-3-b.c	/^unlink1(const char *d, const char *f)$/;"	f
 unlink1	test-lab-3-c.c	/^unlink1(const char *d, const char *f)$/;"	f
 unlinkn	test-lab-3-b.c	/^unlinkn(const char *d, const char *prefix, int nf)$/;"	f

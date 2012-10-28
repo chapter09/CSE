@@ -10,6 +10,7 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <stdlib.h>
+#include <string.h>
 #include <time.h>
 
 yfs_client::yfs_client(std::string extent_dst, std::string lock_dst)
@@ -124,7 +125,7 @@ yfs_client::create(inum dir_inum, const char *name, inum &f, bool is_f)
 		r = EXIST;
 		goto release;
 	} else {
-		f = gen_inum(is_f);	//not generate dir inum
+		f = gen_inum(is_f);	//generate dir inum or not
 		value.append(filename(f));
 		value.append(":");
 		value.append(name);
@@ -227,12 +228,34 @@ int
 yfs_client::mkdir(inum p_inum, const char *name, inum &inum)
 {
 	int r = OK;
-	//yfs_client::create(p_inum, name, inum);
-
-release:
+	r = create(p_inum, name, inum, true);
 	return r;
 }
 
+int
+yfs_client::unlink(inum p_inum, const char *name)
+{
+	inum f;
+
+	if(!lookup(p_inum, name, f)) return NOENT;	
+
+	if(!isfile(f)) {
+		return IOERR; 
+	} else {
+		VERIFY(ec->remove(f) == OK);
+		
+		std::string value;
+		size_t found;
+		VERIFY(ec->get(p_inum, value) == extent_protocol::OK);
+		printf("[i] unlink_yfs_client value: %s size: %d f: %016llx\n", value.c_str(), value.size(), f);	
+		found = value.find(name);
+		value.erase(found-11,12+strlen(name));
+		VERIFY(ec->put(p_inum, value) == extent_protocol::OK);
+		printf("[i] unlink_yfs_client new value: %s size: %d\n", value.c_str(), value.size());	
+	}
+		printf("[i] unlink_yfs_client done\n");	
+	return OK;
+}
 
 int 
 yfs_client::read_dir(inum dir_inum, std::list<struct yfs_client::dirent> &list_dir)
@@ -274,6 +297,7 @@ yfs_client::lookup(inum dir_inum, const char *name, inum &f_inum)
 	if(found != std::string::npos) {
 		printf("have found %s\n", name);
 		r = true;
+		printf("have found %s off %d\n", value.c_str(), found);
 		f_inum = n2i(value.substr(found-11, 10));
 		goto release;
 	} else {
@@ -294,7 +318,7 @@ yfs_client::gen_inum(bool is_dir)
 	if(!is_dir) {
 		inum = inum | 0x0000000080000000;
 	} else {
-		inum = inum & 0x000000000FFFFFFF;
+		inum = inum & 0x000000007FFFFFFF;
 	}
 	return inum;
 }

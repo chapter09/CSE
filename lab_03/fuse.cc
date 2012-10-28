@@ -306,9 +306,10 @@ fuseserver_lookup(fuse_req_t req, fuse_ino_t parent, const char *name)
 	e.generation = 0;
 	bool found = false;
 	yfs_client::inum f_inum;
+	yfs_client::inum dir_inum = parent;
 	struct stat st;
 	
-	found = yfs->lookup(parent, name, f_inum);
+	found = yfs->lookup(dir_inum, name, f_inum);
 	getattr(f_inum, st);	
 
 	// You fill this in for Lab 2
@@ -418,10 +419,16 @@ fuseserver_mkdir(fuse_req_t req, fuse_ino_t parent, const char *name,
 	e.generation = 0;
 	// Suppress compiler warning of unused e.
 	(void) e;
-	//yfs_client::inum p_inum = parent;
-	//yfs_client::inum inum;
+	yfs_client::status ret;	
+	yfs_client::inum p_inum = parent;
+	yfs_client::inum inum;
+	struct stat st;
 	
-	//ret = yfs->mkdir(p_inum, name, inum);
+	ret = yfs->mkdir(p_inum, name, inum);
+	VERIFY(getattr(inum, st) == yfs_client::OK);	
+	e.ino = inum;
+	e.attr = st; 	
+	printf("mkdir  %016llx %d\n", inum, yfs->isfile(inum));
 
 	// You fill this in for Lab 3
 #if 1 
@@ -446,10 +453,24 @@ fuseserver_unlink(fuse_req_t req, fuse_ino_t parent, const char *name)
 	// You fill this in for Lab 3
 	// Success:	fuse_reply_err(req, 0);
 	// Not found:	fuse_reply_err(req, ENOENT);
-	fuse_reply_err(req, ENOSYS);
+	yfs_client::status ret;	
+	yfs_client::inum p_inum = parent;
+	
+	ret = yfs->unlink(p_inum, name);
+	if(ret == yfs_client::IOERR) {
+		fuse_reply_err(req, ENOSYS);
+	} else if(ret == yfs_client::NOENT) {
+		fuse_reply_err(req, ENOENT);
+	} else if(ret == yfs_client::OK) {
+		printf("unlink sucessful");
+		fuse_reply_err(req, 0);
+	}	
+
+	printf("unlink not return");
+//	fuse_reply_err(req, ENOSYS);
 }
 
-	void
+void
 fuseserver_statfs(fuse_req_t req)
 {
 	struct statvfs buf;
