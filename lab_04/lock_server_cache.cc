@@ -12,29 +12,44 @@
 
 lock_server_cache::lock_server_cache()
 {
+	nacquire = 0;
+	
 }
 
-
 int lock_server_cache::acquire(lock_protocol::lockid_t lid, std::string id, 
-                               int &)
+		int &)
 {
-  lock_protocol::status ret = lock_protocol::OK;
-  return ret;
+	lock_protocol::status ret = lock_protocol::OK;
+	printf("acquire request from clt %s for lock %016llx\n", id, lid);
+
+	return ret;
 }
 
 int 
 lock_server_cache::release(lock_protocol::lockid_t lid, std::string id, 
-         int &r)
+		int &r)
 {
-  lock_protocol::status ret = lock_protocol::OK;
-  return ret;
+	lock_protocol::status ret = lock_protocol::OK;
+	return ret;
 }
 
 lock_protocol::status
 lock_server_cache::stat(lock_protocol::lockid_t lid, int &r)
 {
-  tprintf("stat request\n");
-  r = nacquire;
-  return lock_protocol::OK;
+	tprintf("stat request\n");
+	r = nacquire;
+	return lock_protocol::OK;
 }
+
+int lock_server_cache::revoke(std::string)
+{
+
+}
+
+int lock_server_cache::retry(std::string)
+{
+
+
+}
+
 
