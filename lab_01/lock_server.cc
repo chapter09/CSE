@@ -63,21 +63,21 @@ lock_server::release(int clt, lock_protocol::lockid_t lid, int &r)
 bool
 lock_server::is_lock_existed(lock_protocol::lockid_t lid)
 {	
-	std::map<lock_protocol::lockid_t, int>::iterator it;
-	it = table_lk.find(lid);
-	if(it == table_lk.end())
+	if(table_lk.find(lid) == table_lk.end()) {
 		return false;
-	else
+	} else {
 		return true;
+	}
 }
 
 bool
 lock_server::is_locked(lock_protocol::lockid_t lid)
 {
-	if(table_lk[lid] == FREE)
+	if(table_lk[lid] == FREE) {
 		return false;
-	else
+	} else {
 		return true;
+	}
 }
 
 void
@@ -91,22 +91,20 @@ lock_server::create_lock(int clt, lock_protocol::lockid_t lid)
 void
 lock_server::locker(int clt, lock_protocol::lockid_t lid)
 {
+	pthread_mutex_lock(&mutex);
 	if(is_lock_existed(lid)){
 		if(is_locked(lid)){
-			pthread_mutex_lock(&mutex);
 			printf("%d wait for the signal\n", clt);
 			pthread_cond_wait(&cv, &mutex);
 			printf("%d get the signal\n", clt);
 			create_lock(clt, lid);
 			pthread_mutex_unlock(&mutex);
 		}else{
-			pthread_mutex_lock(&mutex);
 			create_lock(clt, lid);
 			pthread_mutex_unlock(&mutex);
 		}
 	}
 	else{
-		pthread_mutex_lock(&mutex);
 		create_lock(clt, lid);
 		pthread_mutex_unlock(&mutex);
 	}

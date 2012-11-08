@@ -56,6 +56,7 @@ lock_client_cache::acquire(lock_protocol::lockid_t lid)
 		printf("lock %016llx had been cached in the client\n");
 		tolock(lid);
 
+		return ret;
 
 
 	} else {
@@ -94,13 +95,26 @@ lock_client_cache::acquire(lock_protocol::lockid_t lid)
 	return ret;
 }
 
+bool
+lock_client_cache::is_locked(lock_protocol::lockid_t lid)
+{
+	pthread_mutex_lock(&mutex);
+	if(cache_map[lid] == LOCKED) {
+		pthread_mutex_unlock(&mutex);
+		return ture;
+	} else {
+		pthread_mutex_unlock(&mutex);
+		return false;
+	}
+}
+
 void
 lock_client_cache::tolock(lock_protocol::lockid_t lid)
 {
-	if(cache_map[lid] == LOCKED){
-		pthread_mutex_lock(&lock_mutex);
+	if(is_locked(lock_protocol::lockid_t lid)){
+		pthread_mutex_lock(&mutex);
 		printf("%d wait for the signal\n", pthread_self());
-		pthread_cond_wait(&lock_cv, &lock_mutex);
+		pthread_cond_wait(&lock_cv, &mutex);
 		printf("%d get the signal\n", pthread_self());
 		cache_map[lid] = LOCKED;
 		pthread_mutex_unlock(&mutex);

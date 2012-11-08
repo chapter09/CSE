@@ -42,8 +42,8 @@ class lock_client_cache : public lock_client {
 		pthread_cond_t lock_cv;
 		pthread_cond_t retry_cv;
 		bool is_lock_cached(lock_protocol::lockid_t);
+		bool is_locked(lock_protocol::lockid_t);
 	
-
 	public:
 		lock_client_cache(std::string xdst, class lock_release_user *l = 0);
 		virtual ~lock_client_cache() {};
