@@ -22,9 +22,8 @@ lock_server_cache::~lock_server_cache()
 
 
 int lock_server_cache::acquire(lock_protocol::lockid_t lid, std::string id, 
-		int &)
+		int &r)
 {
-	lock_protocol::status ret;
 	printf("acquire request from clt %s for lock %016llx\n", id.c_str(), lid);
 	
 	//check the status of lock
@@ -35,22 +34,16 @@ int lock_server_cache::acquire(lock_protocol::lockid_t lid, std::string id,
 		std::list<std::string> wait_list;
 		wait_list.push_back(id);
 		l_map[lid] = wait_list;
-		
-		ret = lock_protocol::OK;
 		pthread_mutex_unlock(&mutex);
-		return ret;
-
+		return lock_protocol::OK;
 	} else {
 	//lock is on a LOCKED client
 		l_map[lid].push_back(id);
 		//send retry to the last one		
-		ret = lock_protocol::RETRY;
-		
 		pthread_mutex_unlock(&mutex);
-		
 		//send revoke to the first client
 		revoke(id, lid);
-		return ret;
+		return lock_protocol::RETRY;
 	}
 }
 
@@ -72,29 +65,39 @@ lock_server_cache::stat(lock_protocol::lockid_t lid, int &r)
 
 int lock_server_cache::revoke(std::string id, lock_protocol::lockid_t lid)
 {
+	int r;
+	rlock_protocol::status ret;
 	//bind the client
 	handle h(id);
 	rpcc *cl = h.safebind();
 	if(cl) {
-		ret = cl->call(rlock_protocol::revoke);
+		ret = cl->call(rlock_protocol::revoke, lid, r);
+		if(ret == rlock_protocol::OK) {
+			
+		}
+
 	} else {
 		printf("revoke rpc faild [client:%s, lock %016llx]\n", id.c_str(), lid);
+		ret = rlock_protocol::RPCERR;
 	}
 
-	return 0;
+	return ret;
 }
 
 int lock_server_cache::retry(std::string id, lock_protocol::lockid_t lid)
 {
+	int r;
+	rlock_protocol::status ret;
 	handle h(id);
 	rpcc *cl = h.safebind();
 	if(cl) {
-		ret = cl->call(rlock_protocol::retry);
+		ret = cl->call(rlock_protocol::retry, lid, r);
 	} else {
 		printf("retry rpc faild [client:%s, lock %016llx]\n", id.c_str(), lid);
+		ret = rlock_protocol::RPCERR;
 	}
 
-	return 0;
+	return ret;
 }
 
 
