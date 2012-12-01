@@ -11,8 +11,8 @@
 #include "lang/verify.h"
 #include <pthread.h>
 
-#define FREE 1
-#define LOCKED 0
+#define OFF 1
+#define ON 0
 
 // Classes that inherit lock_release_user can override dorelease so that 
 // that they will be called when lock_client releases a lock.
@@ -29,22 +29,25 @@ class lock_client_cache : public lock_client {
 		int rlock_port;
 		std::string hostname;
 		std::string id;
+		enum xxstatus { NONE, ACQUIRING, LOCKED, FREE, RELEASING };
+		int cl_status;
+				
 
 		struct lock_info {
-			bool is_revoked = false;
-			bool is_retried = false;
-		}
+			bool is_revoked;
+			bool is_retried;
+		};
 
 		std::map<lock_protocol::lockid_t, lock_info> info_map;
 		std::map<lock_protocol::lockid_t, int> cache_map;
 		pthread_mutex_t mutex;	//lock_client global lock
-		pthread_mutex_t lock_mutex;
 		pthread_cond_t lock_cv;
-		pthread_cond_t retry_cv;
+		//pthread_cond_t retry_cv;
 		bool is_lock_cached(lock_protocol::lockid_t);
 		bool is_locked(lock_protocol::lockid_t);
-	
+		void to_lock(lock_protocol::lockid_t);
 	public:
+		
 		lock_client_cache(std::string xdst, class lock_release_user *l = 0);
 		virtual ~lock_client_cache() {};
 		lock_protocol::status acquire(lock_protocol::lockid_t);

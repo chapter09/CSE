@@ -13,9 +13,9 @@
 class lock_server_cache {
 	private:
 		int nacquire;
-		std::map<lock_protocol::lockid_t, std::list<std::string> > lock_map;
-		int revoke(std::string id, lock_protocol::lockid_t lid);
-		int retry(std::string id, lock_protocol::lockid_t lid);
+		std::map<lock_protocol::lockid_t, std::list<std::string> > l_map;
+		int revoke(lock_protocol::lockid_t lid, std::string id);
+		int retry(lock_protocol::lockid_t lid, std::string id);
 
 		pthread_mutex_t mutex;
 

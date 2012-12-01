@@ -29,20 +29,28 @@ int lock_server_cache::acquire(lock_protocol::lockid_t lid, std::string id,
 	//check the status of lock
 	pthread_mutex_lock(&mutex);
 
+	printf("metex on : clt %s for lock %016llx\n", id.c_str(), lid);
 	if(l_map.find(lid) == l_map.end()) {
 	//lock is requested first time
 		std::list<std::string> wait_list;
 		wait_list.push_back(id);
 		l_map[lid] = wait_list;
 		pthread_mutex_unlock(&mutex);
+		printf("before return OK : clt %s for lock %016llx\n", id.c_str(), lid);
 		return lock_protocol::OK;
 	} else {
-	//lock is on a LOCKED client
+		//lock is on a LOCKED client
 		l_map[lid].push_back(id);
+		std::string w_id = l_map[lid].front();
 		//send retry to the last one		
-		pthread_mutex_unlock(&mutex);
 		//send revoke to the first client
-		revoke(id, lid);
+		if(l_map[lid].size() <= 2) {
+			pthread_mutex_unlock(&mutex);
+			revoke(lid, w_id);
+		} else {
+			pthread_mutex_unlock(&mutex);
+		}
+		printf("before return RETRY : clt %s for lock %016llx\n", id.c_str(), lid);
 		return lock_protocol::RETRY;
 	}
 }
@@ -52,6 +60,16 @@ lock_server_cache::release(lock_protocol::lockid_t lid, std::string id,
 		int &r)
 {
 	lock_protocol::status ret = lock_protocol::OK;
+	l_map[lid].pop_front();
+
+	if (l_map[lid].size() > 0) {
+		retry(lid, l_map[lid].front());	
+		if(l_map[lid].size() > 1) {
+			revoke(lid, l_map[lid].front());	
+		}		
+	} else {
+		l_map.erase(lid);
+	}
 	return ret;
 }
 
@@ -63,7 +81,7 @@ lock_server_cache::stat(lock_protocol::lockid_t lid, int &r)
 	return lock_protocol::OK;
 }
 
-int lock_server_cache::revoke(std::string id, lock_protocol::lockid_t lid)
+int lock_server_cache::revoke(lock_protocol::lockid_t lid, std::string id)
 {
 	int r;
 	rlock_protocol::status ret;
@@ -72,19 +90,14 @@ int lock_server_cache::revoke(std::string id, lock_protocol::lockid_t lid)
 	rpcc *cl = h.safebind();
 	if(cl) {
 		ret = cl->call(rlock_protocol::revoke, lid, r);
-		if(ret == rlock_protocol::OK) {
-			
-		}
-
 	} else {
 		printf("revoke rpc faild [client:%s, lock %016llx]\n", id.c_str(), lid);
 		ret = rlock_protocol::RPCERR;
 	}
-
 	return ret;
 }
 
-int lock_server_cache::retry(std::string id, lock_protocol::lockid_t lid)
+int lock_server_cache::retry(lock_protocol::lockid_t lid, std::string id)
 {
 	int r;
 	rlock_protocol::status ret;
