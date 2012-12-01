@@ -29,14 +29,13 @@ int lock_server_cache::acquire(lock_protocol::lockid_t lid, std::string id,
 	//check the status of lock
 	pthread_mutex_lock(&mutex);
 
-	printf("metex on : clt %s for lock %016llx\n", id.c_str(), lid);
 	if(l_map.find(lid) == l_map.end()) {
 	//lock is requested first time
 		std::list<std::string> wait_list;
 		wait_list.push_back(id);
 		l_map[lid] = wait_list;
 		pthread_mutex_unlock(&mutex);
-		printf("before return OK : clt %s for lock %016llx\n", id.c_str(), lid);
+		printf("acquire return OK : clt %s for lock %016llx\n", id.c_str(), lid);
 		return lock_protocol::OK;
 	} else {
 		//lock is on a LOCKED client
@@ -50,7 +49,7 @@ int lock_server_cache::acquire(lock_protocol::lockid_t lid, std::string id,
 		} else {
 			pthread_mutex_unlock(&mutex);
 		}
-		printf("before return RETRY : clt %s for lock %016llx\n", id.c_str(), lid);
+		printf("acquire return RETRY : clt %s for lock %016llx\n", id.c_str(), lid);
 		return lock_protocol::RETRY;
 	}
 }
@@ -59,6 +58,7 @@ int
 lock_server_cache::release(lock_protocol::lockid_t lid, std::string id, 
 		int &r)
 {
+	printf("[release] : clt %s for lock %016llx\n", id.c_str(), lid);
 	lock_protocol::status ret = lock_protocol::OK;
 	l_map[lid].pop_front();
 
