@@ -18,7 +18,6 @@ lock_client_cache::lock_client_cache(std::string xdst,
 	rlsrpc->reg(rlock_protocol::retry, this, &lock_client_cache::retry_handler);
 
 	VERIFY(pthread_mutex_init(&mutex, NULL) == 0);
-	VERIFY(pthread_cond_init(&lock_cv, NULL) == 0);	
 	//VERIFY(pthread_cond_init(&retry_cv, NULL) == 0);
 	
 	const char *hname;
@@ -27,7 +26,6 @@ lock_client_cache::lock_client_cache(std::string xdst,
 	host << hname << ":" << rlsrpc->port();
 	id = host.str();
 }
-
 
 //void
 //lock_client_cache::to_status(int stat)
@@ -59,7 +57,6 @@ lock_protocol::status
 lock_client_cache::acquire(lock_protocol::lockid_t lid)
 {
 	//check the revoke/retry
-	
 	int r;
 
 	pthread_mutex_lock(&mutex);
@@ -83,6 +80,10 @@ lock_client_cache::acquire(lock_protocol::lockid_t lid)
 			if(ret == lock_protocol::OK) { 
 				//ret == OK
 				pthread_mutex_lock(&mutex);
+				pthread_cond_t lock_cv;
+				VERIFY(pthread_cond_init(&lock_cv, NULL) == 0);	
+				cv_map[lid] = lock_cv;				
+
 				cache_map[lid] = LOCKED;
 				pthread_mutex_unlock(&mutex);
 				printf("acquire return OK in client %s\n", this->id.c_str());
@@ -125,7 +126,7 @@ lock_client_cache::to_lock(lock_protocol::lockid_t lid)
 {
 	if(is_locked(lid)){
 		printf("\tclient %s wait for the signal\n", this->id.c_str());
-		pthread_cond_wait(&lock_cv, &mutex);
+		pthread_cond_wait(&cv_map[lid], &mutex);
 		//printf("%d get the signal\n", pthread_self());
 		printf("\tclient %s get lock\n", this->id.c_str());
 		cache_map[lid] = LOCKED;
@@ -171,7 +172,7 @@ lock_client_cache::release(lock_protocol::lockid_t lid)
 		
 		printf("[send signal] thread %s\n", this->id.c_str());
 
-		pthread_cond_signal(&lock_cv);
+		pthread_cond_signal(&cv_map[lid]);
 		pthread_mutex_unlock(&mutex);
 		return lock_protocol::OK;
 	}
@@ -234,7 +235,7 @@ lock_client_cache::retry_handler(lock_protocol::lockid_t lid,
 		
 		info_map[lid].is_retried = true;
 		cache_map[lid] = LOCKED;
-		pthread_cond_signal(&lock_cv);
+		pthread_cond_signal(&cv_map[lid]);
 		pthread_mutex_unlock(&mutex);
 
 	} else {

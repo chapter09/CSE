@@ -29,7 +29,6 @@ class lock_client_cache : public lock_client {
 		std::string id;
 		enum xxstatus { NONE, ACQUIRING, LOCKED, FREE, RELEASING };
 		typedef int l_status;
-				
 
 		struct lock_info {
 			bool is_revoked;
@@ -38,8 +37,9 @@ class lock_client_cache : public lock_client {
 
 		std::map<lock_protocol::lockid_t, lock_info> info_map;
 		std::map<lock_protocol::lockid_t, l_status> cache_map;
+		std::map<lock_protocol::lockid_t, pthread_cond_t> cv_map;
 		pthread_mutex_t mutex;	//lock_client global lock
-		pthread_cond_t lock_cv;
+//		pthread_cond_t lock_cv;
 		//pthread_cond_t retry_cv;
 		bool is_lock_cached(lock_protocol::lockid_t);
 		bool is_locked(lock_protocol::lockid_t);

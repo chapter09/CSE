@@ -60,9 +60,11 @@ lock_server_cache::release(lock_protocol::lockid_t lid, std::string id,
 {
 	printf("[release] : clt %s for lock %016llx\n", id.c_str(), lid);
 	lock_protocol::status ret = lock_protocol::OK;
+	pthread_mutex_lock(&mutex);
 	l_map[lid].pop_front();
 
 	if (l_map[lid].size() > 0) {
+		pthread_mutex_unlock(&mutex);
 		retry(lid, l_map[lid].front());	
 		if(l_map[lid].size() > 1) {
 			revoke(lid, l_map[lid].front());	
@@ -112,5 +114,3 @@ int lock_server_cache::retry(lock_protocol::lockid_t lid, std::string id)
 
 	return ret;
 }
-
-
