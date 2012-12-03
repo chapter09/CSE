@@ -27,7 +27,7 @@ class lock_client_cache : public lock_client {
 		int rlock_port;
 		std::string hostname;
 		std::string id;
-		enum xxstatus { NONE, ACQUIRING, LOCKED, FREE, RELEASING };
+		enum xxstatus { NONE, ACQUIRING, RETRYING, LOCKED, FREE, RELEASING };
 		typedef int l_status;
 
 		struct lock_info {
@@ -39,10 +39,6 @@ class lock_client_cache : public lock_client {
 		std::map<lock_protocol::lockid_t, l_status> cache_map;
 		std::map<lock_protocol::lockid_t, pthread_cond_t> cv_map;
 		pthread_mutex_t mutex;	//lock_client global lock
-//		pthread_cond_t lock_cv;
-		//pthread_cond_t retry_cv;
-		bool is_lock_cached(lock_protocol::lockid_t);
-		bool is_locked(lock_protocol::lockid_t);
 		void to_lock(lock_protocol::lockid_t);
 	public:
 		

@@ -16,7 +16,7 @@ class lock_server_cache {
 		std::map<lock_protocol::lockid_t, std::list<std::string> > l_map;
 		int revoke(lock_protocol::lockid_t lid, std::string id);
 		int retry(lock_protocol::lockid_t lid, std::string id);
-
+		void print_list(lock_protocol::lockid_t lid);
 		pthread_mutex_t mutex;
 
 	public:

@@ -109,7 +109,7 @@ test3(void *x)
 	return 0;
 }
 
-	void *
+void *
 test4(void *x)
 {
 	int i = * (int *) x;
