@@ -28,6 +28,7 @@ lock_server_cache::print_list(lock_protocol::lockid_t lid)
 	for(it = l_map[lid].begin(); it != l_map[lid].end(); it++ ) {
 		printf("%s ", (*it).c_str());
 	}
+	printf("\n");
 }
 
 int 
@@ -74,6 +75,7 @@ lock_server_cache::release(lock_protocol::lockid_t lid, std::string id,
 
 	if (l_map[lid].size() > 0) {
 		std::string h_id = l_map[lid].front();
+		print_list(lid);
 		pthread_mutex_unlock(&mutex);
 		retry(lid, h_id);	
 		if(l_map[lid].size() > 1) {
