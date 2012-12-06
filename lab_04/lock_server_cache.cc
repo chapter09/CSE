@@ -47,12 +47,17 @@ lock_server_cache::acquire(lock_protocol::lockid_t lid, std::string id, int &r)
 		printf("acquire new lock return OK : clt %s for lock %016llx\n", id.c_str(), lid);
 		return lock_protocol::OK;
 	} else {
+		printf("acq exist lock from clt %s for lock %016llx\n", id.c_str(), lid);
 		//lock is on a LOCKED client
 		l_map[lid].push_back(id);
+		print_list(lid);
 		std::string w_id = l_map[lid].front();
 		//send retry to the last one		
 		//send revoke to the first client
-		if(l_map[lid].size() <= 2) {
+		if(l_map[lid].size() <= 1) { 
+			pthread_mutex_unlock(&mutex);
+			return lock_protocol::OK;
+		} else if(l_map[lid].size() == 2) {
 			pthread_mutex_unlock(&mutex);
 			printf("revoke : clt %s for lock %016llx\n", id.c_str(), lid);
 			revoke(lid, w_id);
@@ -78,8 +83,12 @@ lock_server_cache::release(lock_protocol::lockid_t lid, std::string id,
 		print_list(lid);
 		pthread_mutex_unlock(&mutex);
 		retry(lid, h_id);	
+		pthread_mutex_lock(&mutex);
 		if(l_map[lid].size() > 1) {
+			pthread_mutex_unlock(&mutex);
 			revoke(lid, h_id);	
+		} else {
+			pthread_mutex_unlock(&mutex);
 		}		
 	} else {
 		l_map.erase(lid);

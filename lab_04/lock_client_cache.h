@@ -39,7 +39,6 @@ class lock_client_cache : public lock_client {
 		std::map<lock_protocol::lockid_t, l_status> cache_map;
 		std::map<lock_protocol::lockid_t, pthread_cond_t> cv_map;
 		pthread_mutex_t mutex;	//lock_client global lock
-		bool to_lock(lock_protocol::lockid_t);
 	public:
 		
 		lock_client_cache(std::string xdst, class lock_release_user *l = 0);
