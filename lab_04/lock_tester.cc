@@ -137,7 +137,8 @@ test5(void *x)
 		if (i < 5)  lc[0]->acquire(a);
 		else  lc[1]->acquire(a);
 		check_grant(a);
-		printf ("test5: client %d got lock\n", i);
+	//	printf ("test5: client %d got lock\n", i);
+		printf ("test5: client %u got lock\n", (unsigned int)pthread_self());
 		check_release(a);
 		if (i < 5) lc[0]->release(a);
 		else lc[1]->release(a);

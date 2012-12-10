@@ -37,6 +37,7 @@ lock_server_cache::acquire(lock_protocol::lockid_t lid, std::string id, int &r)
 	printf("acquire request from clt %s for lock %016llx\n", id.c_str(), lid);
 	//check the status of lock
 	pthread_mutex_lock(&mutex);
+	printf("acquire request from clt %s for lock %016llx\n", id.c_str(), lid);
 
 	if(l_map.find(lid) == l_map.end()) {
 		//lock is requested first time
