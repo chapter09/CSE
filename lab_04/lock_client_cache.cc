@@ -154,47 +154,34 @@ lock_client_cache::acquire(lock_protocol::lockid_t lid)
 lock_protocol::status
 lock_client_cache::release(lock_protocol::lockid_t lid)
 {
-	int r;
-	int ret = lock_protocol::OK;
+	printf("[release]\n");
 	pthread_mutex_lock(&mutex);
-	if(info_map[lid].is_revoked) {	
-		printf("[release is_revoked=true] lock_status is %d\n", cache_map[lid]);
-		//call server to release
-		//delete the cache record under the client
-		//cache_map[lid] = RELEASING;
-		info_map.erase(lid);
-		cache_map[lid] = NONE;
-		printf("release and wake %s\n", this->id.c_str());
-		pthread_cond_signal(&cv_map[lid]);
-		pthread_mutex_unlock(&mutex);
-		
-		ret = cl->call(lock_protocol::release, lid, id, r);
-	
-		//pthread_mutex_lock(&mutex);
-		//if(ret == lock_protocol::OK) {
+	if(info_map.count(lid) != 0) {
+		printf("lock_status %d\n", cache_map[lid]);
 
-		//    info_map.erase(lid);
-		//    cache_map[lid] = NONE;
-		//    printf("release and wake %s\n", this->id.c_str());
-		//    pthread_cond_signal(&cv_map[lid]);
-		//}
-		//pthread_mutex_unlock(&mutex);
-		if(ret == lock_protocol::OK) {
-			return lock_protocol::OK;
+		if(info_map[lid].is_revoked) {	
+			int r;
+			info_map.erase(lid);
+			cache_map[lid] = NONE;
+			printf("release to remote %s\n", this->id.c_str());
+			
+			ret = cl->call(lock_protocol::release, lid, id, r);
+		
 		} else {
-			return lock_protocol::RPCERR;
+			printf("release request [t] %u [c]%s\n", 
+				(unsigned int) pthread_self(), this->id.c_str());
+			cache_map[lid] = FREE;
+			info_map.erase(lid);
+			pthread_cond_signal(&cv_map[lid]);
+			pthread_mutex_unlock(&mutex);
+			printf("[send signal out] [t] %u [c]%s\n", 
+				(unsigned int) pthread_self(), this->id.c_str());
 		}
-	} else {
-		printf("release request [t] %u [c]%s\n", 
-			(unsigned int) pthread_self(), this->id.c_str());
-		cache_map[lid] = FREE;
-		info_map.erase(lid);
 		pthread_cond_signal(&cv_map[lid]);
 		pthread_mutex_unlock(&mutex);
-		printf("[send signal out] [t] %u [c]%s\n", 
-			(unsigned int) pthread_self(), this->id.c_str());
-		return lock_protocol::OK;
+			
 	}
+	return lock_protocol::OK;
 }
 
 
