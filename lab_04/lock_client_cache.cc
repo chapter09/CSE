@@ -129,7 +129,8 @@ lock_client_cache::acquire(lock_protocol::lockid_t lid)
  *lock_client_cache::to_lock(lock_protocol::lockid_t lid)
  *{
  *    if(cache_map[lid] != FREE){
- *        printf("\tclient %s thread %u wait for the signal\n", this->id.c_str(), (unsigned int) pthread_self());
+ *        printf("\tclient %s thread %u wait for the signal\n", 
+ *		this->id.c_str(), (unsigned int) pthread_self());
  *        while(1) {
  *            pthread_cond_wait(&cv_map[lid], &mutex);
  *            printf("wait again\n");
@@ -137,10 +138,12 @@ lock_client_cache::acquire(lock_protocol::lockid_t lid)
  *                break;
  *            } 
  *        }
- *        printf("[c] %s [t] %u get lock\n", this->id.c_str(), (unsigned int) pthread_self());
+ *        printf("[c] %s [t] %u get lock\n", 
+ *			this->id.c_str(), (unsigned int) pthread_self());
  *        cache_map[lid] = LOCKED;
  *    }else{
- *        printf("[c] %s [t] %u get lock\n", this->id.c_str(), (unsigned int) pthread_self());
+ *        printf("[c] %s [t] %u get lock\n", 
+ *			this->id.c_str(), (unsigned int) pthread_self());
  *        cache_map[lid] = LOCKED;
  *    }
  *    info_map[lid].is_retried = false;
