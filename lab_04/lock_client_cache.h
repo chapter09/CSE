@@ -27,15 +27,15 @@ class lock_client_cache : public lock_client {
 		int rlock_port;
 		std::string hostname;
 		std::string id;
-		enum xxstatus { NONE, ACQUIRING, RETRYING, LOCKED, FREE, RELEASING };
+		enum xxstatus {NONE, FREE, LOCKED, ACQUIRING, RELEASING};
 		typedef int l_status;
 
-		struct lock_info {
-			bool is_revoked;
-			bool is_retried;
-		};
+		// struct lock_info {
+		// 	bool is_used;
+		// 	bool is_retried;
+		// };
 
-		std::map<lock_protocol::lockid_t, lock_info> info_map;
+		std::map<lock_protocol::lockid_t, bool> info_map;
 		std::map<lock_protocol::lockid_t, l_status> cache_map;
 		std::map<lock_protocol::lockid_t, pthread_cond_t> cv_map;
 		pthread_mutex_t mutex;	//lock_client global lock
