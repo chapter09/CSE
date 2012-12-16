@@ -104,7 +104,7 @@ lock_client_cache::acquire(lock_protocol::lockid_t lid)
 			continue;
 		} else {
 			printf("acquire sleep %s\n", this->id.c_str());
-			pthread_cond_wait(&cv_map[lid])
+			pthread_cond_wait(&cv_map[lid], &mutex);
 		}
 		printf("wake up %s\n", this->id.c_str());
 	}
@@ -115,7 +115,6 @@ lock_client_cache::acquire(lock_protocol::lockid_t lid)
 	return lock_protocol::OK;
 }
 
-<<<<<<< HEAD
 /*
  *void
  *lock_client_cache::to_lock(lock_protocol::lockid_t lid)
@@ -142,13 +141,11 @@ lock_client_cache::acquire(lock_protocol::lockid_t lid)
  *}
  */
 
-=======
->>>>>>> change the lock_client
-
 lock_protocol::status
 lock_client_cache::release(lock_protocol::lockid_t lid)
 {
 	printf("[release]\n");
+	int r;
 	pthread_mutex_lock(&mutex);
 	if(info_map.count(lid) != 0) {
 		printf("lock_status %d\n", cache_map[lid]);
@@ -183,7 +180,7 @@ lock_client_cache::revoke_handler(lock_protocol::lockid_t lid,
 		}
 
 		if(cache_map[lid] == FREE && info_map[lid] == true) {
-			cache_map[lid] = NONE
+			cache_map[lid] = NONE;
 			info_map[lid] = false;
 			int r;
 			pthread_mutex_unlock(&mutex);
@@ -245,7 +242,6 @@ lock_client_cache::retry_handler(lock_protocol::lockid_t lid,
 		int &)
 {
 	//retry will cause a signal to wake up the acquire lock
-	rlock_protocol::status ret;
 	pthread_mutex_lock(&mutex);
 
 	if(cache_map.count(lid) != 0) {
@@ -275,5 +271,5 @@ lock_client_cache::retry_handler(lock_protocol::lockid_t lid,
 	// 	cache_map[lid] = LOCKED;
 	// 	pthread_mutex_unlock(&mutex);
 	// }
-	return ret;
+	return rlock_protocol::OK;
 }
