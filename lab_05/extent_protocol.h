@@ -22,6 +22,7 @@ class extent_protocol {
     unsigned int mtime;
     unsigned int ctime;
     unsigned int size;
+	bool dirty;
   };
 };
 

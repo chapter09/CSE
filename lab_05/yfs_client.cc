@@ -156,7 +156,8 @@ yfs_client::write(inum inum, size_t size, off_t off, const char *buf)
 	lc->acquire(inum);
 	VERIFY(ec->get(inum, value) == extent_protocol::OK);
 	v_size = value.size();
-	printf("[i] write_yfs_client value: %s size: %d\n", value.c_str(), v_size);	
+	printf("[i] write_yfs_client value: %s size: %d\n", 
+		value.c_str(), v_size);	
 	if(off > v_size) {
 		for(t = v_size; t < off; t++) {
 			value.push_back('\0');
@@ -173,7 +174,8 @@ yfs_client::write(inum inum, size_t size, off_t off, const char *buf)
 		value.replace(off, size, buf, size);
 			
 	}
-	printf("[i] write_yfs_client new value: %s size: %d\n", value.c_str(), value.size());	
+	printf("[i] write_yfs_client new value: %s size: %d\n", 
+		value.c_str(), value.size());	
 	if (ec->put(inum, value) != extent_protocol::OK) {
 		r = IOERR;
 		printf("[yfs_client] %016llx write_put failed\n", inum);
