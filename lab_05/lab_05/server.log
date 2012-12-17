@@ -1,0 +1,216 @@
+acquire request from clt 127.0.0.1:50557 for lock 0000000000000001
+acquire new lock return OK : clt 127.0.0.1:50557 for lock 0000000000000001
+acquire request from clt 127.0.0.1:50557 for lock 0000000000000002
+acquire new lock return OK : clt 127.0.0.1:50557 for lock 0000000000000002
+acquire request from clt 127.0.0.1:47765 for lock 0000000000000001
+acq exist lock from clt 127.0.0.1:47765 for lock 0000000000000001
+Waiting List of 1 is:
+127.0.0.1:50557 127.0.0.1:47765 
+revoke : clt 127.0.0.1:47765 for lock 0000000000000001
+2736302583:	handler_mgr::get_handle trying to bind...127.0.0.1:50557
+2736302586:	handle_mgr::get_handle bind succeeded 127.0.0.1:50557
+revoke rpc [client:127.0.0.1:50557, lock 0000000000000001]
+acquire return RETRY : clt 127.0.0.1:47765 for lock 0000000000000001
+acquire request from clt 127.0.0.1:47681 for lock 0000000000000001
+acq exist lock from clt 127.0.0.1:47681 for lock 0000000000000001
+Waiting List of 1 is:
+127.0.0.1:50557 127.0.0.1:47765 127.0.0.1:47681 
+acquire return RETRY : clt 127.0.0.1:47681 for lock 0000000000000001
+acquire request from clt 127.0.0.1:53610 for lock 0000000000000001
+acq exist lock from clt 127.0.0.1:53610 for lock 0000000000000001
+Waiting List of 1 is:
+127.0.0.1:50557 127.0.0.1:47765 127.0.0.1:47681 127.0.0.1:53610 
+acquire return RETRY : clt 127.0.0.1:53610 for lock 0000000000000001
+acquire request from clt 127.0.0.1:40893 for lock 0000000000000001
+acq exist lock from clt 127.0.0.1:40893 for lock 0000000000000001
+Waiting List of 1 is:
+127.0.0.1:50557 127.0.0.1:47765 127.0.0.1:47681 127.0.0.1:53610 127.0.0.1:40893 
+acquire return RETRY : clt 127.0.0.1:40893 for lock 0000000000000001
+acquire request from clt 127.0.0.1:54099 for lock 0000000000000001
+acq exist lock from clt 127.0.0.1:54099 for lock 0000000000000001
+Waiting List of 1 is:
+127.0.0.1:50557 127.0.0.1:47765 127.0.0.1:47681 127.0.0.1:53610 127.0.0.1:40893 127.0.0.1:54099 
+acquire return RETRY : clt 127.0.0.1:54099 for lock 0000000000000001
+[release] : clt 127.0.0.1:50557 for lock 0000000000000001
+Waiting List of 1 is:
+127.0.0.1:47765 127.0.0.1:47681 127.0.0.1:53610 127.0.0.1:40893 127.0.0.1:54099 
+2736304591:	handler_mgr::get_handle trying to bind...127.0.0.1:47765
+2736304592:	handle_mgr::get_handle bind succeeded 127.0.0.1:47765
+retry rpc [client:127.0.0.1:47765, lock 0000000000000001]
+revoke rpc [client:127.0.0.1:47765, lock 0000000000000001]
+[release] : clt 127.0.0.1:47765 for lock 0000000000000001
+Waiting List of 1 is:
+127.0.0.1:47681 127.0.0.1:53610 127.0.0.1:40893 127.0.0.1:54099 
+2736305595:	handler_mgr::get_handle trying to bind...127.0.0.1:47681
+2736305599:	handle_mgr::get_handle bind succeeded 127.0.0.1:47681
+retry rpc [client:127.0.0.1:47681, lock 0000000000000001]
+revoke rpc [client:127.0.0.1:47681, lock 0000000000000001]
+[release] : clt 127.0.0.1:47681 for lock 0000000000000001
+Waiting List of 1 is:
+127.0.0.1:53610 127.0.0.1:40893 127.0.0.1:54099 
+2736306604:	handler_mgr::get_handle trying to bind...127.0.0.1:53610
+2736306604:	handle_mgr::get_handle bind succeeded 127.0.0.1:53610
+retry rpc [client:127.0.0.1:53610, lock 0000000000000001]
+revoke rpc [client:127.0.0.1:53610, lock 0000000000000001]
+[release] : clt 127.0.0.1:53610 for lock 0000000000000001
+Waiting List of 1 is:
+127.0.0.1:40893 127.0.0.1:54099 
+2736307607:	handler_mgr::get_handle trying to bind...127.0.0.1:40893
+2736308610:	handle_mgr::get_handle bind succeeded 127.0.0.1:40893
+retry rpc [client:127.0.0.1:40893, lock 0000000000000001]
+revoke rpc [client:127.0.0.1:40893, lock 0000000000000001]
+[release] : clt 127.0.0.1:40893 for lock 0000000000000001
+Waiting List of 1 is:
+127.0.0.1:54099 
+2736309612:	handler_mgr::get_handle trying to bind...127.0.0.1:54099
+2736309613:	handle_mgr::get_handle bind succeeded 127.0.0.1:54099
+retry rpc [client:127.0.0.1:54099, lock 0000000000000001]
+acquire request from clt 127.0.0.1:53610 for lock 0000000000000001
+acq exist lock from clt 127.0.0.1:53610 for lock 0000000000000001
+Waiting List of 1 is:
+127.0.0.1:54099 127.0.0.1:53610 
+revoke : clt 127.0.0.1:53610 for lock 0000000000000001
+revoke rpc [client:127.0.0.1:54099, lock 0000000000000001]
+[release] : clt 127.0.0.1:54099 for lock 0000000000000001
+Waiting List of 1 is:
+127.0.0.1:53610 
+retry rpc [client:127.0.0.1:53610, lock 0000000000000001]
+acquire request from clt 127.0.0.1:40893 for lock 0000000000000001
+acq exist lock from clt 127.0.0.1:40893 for lock 0000000000000001
+Waiting List of 1 is:
+127.0.0.1:53610 127.0.0.1:40893 
+revoke : clt 127.0.0.1:40893 for lock 0000000000000001
+revoke rpc [client:127.0.0.1:53610, lock 0000000000000001]
+acquire return RETRY : clt 127.0.0.1:40893 for lock 0000000000000001
+acquire request from clt 127.0.0.1:54099 for lock 0000000000000001
+acq exist lock from clt 127.0.0.1:54099 for lock 0000000000000001
+Waiting List of 1 is:
+127.0.0.1:53610 127.0.0.1:40893 127.0.0.1:54099 
+acquire return RETRY : clt 127.0.0.1:54099 for lock 0000000000000001
+acquire request from clt 127.0.0.1:47765 for lock 0000000000000001
+acq exist lock from clt 127.0.0.1:47765 for lock 0000000000000001
+Waiting List of 1 is:
+127.0.0.1:53610 127.0.0.1:40893 127.0.0.1:54099 127.0.0.1:47765 
+acquire return RETRY : clt 127.0.0.1:47765 for lock 0000000000000001
+acquire request from clt 127.0.0.1:50557 for lock 0000000000000001
+acq exist lock from clt 127.0.0.1:50557 for lock 0000000000000001
+Waiting List of 1 is:
+127.0.0.1:53610 127.0.0.1:40893 127.0.0.1:54099 127.0.0.1:47765 127.0.0.1:50557 
+acquire return RETRY : clt 127.0.0.1:50557 for lock 0000000000000001
+revoke rpc [client:127.0.0.1:53610, lock 0000000000000001]
+acquire return RETRY : clt 127.0.0.1:53610 for lock 0000000000000001
+RPC STATS: 1:6 7001:12 7002:7 
+[release] : clt 127.0.0.1:53610 for lock 0000000000000001
+Waiting List of 1 is:
+127.0.0.1:40893 127.0.0.1:54099 127.0.0.1:47765 127.0.0.1:50557 
+retry rpc [client:127.0.0.1:40893, lock 0000000000000001]
+revoke rpc [client:127.0.0.1:40893, lock 0000000000000001]
+acquire request from clt 127.0.0.1:47681 for lock 0000000000000001
+acq exist lock from clt 127.0.0.1:47681 for lock 0000000000000001
+Waiting List of 1 is:
+127.0.0.1:40893 127.0.0.1:54099 127.0.0.1:47765 127.0.0.1:50557 127.0.0.1:47681 
+acquire return RETRY : clt 127.0.0.1:47681 for lock 0000000000000001
+[release] : clt 127.0.0.1:40893 for lock 0000000000000001
+Waiting List of 1 is:
+127.0.0.1:54099 127.0.0.1:47765 127.0.0.1:50557 127.0.0.1:47681 
+retry rpc [client:127.0.0.1:54099, lock 0000000000000001]
+acquire request from clt 127.0.0.1:53610 for lock 0000000000000001
+acq exist lock from clt 127.0.0.1:53610 for lock 0000000000000001
+Waiting List of 1 is:
+127.0.0.1:54099 127.0.0.1:47765 127.0.0.1:50557 127.0.0.1:47681 127.0.0.1:53610 
+acquire return RETRY : clt 127.0.0.1:53610 for lock 0000000000000001
+revoke rpc [client:127.0.0.1:54099, lock 0000000000000001]
+acquire request from clt 127.0.0.1:40893 for lock 0000000000000001
+acq exist lock from clt 127.0.0.1:40893 for lock 0000000000000001
+Waiting List of 1 is:
+127.0.0.1:54099 127.0.0.1:47765 127.0.0.1:50557 127.0.0.1:47681 127.0.0.1:53610 127.0.0.1:40893 
+acquire return RETRY : clt 127.0.0.1:40893 for lock 0000000000000001
+[release] : clt 127.0.0.1:54099 for lock 0000000000000001
+Waiting List of 1 is:
+127.0.0.1:47765 127.0.0.1:50557 127.0.0.1:47681 127.0.0.1:53610 127.0.0.1:40893 
+retry rpc [client:127.0.0.1:47765, lock 0000000000000001]
+revoke rpc [client:127.0.0.1:47765, lock 0000000000000001]
+[release] : clt 127.0.0.1:47765 for lock 0000000000000001
+Waiting List of 1 is:
+127.0.0.1:50557 127.0.0.1:47681 127.0.0.1:53610 127.0.0.1:40893 
+retry rpc [client:127.0.0.1:50557, lock 0000000000000001]
+revoke rpc [client:127.0.0.1:50557, lock 0000000000000001]
+acquire request from clt 127.0.0.1:54099 for lock 0000000000000001
+acq exist lock from clt 127.0.0.1:54099 for lock 0000000000000001
+Waiting List of 1 is:
+127.0.0.1:50557 127.0.0.1:47681 127.0.0.1:53610 127.0.0.1:40893 127.0.0.1:54099 
+acquire return RETRY : clt 127.0.0.1:54099 for lock 0000000000000001
+[release] : clt 127.0.0.1:50557 for lock 0000000000000001
+Waiting List of 1 is:
+127.0.0.1:47681 127.0.0.1:53610 127.0.0.1:40893 127.0.0.1:54099 
+retry rpc [client:127.0.0.1:47681, lock 0000000000000001]
+revoke rpc [client:127.0.0.1:47681, lock 0000000000000001]
+[release] : clt 127.0.0.1:47681 for lock 0000000000000001
+Waiting List of 1 is:
+127.0.0.1:53610 127.0.0.1:40893 127.0.0.1:54099 
+retry rpc [client:127.0.0.1:53610, lock 0000000000000001]
+revoke rpc [client:127.0.0.1:53610, lock 0000000000000001]
+[release] : clt 127.0.0.1:53610 for lock 0000000000000001
+Waiting List of 1 is:
+127.0.0.1:40893 127.0.0.1:54099 
+retry rpc [client:127.0.0.1:40893, lock 0000000000000001]
+revoke rpc [client:127.0.0.1:40893, lock 0000000000000001]
+[release] : clt 127.0.0.1:40893 for lock 0000000000000001
+Waiting List of 1 is:
+127.0.0.1:54099 
+retry rpc [client:127.0.0.1:54099, lock 0000000000000001]
+acquire request from clt 127.0.0.1:50557 for lock 0000000000000001
+acq exist lock from clt 127.0.0.1:50557 for lock 0000000000000001
+Waiting List of 1 is:
+127.0.0.1:54099 127.0.0.1:50557 
+revoke : clt 127.0.0.1:50557 for lock 0000000000000001
+revoke rpc [client:127.0.0.1:54099, lock 0000000000000001]
+[release] : clt 127.0.0.1:54099 for lock 0000000000000001
+Waiting List of 1 is:
+127.0.0.1:50557 
+retry rpc [client:127.0.0.1:50557, lock 0000000000000001]
+acquire return RETRY : clt 127.0.0.1:50557 for lock 0000000000000001
+acquire request from clt 127.0.0.1:47765 for lock 0000000000000001
+acq exist lock from clt 127.0.0.1:47765 for lock 0000000000000001
+Waiting List of 1 is:
+127.0.0.1:50557 127.0.0.1:47765 
+revoke : clt 127.0.0.1:47765 for lock 0000000000000001
+revoke rpc [client:127.0.0.1:50557, lock 0000000000000001]
+[release] : clt 127.0.0.1:50557 for lock 0000000000000001
+Waiting List of 1 is:
+127.0.0.1:47765 
+retry rpc [client:127.0.0.1:47765, lock 0000000000000001]
+acquire request from clt 127.0.0.1:50557 for lock 0000000000000001
+acq exist lock from clt 127.0.0.1:50557 for lock 0000000000000001
+Waiting List of 1 is:
+127.0.0.1:47765 127.0.0.1:50557 
+revoke : clt 127.0.0.1:50557 for lock 0000000000000001
+revoke rpc [client:127.0.0.1:47765, lock 0000000000000001]
+acquire return RETRY : clt 127.0.0.1:50557 for lock 0000000000000001
+acquire return RETRY : clt 127.0.0.1:47765 for lock 0000000000000001
+[release] : clt 127.0.0.1:47765 for lock 0000000000000001
+Waiting List of 1 is:
+127.0.0.1:50557 
+retry rpc [client:127.0.0.1:50557, lock 0000000000000001]
+acquire request from clt 127.0.0.1:47765 for lock 0000000000000001
+acq exist lock from clt 127.0.0.1:47765 for lock 0000000000000001
+Waiting List of 1 is:
+127.0.0.1:50557 127.0.0.1:47765 
+revoke : clt 127.0.0.1:47765 for lock 0000000000000001
+revoke rpc [client:127.0.0.1:50557, lock 0000000000000001]
+acquire return RETRY : clt 127.0.0.1:47765 for lock 0000000000000001
+[release] : clt 127.0.0.1:50557 for lock 0000000000000001
+Waiting List of 1 is:
+127.0.0.1:47765 
+retry rpc [client:127.0.0.1:47765, lock 0000000000000001]
+acquire request from clt 127.0.0.1:50557 for lock 0000000000000001
+acq exist lock from clt 127.0.0.1:50557 for lock 0000000000000001
+Waiting List of 1 is:
+127.0.0.1:47765 127.0.0.1:50557 
+revoke : clt 127.0.0.1:50557 for lock 0000000000000001
+revoke rpc [client:127.0.0.1:47765, lock 0000000000000001]
+[release] : clt 127.0.0.1:47765 for lock 0000000000000001
+Waiting List of 1 is:
+127.0.0.1:50557 
+retry rpc [client:127.0.0.1:50557, lock 0000000000000001]
+acquire return RETRY : clt 127.0.0.1:50557 for lock 0000000000000001
