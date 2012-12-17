@@ -282,23 +282,6 @@ release:
 int 
 yfs_client::read_dir(inum dir_inum, std::list<struct yfs_client::dirent> &list_dir)
 {
-	/*std::string value = "";
-	printf("[i] readdir_yfs_client\n");	
-	printf("[i] %016llx\n", dir_inum);
-	ec->get(dir_inum, value);
-
-	std::string line;
-	std::stringstream stream;
-	stream << value;
-	while(getline(stream, line)) {
-		size_t pos;
-		struct dirent dir_ent;
-		pos = line.find(':');
-		dir_ent.name = line.substr(pos+1);
-		dir_ent.inum = n2i(line.substr(0, pos));
-		list_dir.push_back(dir_ent);		
-	}
-	return extent_protocol::OK;*/
 	lc->acquire(dir_inum);
 	int r;
 	r = yfs_read_dir(dir_inum, list_dir);

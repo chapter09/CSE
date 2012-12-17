@@ -22,17 +22,16 @@ extent_client::extent_client(std::string dst)
 extent_protocol::status
 extent_client::get(extent_protocol::extentid_t eid, std::string &buf)
 {
+	extent_protocol::status ret;
 	if(ctnt_cmap.count(eid) == 0) {
 		extent_protocol::attr attr;
-		cl->call(extent_protocol::get, eid, buf);
-		//cache it
-		cl->call(extent_protocol::getattr, eid, attr);
+		ret = cl->call(extent_protocol::get, eid, buf);
 		ctnt_cmap[eid] = buf;
-		info_cmap[eid] = attr;
+		return ret;
 	} else {
 		buf = ctnt_cmap[eid];
+		info_cmap[eid].atime = time(NULL);
 	}
-	info_cmap[eid].atime = time(NULL);
 	return extent_protocol::OK;
 }
 

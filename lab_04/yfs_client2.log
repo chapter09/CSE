@@ -7,4 +7,24 @@ max_readahead=0x00020000
    max_readahead=0x00020000
    max_write=0x00020000
    unique: 1, error: 0 (Success), outsize: 40
-unique: 2, opcode: FORGET (2), nodeid: 1, insize: 48
+unique: 2, opcode: GETATTR (3), nodeid: 1, insize: 56
+get_attr start
+getattr 0000000000000001 0
+[c] 127.0.0.1:42594 acquire [l] 0000000000000001 not exist
+[l] 0000000000000001 [RETRYING] [c] 127.0.0.1:42594 wait for lock
+getdir 0000000000000001
+[release]
+lock_status 2
+   getattr -> 1355775155 1355775121 1355775121
+   unique: 2, error: 0 (Success), outsize: 112
+[c] 127.0.0.1:42594 revoke
+unique: 3, opcode: GETATTR (3), nodeid: 1, insize: 56
+get_attr start
+getattr 0000000000000001 0
+[l] 0000000000000001 [RETRYING] [c] 127.0.0.1:42594 wait for lock
+acquire remote 127.0.0.1:42594
+getdir 0000000000000001
+[release]
+lock_status 2
+   getattr -> 1355775155 1355775121 1355775121
+   unique: 3, error: 0 (Success), outsize: 112

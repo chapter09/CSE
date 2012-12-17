@@ -1,654 +1,711 @@
 [PUT] create 
 [PUT] update 
+[E] extent_server 0000000000000001 getattr success
 [E] extent_server getattr failed
 [E] extent_server 0000000000000001 getattr success
 [PUT] update 
 [PUT] create 
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 000000006e9bdb4c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
 [E] extent_server getattr failed
-[E] extent_server 000000006e9bdb4c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
 [PUT] update 
 [PUT] create 
-[E] extent_server 00000000bf8006aa getattr success
-[E] extent_server 00000000bf8006aa getattr success
+RPC STATS: 1:2 6001:6 6002:9 6003:8 
+[E] extent_server 00000000f4d4bfc2 getattr success
+[E] extent_server 00000000f4d4bfc2 getattr success
 [PUT] update 
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 00000000bf8006aa getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 00000000f4d4bfc2 getattr success
 [PUT] update 
-[E] extent_server 000000006e9bdb4c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
 [E] extent_server getattr failed
-[E] extent_server 000000006e9bdb4c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
 [PUT] update 
 [PUT] create 
-[E] extent_server 00000000a0fb5c30 getattr success
-[E] extent_server 00000000a0fb5c30 getattr success
+[E] extent_server 00000000a7be3146 getattr success
+[E] extent_server 00000000a7be3146 getattr success
+RPC STATS: 1:2 6001:11 6002:20 6003:16 6004:1 
 [PUT] update 
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 00000000a0fb5c30 getattr success
-[E] extent_server 00000000a0fb5c30 getattr success
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 00000000a0fb5c30 getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 00000000a7be3146 getattr success
+[E] extent_server 00000000a7be3146 getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 00000000a7be3146 getattr success
 [PUT] update 
-[E] extent_server 00000000a0fb5c30 getattr success
-[E] extent_server 00000000a0fb5c30 getattr success
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 00000000a0fb5c30 getattr success
-[E] extent_server 00000000a0fb5c30 getattr success
+[E] extent_server 00000000a7be3146 getattr success
+[E] extent_server 00000000a7be3146 getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 00000000a7be3146 getattr success
+[E] extent_server 00000000a7be3146 getattr success
 [PUT] update 
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 00000000a0fb5c30 getattr success
-[E] extent_server 00000000a0fb5c30 getattr success
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 00000000a0fb5c30 getattr success
-[E] extent_server 00000000a0fb5c30 getattr success
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 000000006e9bdb4c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 00000000a7be3146 getattr success
+RPC STATS: 1:2 6001:13 6002:30 6003:29 6004:1 
+[E] extent_server 00000000a7be3146 getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 00000000a7be3146 getattr success
+[E] extent_server 00000000a7be3146 getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 00000000a7be3146 getattr success
+[PUT] update 
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+RPC STATS: 1:2 6001:14 6002:41 6003:41 6004:2 
+[E] extent_server 000000000fc6ef2c getattr success
 [E] extent_server getattr failed
-[E] extent_server 000000006e9bdb4c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
 [PUT] update 
 [PUT] create 
-[E] extent_server 00000000ff42dcde getattr success
-[E] extent_server 00000000ff42dcde getattr success
+[E] extent_server 00000000c8e5f9ae getattr success
+[E] extent_server 00000000c8e5f9ae getattr success
 [PUT] update 
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 000000006e9bdb4c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
 [E] extent_server getattr failed
-[E] extent_server 000000006e9bdb4c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
 [PUT] update 
 [PUT] create 
-[E] extent_server 00000000a25ea610 getattr success
-[E] extent_server 00000000a25ea610 getattr success
+[E] extent_server 00000000b4a05aa1 getattr success
+[E] extent_server 00000000b4a05aa1 getattr success
+RPC STATS: 1:2 6001:19 6002:52 6003:50 6004:2 
 [PUT] update 
-[E] extent_server 000000006e9bdb4c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
 [E] extent_server getattr failed
-[E] extent_server 000000006e9bdb4c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
 [PUT] update 
 [PUT] create 
-[E] extent_server 000000009f42ac15 getattr success
-[E] extent_server 000000009f42ac15 getattr success
+[E] extent_server 00000000eda865db getattr success
+[E] extent_server 00000000eda865db getattr success
 [PUT] update 
-[E] extent_server 000000006e9bdb4c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
 [E] extent_server getattr failed
-[E] extent_server 000000006e9bdb4c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[PUT] update 
+RPC STATS: 1:2 6001:25 6002:63 6003:58 6004:2 
+[PUT] create 
+[E] extent_server 00000000f327c21f getattr success
+[E] extent_server 00000000f327c21f getattr success
+[PUT] update 
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server getattr failed
+[E] extent_server 000000000fc6ef2c getattr success
 [PUT] update 
 [PUT] create 
-[E] extent_server 00000000bc913d11 getattr success
-[E] extent_server 00000000bc913d11 getattr success
+[E] extent_server 00000000dc5b96c7 getattr success
+[E] extent_server 00000000dc5b96c7 getattr success
 [PUT] update 
-[E] extent_server 000000006e9bdb4c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
 [E] extent_server getattr failed
-[E] extent_server 000000006e9bdb4c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+RPC STATS: 1:2 6001:29 6002:74 6003:68 6004:2 
 [PUT] update 
 [PUT] create 
-[E] extent_server 000000008e05e298 getattr success
-[E] extent_server 000000008e05e298 getattr success
+[E] extent_server 000000008d70d1d2 getattr success
+[E] extent_server 000000008d70d1d2 getattr success
 [PUT] update 
-[E] extent_server 000000006e9bdb4c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
 [E] extent_server getattr failed
-[E] extent_server 000000006e9bdb4c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
 [PUT] update 
 [PUT] create 
-[E] extent_server 00000000957fe68a getattr success
-[E] extent_server 00000000957fe68a getattr success
+[E] extent_server 000000008a863521 getattr success
+[E] extent_server 000000008a863521 getattr success
 [PUT] update 
-[E] extent_server 000000006e9bdb4c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+RPC STATS: 1:2 6001:35 6002:84 6003:77 6004:2 
 [E] extent_server getattr failed
-[E] extent_server 000000006e9bdb4c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
 [PUT] update 
 [PUT] create 
-[E] extent_server 00000000f8b12bbf getattr success
-[E] extent_server 00000000f8b12bbf getattr success
+[E] extent_server 00000000f2540bce getattr success
+[E] extent_server 00000000f2540bce getattr success
 [PUT] update 
-[E] extent_server 000000006e9bdb4c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
 [E] extent_server getattr failed
-[E] extent_server 000000006e9bdb4c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
 [PUT] update 
 [PUT] create 
-[E] extent_server 000000009c2a9dfc getattr success
-[E] extent_server 000000009c2a9dfc getattr success
+[E] extent_server 00000000c56ddd78 getattr success
+[E] extent_server 00000000c56ddd78 getattr success
 [PUT] update 
-[E] extent_server 000000006e9bdb4c getattr success
+RPC STATS: 1:2 6001:41 6002:95 6003:85 6004:2 
+[E] extent_server 000000000fc6ef2c getattr success
 [E] extent_server getattr failed
-[E] extent_server 000000006e9bdb4c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
 [PUT] update 
 [PUT] create 
-[E] extent_server 00000000e5a718d8 getattr success
-[E] extent_server 00000000e5a718d8 getattr success
+[E] extent_server 00000000cf21b311 getattr success
+[E] extent_server 00000000cf21b311 getattr success
 [PUT] update 
-[E] extent_server 000000006e9bdb4c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
 [E] extent_server getattr failed
-[E] extent_server 000000006e9bdb4c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
 [PUT] update 
 [PUT] create 
-[E] extent_server 00000000f3caec75 getattr success
-[E] extent_server 00000000f3caec75 getattr success
+[E] extent_server 00000000c9064fe8 getattr success
+RPC STATS: 1:2 6001:46 6002:105 6003:95 6004:2 
+[E] extent_server 00000000c9064fe8 getattr success
 [PUT] update 
-[E] extent_server 000000006e9bdb4c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 00000000c8e5f9ae getattr success
+[PUT] update 
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 00000000dc5b96c7 getattr success
+[PUT] update 
+RPC STATS: 1:2 6001:49 6002:117 6003:103 6004:4 
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 00000000c56ddd78 getattr success
+[PUT] update 
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+RPC STATS: 1:2 6001:50 6002:128 6003:115 6004:5 
 [E] extent_server getattr failed
-[E] extent_server 000000006e9bdb4c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
 [PUT] update 
 [PUT] create 
-[E] extent_server 00000000c4235834 getattr success
-[E] extent_server 00000000c4235834 getattr success
+[E] extent_server 00000000b4b53d39 getattr success
+[E] extent_server 00000000b4b53d39 getattr success
 [PUT] update 
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 00000000f8b12bbf getattr success
-[E] extent_server 00000000f8b12bbf getattr success
-[E] extent_server 00000000f8b12bbf getattr success
-[E] extent_server 00000000f8b12bbf getattr success
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 00000000bc913d11 getattr success
-[PUT] update 
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 000000006e9bdb4c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
 [E] extent_server getattr failed
-[E] extent_server 000000006e9bdb4c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
 [PUT] update 
 [PUT] create 
-[E] extent_server 00000000f1bed42a getattr success
-[E] extent_server 00000000f1bed42a getattr success
+[E] extent_server 00000000f3cfa4ab getattr success
+[E] extent_server 00000000f3cfa4ab getattr success
 [PUT] update 
-[E] extent_server 000000006e9bdb4c getattr success
+RPC STATS: 1:2 6001:56 6002:139 6003:123 6004:5 
+[E] extent_server 000000000fc6ef2c getattr success
 [E] extent_server getattr failed
-[E] extent_server 000000006e9bdb4c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server getattr failed
+[E] extent_server 000000000fc6ef2c getattr success
 [PUT] update 
 [PUT] create 
-[E] extent_server 00000000b13e7e8b getattr success
-[E] extent_server 00000000b13e7e8b getattr success
+[E] extent_server 00000000c2ae2fe5 getattr success
+[E] extent_server 00000000c2ae2fe5 getattr success
 [PUT] update 
-[E] extent_server 000000006e9bdb4c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+RPC STATS: 1:2 6001:59 6002:150 6003:134 6004:5 
+[E] extent_server 00000000b4b53d39 getattr success
+[PUT] update 
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 000000008d70d1d2 getattr success
+[PUT] update 
+[E] extent_server 000000000fc6ef2c getattr success
 [E] extent_server getattr failed
-[E] extent_server 000000006e9bdb4c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+RPC STATS: 1:2 6001:61 6002:162 6003:143 6004:7 
 [PUT] update 
 [PUT] create 
-[E] extent_server 00000000dcdc0bb1 getattr success
-[E] extent_server 00000000dcdc0bb1 getattr success
+[E] extent_server 00000000f513c8b1 getattr success
+[E] extent_server 00000000f513c8b1 getattr success
 [PUT] update 
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 00000000ff42dcde getattr success
-[E] extent_server 00000000ff42dcde getattr success
-[E] extent_server 00000000ff42dcde getattr success
-[E] extent_server 00000000ff42dcde getattr success
-[E] extent_server 000000006e9bdb4c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 00000000c9064fe8 getattr success
+[PUT] update 
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+RPC STATS: 1:2 6001:65 6002:172 6003:153 6004:8 
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 00000000cf21b311 getattr success
+[PUT] update 
+[E] extent_server 000000000fc6ef2c getattr success
 [E] extent_server getattr failed
-[E] extent_server 000000006e9bdb4c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
 [PUT] update 
 [PUT] create 
-[E] extent_server 000000009f208b98 getattr success
-[E] extent_server 000000009f208b98 getattr success
+[E] extent_server 0000000098a385e7 getattr success
+[E] extent_server 0000000098a385e7 getattr success
 [PUT] update 
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 00000000c4235834 getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+RPC STATS: 1:2 6001:69 6002:184 6003:161 6004:9 
+[E] extent_server 00000000f3cfa4ab getattr success
 [PUT] update 
-[E] extent_server 000000006e9bdb4c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
 [E] extent_server getattr failed
-[E] extent_server 000000006e9bdb4c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
 [PUT] update 
 [PUT] create 
-[E] extent_server 000000009d300eed getattr success
-[E] extent_server 000000009d300eed getattr success
+[E] extent_server 00000000f047bc1a getattr success
+[E] extent_server 00000000f047bc1a getattr success
 [PUT] update 
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 00000000957fe68a getattr success
-[E] extent_server 00000000957fe68a getattr success
-[E] extent_server 00000000957fe68a getattr success
-[E] extent_server 00000000957fe68a getattr success
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 000000006e9bdb4c getattr success
+RPC STATS: 1:2 6001:73 6002:196 6003:169 6004:10 
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 00000000c2ae2fe5 getattr success
+[E] extent_server 00000000c2ae2fe5 getattr success
+[E] extent_server 00000000c2ae2fe5 getattr success
+[E] extent_server 00000000c2ae2fe5 getattr success
+[E] extent_server 000000000fc6ef2c getattr success
 [E] extent_server getattr failed
-[E] extent_server 000000006e9bdb4c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
 [PUT] update 
 [PUT] create 
-[E] extent_server 00000000990f2a08 getattr success
-[E] extent_server 00000000990f2a08 getattr success
+[E] extent_server 00000000afc9dd44 getattr success
+[E] extent_server 00000000afc9dd44 getattr success
 [PUT] update 
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 00000000f1bed42a getattr success
-[E] extent_server 00000000f1bed42a getattr success
-[E] extent_server 00000000f1bed42a getattr success
-[E] extent_server 00000000f1bed42a getattr success
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 00000000f1bed42a getattr success
-[E] extent_server 00000000f1bed42a getattr success
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 00000000f1bed42a getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 00000000f327c21f getattr success
+RPC STATS: 1:2 6001:76 6002:207 6003:180 6004:10 
 [PUT] update 
-[E] extent_server 00000000f1bed42a getattr success
-[E] extent_server 00000000f1bed42a getattr success
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 00000000f1bed42a getattr success
-[E] extent_server 00000000f1bed42a getattr success
-[PUT] update 
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 00000000f1bed42a getattr success
-[E] extent_server 00000000f1bed42a getattr success
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 00000000f1bed42a getattr success
-[E] extent_server 00000000f1bed42a getattr success
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 00000000ff42dcde getattr success
-[PUT] update 
-[E] extent_server 000000006e9bdb4c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
 [E] extent_server getattr failed
-[E] extent_server 000000006e9bdb4c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
 [PUT] update 
 [PUT] create 
-[E] extent_server 00000000a38767a9 getattr success
-[E] extent_server 00000000a38767a9 getattr success
+[E] extent_server 00000000afe8ab5c getattr success
+[E] extent_server 00000000afe8ab5c getattr success
 [PUT] update 
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 00000000f1bed42a getattr success
-[PUT] update 
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 00000000990f2a08 getattr success
-[E] extent_server 00000000990f2a08 getattr success
-[E] extent_server 00000000990f2a08 getattr success
-[E] extent_server 00000000990f2a08 getattr success
-[E] extent_server 000000006e9bdb4c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
 [E] extent_server getattr failed
-[E] extent_server 000000006e9bdb4c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+RPC STATS: 1:2 6001:80 6002:218 6003:189 6004:11 
+[E] extent_server 00000000f047bc1a getattr success
+[E] extent_server 00000000f047bc1a getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 00000000f047bc1a getattr success
+[PUT] update 
+[E] extent_server 00000000f047bc1a getattr success
+[E] extent_server 00000000f047bc1a getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 00000000f047bc1a getattr success
+[E] extent_server 00000000f047bc1a getattr success
+[PUT] update 
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 00000000f047bc1a getattr success
+[E] extent_server 00000000f047bc1a getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+RPC STATS: 1:2 6001:82 6002:228 6003:202 6004:11 
+[E] extent_server 00000000f047bc1a getattr success
+[E] extent_server 00000000f047bc1a getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 00000000b4a05aa1 getattr success
+[PUT] update 
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 00000000eda865db getattr success
+[E] extent_server 00000000eda865db getattr success
+[E] extent_server 00000000eda865db getattr success
+[E] extent_server 00000000eda865db getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server getattr failed
+[E] extent_server 000000000fc6ef2c getattr success
+RPC STATS: 1:2 6001:83 6002:240 6003:213 6004:12 
 [PUT] update 
 [PUT] create 
-[E] extent_server 00000000b53476db getattr success
-[E] extent_server 00000000b53476db getattr success
+[E] extent_server 00000000ddd8a4f0 getattr success
+[E] extent_server 00000000ddd8a4f0 getattr success
 [PUT] update 
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 000000006e9bdb4c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 00000000afc9dd44 getattr success
+[PUT] update 
+[E] extent_server 000000000fc6ef2c getattr success
 [E] extent_server getattr failed
-[E] extent_server 000000006e9bdb4c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
 [PUT] update 
 [PUT] create 
-[E] extent_server 0000000088a52153 getattr success
-[E] extent_server 0000000088a52153 getattr success
+RPC STATS: 1:2 6001:89 6002:250 6003:221 6004:13 
+[E] extent_server 00000000d0b097e4 getattr success
+[E] extent_server 00000000d0b097e4 getattr success
 [PUT] update 
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 000000009f208b98 getattr success
-[PUT] update 
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 000000009d300eed getattr success
-[E] extent_server 000000009d300eed getattr success
-[E] extent_server 000000009d300eed getattr success
-[E] extent_server 000000009d300eed getattr success
-[E] extent_server 000000006e9bdb4c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 00000000d0b097e4 getattr success
+[E] extent_server 00000000d0b097e4 getattr success
+[E] extent_server 00000000d0b097e4 getattr success
+[E] extent_server 00000000d0b097e4 getattr success
+[E] extent_server 000000000fc6ef2c getattr success
 [E] extent_server getattr failed
-[E] extent_server 000000006e9bdb4c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
 [PUT] update 
 [PUT] create 
-[E] extent_server 00000000cc187abb getattr success
-[E] extent_server 00000000cc187abb getattr success
+[E] extent_server 00000000ea7f5c4d getattr success
+[E] extent_server 00000000ea7f5c4d getattr success
+RPC STATS: 1:2 6001:93 6002:260 6003:232 6004:13 
 [PUT] update 
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 000000009d300eed getattr success
-[E] extent_server 000000009d300eed getattr success
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 000000009d300eed getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 00000000d0b097e4 getattr success
 [PUT] update 
-[E] extent_server 000000009d300eed getattr success
-[E] extent_server 000000009d300eed getattr success
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 000000009d300eed getattr success
-[E] extent_server 000000009d300eed getattr success
-[PUT] update 
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 000000009d300eed getattr success
-[E] extent_server 000000009d300eed getattr success
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 000000009d300eed getattr success
-[E] extent_server 000000009d300eed getattr success
-[E] extent_server 000000006e9bdb4c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
 [E] extent_server getattr failed
-[E] extent_server 000000006e9bdb4c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 000000008a863521 getattr success
+[E] extent_server 000000008a863521 getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 000000008a863521 getattr success
+[PUT] update 
+[E] extent_server 000000008a863521 getattr success
+RPC STATS: 1:2 6001:95 6002:271 6003:243 6004:14 
+[E] extent_server 000000008a863521 getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 000000008a863521 getattr success
+[E] extent_server 000000008a863521 getattr success
+[PUT] update 
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 000000008a863521 getattr success
+[E] extent_server 000000008a863521 getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 000000008a863521 getattr success
+[E] extent_server 000000008a863521 getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server getattr failed
+[E] extent_server 000000000fc6ef2c getattr success
+RPC STATS: 1:2 6001:96 6002:283 6003:255 6004:14 
 [PUT] update 
 [PUT] create 
-[E] extent_server 00000000cdb787bc getattr success
-[E] extent_server 00000000cdb787bc getattr success
+[E] extent_server 00000000db400b70 getattr success
+[E] extent_server 00000000db400b70 getattr success
 [PUT] update 
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 00000000957fe68a getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 00000000ea7f5c4d getattr success
 [PUT] update 
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 000000009c2a9dfc getattr success
-[E] extent_server 000000009c2a9dfc getattr success
-[E] extent_server 000000009c2a9dfc getattr success
-[E] extent_server 000000009c2a9dfc getattr success
-[E] extent_server 000000006e9bdb4c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 00000000eda865db getattr success
+[E] extent_server 00000000eda865db getattr success
+[E] extent_server 00000000eda865db getattr success
+[E] extent_server 00000000eda865db getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+RPC STATS: 1:2 6001:100 6002:293 6003:265 6004:15 
 [E] extent_server getattr failed
-[E] extent_server 000000006e9bdb4c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
 [PUT] update 
 [PUT] create 
-[E] extent_server 00000000cdac794a getattr success
-[E] extent_server 00000000cdac794a getattr success
+[E] extent_server 00000000d9b39de6 getattr success
+[E] extent_server 00000000d9b39de6 getattr success
 [PUT] update 
-[E] extent_server 000000006e9bdb4c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 000000008a863521 getattr success
+[PUT] update 
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 0000000098a385e7 getattr success
+RPC STATS: 1:2 6001:104 6002:304 6003:273 6004:17 
+[PUT] update 
+[E] extent_server 000000000fc6ef2c getattr success
 [E] extent_server getattr failed
-[E] extent_server 000000006e9bdb4c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
 [PUT] update 
 [PUT] create 
-[E] extent_server 00000000b923e10e getattr success
-[E] extent_server 00000000b923e10e getattr success
+[E] extent_server 000000009735a3ae getattr success
+[E] extent_server 000000009735a3ae getattr success
 [PUT] update 
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 00000000b923e10e getattr success
-[PUT] update 
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 00000000990f2a08 getattr success
-[E] extent_server 00000000990f2a08 getattr success
-[E] extent_server 00000000990f2a08 getattr success
-[E] extent_server 00000000990f2a08 getattr success
-[E] extent_server 000000006e9bdb4c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
 [E] extent_server getattr failed
-[E] extent_server 000000006e9bdb4c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+RPC STATS: 1:2 6001:108 6002:315 6003:283 6004:17 
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server getattr failed
+[E] extent_server 000000000fc6ef2c getattr success
 [PUT] update 
 [PUT] create 
-[E] extent_server 00000000e374de20 getattr success
-[E] extent_server 00000000e374de20 getattr success
+[E] extent_server 00000000f65a8c33 getattr success
+[E] extent_server 00000000f65a8c33 getattr success
 [PUT] update 
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 000000006e9bdb4c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 00000000db400b70 getattr success
+RPC STATS: 1:2 6001:111 6002:326 6003:293 6004:18 
+[PUT] update 
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
 [E] extent_server getattr failed
-[E] extent_server 000000006e9bdb4c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
 [PUT] update 
 [PUT] create 
-[E] extent_server 00000000bdb5d8d7 getattr success
-[E] extent_server 00000000bdb5d8d7 getattr success
+[E] extent_server 00000000b9130e27 getattr success
+[E] extent_server 00000000b9130e27 getattr success
 [PUT] update 
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 00000000a25ea610 getattr success
-[PUT] update 
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 00000000cdac794a getattr success
-[E] extent_server 00000000cdac794a getattr success
-[E] extent_server 00000000cdac794a getattr success
-[E] extent_server 00000000cdac794a getattr success
-[E] extent_server 000000006e9bdb4c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+RPC STATS: 1:2 6001:115 6002:337 6003:303 6004:18 
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
 [E] extent_server getattr failed
-[E] extent_server 000000006e9bdb4c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
 [PUT] update 
 [PUT] create 
-[E] extent_server 00000000b89284c9 getattr success
-[E] extent_server 00000000b89284c9 getattr success
+[E] extent_server 00000000989ff40f getattr success
+[E] extent_server 00000000989ff40f getattr success
 [PUT] update 
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 00000000a0fb5c30 getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 00000000b9130e27 getattr success
 [PUT] update 
-[E] extent_server 000000006e9bdb4c getattr success
+RPC STATS: 1:2 6001:119 6002:348 6003:312 6004:19 
+[E] extent_server 000000000fc6ef2c getattr success
 [E] extent_server getattr failed
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 00000000e374de20 getattr success
-[E] extent_server 00000000e374de20 getattr success
-[E] extent_server 00000000e374de20 getattr success
-[E] extent_server 00000000e374de20 getattr success
-[E] extent_server 000000006e9bdb4c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 00000000989ff40f getattr success
+[E] extent_server 00000000989ff40f getattr success
+[E] extent_server 00000000989ff40f getattr success
+[E] extent_server 00000000989ff40f getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 00000000f513c8b1 getattr success
+[PUT] update 
+RPC STATS: 1:2 6001:120 6002:359 6003:324 6004:20 
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 00000000f047bc1a getattr success
+[PUT] update 
+[E] extent_server 000000000fc6ef2c getattr success
 [E] extent_server getattr failed
-[E] extent_server 000000006e9bdb4c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
 [PUT] update 
 [PUT] create 
-[E] extent_server 00000000d673a4d0 getattr success
-[E] extent_server 00000000d673a4d0 getattr success
+[E] extent_server 0000000086217b5f getattr success
+[E] extent_server 0000000086217b5f getattr success
+RPC STATS: 1:2 6001:124 6002:370 6003:333 6004:21 
 [PUT] update 
-[E] extent_server 000000006e9bdb4c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 00000000eda865db getattr success
+[PUT] update 
+[E] extent_server 000000000fc6ef2c getattr success
 [E] extent_server getattr failed
-[E] extent_server 000000006e9bdb4c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
 [PUT] update 
 [PUT] create 
-[E] extent_server 00000000ac51b424 getattr success
-[E] extent_server 00000000ac51b424 getattr success
+[E] extent_server 00000000ade7cde9 getattr success
+[E] extent_server 00000000ade7cde9 getattr success
 [PUT] update 
-[E] extent_server 000000006e9bdb4c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+RPC STATS: 1:2 6001:128 6002:382 6003:341 6004:22 
+[E] extent_server 000000009735a3ae getattr success
+[PUT] update 
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 00000000ddd8a4f0 getattr success
+[PUT] update 
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 00000000afe8ab5c getattr success
+[E] extent_server 00000000afe8ab5c getattr success
+[E] extent_server 00000000afe8ab5c getattr success
+[E] extent_server 00000000afe8ab5c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+RPC STATS: 1:2 6001:130 6002:393 6003:351 6004:24 
+[E] extent_server 00000000f65a8c33 getattr success
+[E] extent_server 00000000f65a8c33 getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 00000000f65a8c33 getattr success
+[PUT] update 
+[E] extent_server 00000000f65a8c33 getattr success
+[E] extent_server 00000000f65a8c33 getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 00000000f65a8c33 getattr success
+[E] extent_server 00000000f65a8c33 getattr success
+[PUT] update 
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 00000000f65a8c33 getattr success
+[E] extent_server 00000000f65a8c33 getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+RPC STATS: 1:2 6001:132 6002:403 6003:364 6004:24 
+[E] extent_server 00000000f65a8c33 getattr success
+[E] extent_server 00000000f65a8c33 getattr success
+[E] extent_server 000000000fc6ef2c getattr success
 [E] extent_server getattr failed
-[E] extent_server 000000006e9bdb4c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
 [PUT] update 
 [PUT] create 
-[E] extent_server 00000000f8128b73 getattr success
-[E] extent_server 00000000f8128b73 getattr success
+[E] extent_server 00000000c05e2555 getattr success
+[E] extent_server 00000000c05e2555 getattr success
 [PUT] update 
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 000000008e05e298 getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 0000000086217b5f getattr success
 [PUT] update 
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 0000000088a52153 getattr success
-[E] extent_server 0000000088a52153 getattr success
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 0000000088a52153 getattr success
+RPC STATS: 1:2 6001:136 6002:414 6003:373 6004:25 
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 00000000c2ae2fe5 getattr success
+[E] extent_server 00000000c2ae2fe5 getattr success
+[E] extent_server 00000000c2ae2fe5 getattr success
+[E] extent_server 00000000c2ae2fe5 getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 00000000989ff40f getattr success
 [PUT] update 
-[E] extent_server 0000000088a52153 getattr success
-[E] extent_server 0000000088a52153 getattr success
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 0000000088a52153 getattr success
-[E] extent_server 0000000088a52153 getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 00000000f2540bce getattr success
 [PUT] update 
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 0000000088a52153 getattr success
-[E] extent_server 0000000088a52153 getattr success
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 0000000088a52153 getattr success
-[E] extent_server 0000000088a52153 getattr success
-[E] extent_server 000000006e9bdb4c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+RPC STATS: 1:2 6001:138 6002:426 6003:382 6004:27 
 [E] extent_server getattr failed
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 00000000a38767a9 getattr success
-[E] extent_server 00000000a38767a9 getattr success
-[E] extent_server 00000000a38767a9 getattr success
-[E] extent_server 00000000a38767a9 getattr success
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server getattr failed
-[E] extent_server 000000006e9bdb4c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
 [PUT] update 
 [PUT] create 
-[E] extent_server 00000000f76f0101 getattr success
-[E] extent_server 00000000f76f0101 getattr success
+[E] extent_server 00000000cf07750d getattr success
+[E] extent_server 00000000cf07750d getattr success
 [PUT] update 
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 0000000088a52153 getattr success
-[PUT] update 
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 000000009c2a9dfc getattr success
-[E] extent_server 000000009c2a9dfc getattr success
-[E] extent_server 000000009c2a9dfc getattr success
-[E] extent_server 000000009c2a9dfc getattr success
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 00000000b13e7e8b getattr success
-[PUT] update 
-[E] extent_server 000000006e9bdb4c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
 [E] extent_server getattr failed
-[E] extent_server 000000006e9bdb4c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server getattr failed
+[E] extent_server 000000000fc6ef2c getattr success
+[PUT] update 
+RPC STATS: 1:2 6001:143 6002:437 6003:391 6004:27 
+[PUT] create 
+[E] extent_server 00000000e288288a getattr success
+[E] extent_server 00000000e288288a getattr success
+[PUT] update 
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server getattr failed
+[E] extent_server 000000000fc6ef2c getattr success
 [PUT] update 
 [PUT] create 
-[E] extent_server 00000000ab949102 getattr success
-[E] extent_server 00000000ab949102 getattr success
+[E] extent_server 00000000ae068b31 getattr success
+[E] extent_server 00000000ae068b31 getattr success
 [PUT] update 
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 00000000cdac794a getattr success
-[E] extent_server 00000000cdac794a getattr success
-[E] extent_server 00000000cdac794a getattr success
-[E] extent_server 00000000cdac794a getattr success
-[E] extent_server 000000006e9bdb4c getattr success
+RPC STATS: 1:2 6001:147 6002:447 6003:402 6004:27 
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 00000000d9b39de6 getattr success
+[PUT] update 
+[E] extent_server 000000000fc6ef2c getattr success
 [E] extent_server getattr failed
-[E] extent_server 000000006e9bdb4c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
 [PUT] update 
 [PUT] create 
-[E] extent_server 000000009a713183 getattr success
-[E] extent_server 000000009a713183 getattr success
+[E] extent_server 00000000c22f372d getattr success
+[E] extent_server 00000000c22f372d getattr success
+RPC STATS: 1:2 6001:151 6002:458 6003:411 6004:28 
 [PUT] update 
-[E] extent_server 000000006e9bdb4c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 00000000ae068b31 getattr success
+[PUT] update 
+[E] extent_server 000000000fc6ef2c getattr success
 [E] extent_server getattr failed
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server getattr failed
-[E] extent_server 000000006e9bdb4c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
 [PUT] update 
 [PUT] create 
-[E] extent_server 0000000096b1ad16 getattr success
-[E] extent_server 0000000096b1ad16 getattr success
+[E] extent_server 00000000bee3bf52 getattr success
+[E] extent_server 00000000bee3bf52 getattr success
 [PUT] update 
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 000000009d300eed getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+RPC STATS: 1:2 6001:155 6002:470 6003:419 6004:29 
+[E] extent_server 00000000cf07750d getattr success
+[E] extent_server 00000000cf07750d getattr success
+[E] extent_server 00000000cf07750d getattr success
+[E] extent_server 00000000cf07750d getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 00000000f65a8c33 getattr success
 [PUT] update 
-[E] extent_server 000000006e9bdb4c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 00000000e288288a getattr success
+[PUT] update 
+[E] extent_server 000000000fc6ef2c getattr success
+RPC STATS: 1:2 6001:157 6002:481 6003:429 6004:31 
+[E] extent_server 00000000c05e2555 getattr success
+[E] extent_server 00000000c05e2555 getattr success
+[E] extent_server 00000000c05e2555 getattr success
+[E] extent_server 00000000c05e2555 getattr success
+[E] extent_server 000000000fc6ef2c getattr success
 [E] extent_server getattr failed
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 00000000e374de20 getattr success
-[E] extent_server 00000000e374de20 getattr success
-[E] extent_server 00000000e374de20 getattr success
-[E] extent_server 00000000e374de20 getattr success
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 00000000d673a4d0 getattr success
-[PUT] update 
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 00000000f8128b73 getattr success
-[PUT] update 
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server getattr failed
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 00000000f8b12bbf getattr success
-[PUT] update 
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server getattr failed
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 00000000dcdc0bb1 getattr success
-[E] extent_server 00000000dcdc0bb1 getattr success
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 00000000dcdc0bb1 getattr success
-[PUT] update 
-[E] extent_server 00000000dcdc0bb1 getattr success
-[E] extent_server 00000000dcdc0bb1 getattr success
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 00000000dcdc0bb1 getattr success
-[E] extent_server 00000000dcdc0bb1 getattr success
-[PUT] update 
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 00000000dcdc0bb1 getattr success
-[E] extent_server 00000000dcdc0bb1 getattr success
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 00000000dcdc0bb1 getattr success
-[E] extent_server 00000000dcdc0bb1 getattr success
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 000000009c2a9dfc getattr success
-[PUT] update 
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server getattr failed
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server getattr failed
-[E] extent_server 000000006e9bdb4c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
 [PUT] update 
 [PUT] create 
-[E] extent_server 00000000e825ce13 getattr success
-[E] extent_server 00000000e825ce13 getattr success
+[E] extent_server 00000000bb775d03 getattr success
+[E] extent_server 00000000bb775d03 getattr success
 [PUT] update 
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 000000006e9bdb4c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 00000000c22f372d getattr success
+RPC STATS: 1:2 6001:160 6002:492 6003:439 6004:32 
+[PUT] update 
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 00000000bb775d03 getattr success
+[E] extent_server 00000000bb775d03 getattr success
+[E] extent_server 00000000bb775d03 getattr success
+[E] extent_server 00000000bb775d03 getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 00000000cf07750d getattr success
+[E] extent_server 00000000cf07750d getattr success
+[E] extent_server 00000000cf07750d getattr success
+[E] extent_server 00000000cf07750d getattr success
+[E] extent_server 000000000fc6ef2c getattr success
 [E] extent_server getattr failed
-[E] extent_server 000000006e9bdb4c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+RPC STATS: 1:2 6001:161 6002:503 6003:452 6004:32 
 [PUT] update 
 [PUT] create 
-[E] extent_server 00000000a877141b getattr success
-[E] extent_server 00000000a877141b getattr success
+[E] extent_server 00000000ccb56c4e getattr success
+[E] extent_server 00000000ccb56c4e getattr success
 [PUT] update 
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 000000006e9bdb4c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
 [E] extent_server getattr failed
-[E] extent_server 000000006e9bdb4c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 00000000c2ae2fe5 getattr success
+[PUT] update 
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server getattr failed
+[E] extent_server 000000000fc6ef2c getattr success
+RPC STATS: 1:2 6001:165 6002:514 6003:461 6004:33 
 [PUT] update 
 [PUT] create 
-[E] extent_server 00000000ac3193a0 getattr success
-[E] extent_server 00000000ac3193a0 getattr success
+[E] extent_server 00000000b137cb20 getattr success
+[E] extent_server 00000000b137cb20 getattr success
 [PUT] update 
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 00000000dcdc0bb1 getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 00000000bee3bf52 getattr success
 [PUT] update 
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server getattr failed
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 00000000ac51b424 getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 00000000c05e2555 getattr success
+RPC STATS: 1:2 6001:169 6002:526 6003:468 6004:35 
 [PUT] update 
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 00000000cdac794a getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 00000000cf07750d getattr success
 [PUT] update 
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 00000000b89284c9 getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 00000000bb775d03 getattr success
 [PUT] update 
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 00000000cdb787bc getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 00000000ade7cde9 getattr success
+RPC STATS: 1:2 6001:172 6002:539 6003:474 6004:38 
 [PUT] update 
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 00000000e5a718d8 getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 00000000ccb56c4e getattr success
 [PUT] update 
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 00000000f76f0101 getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 00000000afe8ab5c getattr success
 [PUT] update 
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 00000000ac3193a0 getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 00000000b137cb20 getattr success
+RPC STATS: 1:2 6001:176 6002:551 6003:480 6004:41 
 [PUT] update 
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 00000000a877141b getattr success
-[PUT] update 
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 00000000990f2a08 getattr success
-[PUT] update 
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 00000000f3caec75 getattr success
-[PUT] update 
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 000000009f42ac15 getattr success
-[PUT] update 
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 00000000a38767a9 getattr success
-[PUT] update 
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 00000000bdb5d8d7 getattr success
-[PUT] update 
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 00000000cc187abb getattr success
-[PUT] update 
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 00000000e825ce13 getattr success
-[PUT] update 
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 0000000096b1ad16 getattr success
-[PUT] update 
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 00000000ab949102 getattr success
-[PUT] update 
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 00000000b53476db getattr success
-[PUT] update 
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 000000009a713183 getattr success
-[PUT] update 
-[E] extent_server 000000006e9bdb4c getattr success
-[E] extent_server 00000000e374de20 getattr success
-[PUT] update 
-[E] extent_server 000000006e9bdb4c getattr success
+[E] extent_server 000000000fc6ef2c getattr success
+[E] extent_server 0000000000000001 getattr success
+[E] extent_server 0000000000000001 getattr success
+[E] extent_server 0000000000000001 getattr success
+[E] extent_server 0000000000000001 getattr success

@@ -73,7 +73,7 @@ int extent_server::getattr(extent_protocol::extentid_t id, extent_protocol::attr
 	// for now because it's difficult to get FUSE to do anything (including
 	// unmount) if getattr fails.
 	if(info_map.find(id) == info_map.end()) {
-		printf("[E] extent_server getattr failed\n");
+		printf("[E] extent_server no attr found\n");
 		return extent_protocol::IOERR;
 	} else {
 		printf("[E] extent_server %016llx getattr success\n", id);
