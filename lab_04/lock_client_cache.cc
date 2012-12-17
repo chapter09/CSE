@@ -115,32 +115,6 @@ lock_client_cache::acquire(lock_protocol::lockid_t lid)
 	return lock_protocol::OK;
 }
 
-/*
- *void
- *lock_client_cache::to_lock(lock_protocol::lockid_t lid)
- *{
- *    if(cache_map[lid] != FREE){
- *        printf("\tclient %s thread %u wait for the signal\n", 
- *		this->id.c_str(), (unsigned int) pthread_self());
- *        while(1) {
- *            pthread_cond_wait(&cv_map[lid], &mutex);
- *            printf("wait again\n");
- *            if(cache_map[lid] == FREE) {
- *                break;
- *            } 
- *        }
- *        printf("[c] %s [t] %u get lock\n", 
- *			this->id.c_str(), (unsigned int) pthread_self());
- *        cache_map[lid] = LOCKED;
- *    }else{
- *        printf("[c] %s [t] %u get lock\n", 
- *			this->id.c_str(), (unsigned int) pthread_self());
- *        cache_map[lid] = LOCKED;
- *    }
- *    info_map[lid].is_retried = false;
- *}
- */
-
 lock_protocol::status
 lock_client_cache::release(lock_protocol::lockid_t lid)
 {
@@ -194,48 +168,6 @@ lock_client_cache::revoke_handler(lock_protocol::lockid_t lid,
 	return rlock_protocol::OK;
 }
 
-// 		if(cache_map[lid] == RELEASING) {
-// 			pthread_mutex_unlock(&mutex);
-// 			printf("\t%s call server release lock %lld exist OFF\n", 
-// 				this->id.c_str(), lid);
-// 			cl->call(lock_protocol::release, lid, id, r);
-// 			pthread_mutex_lock(&mutex);
-// 			cache_map[lid] = NONE;
-// 			info_map[lid] = false;
-
-// 		} 
-		
-// 	}
-
-
-
-
-// 	if(cache_map[lid] == FREE && !info_map[lid].is_retried) {
-// 		int r;
-
-// 		lock_protocol::status ret;
-// 		info_map.erase(lid);
-// 		cache_map[lid] = NONE;
-// 		pthread_cond_signal(&cv_map[lid]);
-// 		pthread_mutex_unlock(&mutex);
-// 		printf("\t%s call server release lock %lld exist OFF\n", 
-// 			this->id.c_str(), lid);
-// 		ret = cl->call(lock_protocol::release, lid, id, r);
-// 		return ret;
-// 	} else if(cache_map[lid] == NONE) {
-// 		printf("\t%s revoke lock %lld exist NONE [s] %d\n", 
-// 			this->id.c_str(), lid, cache_map[lid]);
-// 		pthread_mutex_unlock(&mutex);
-// 		return rlock_protocol::OK;
-// 	} else {
-// 		printf("\t%s revoke lock %lld exist LOCKED [s] %d\n", 
-// 			this->id.c_str(), lid, cache_map[lid]);
-// 		info_map[lid].is_revoked = true;		
-// 		pthread_mutex_unlock(&mutex);
-// 		return rlock_protocol::OK;
-// 	}
-// }
-
 
 rlock_protocol::status
 lock_client_cache::retry_handler(lock_protocol::lockid_t lid, 
@@ -253,23 +185,5 @@ lock_client_cache::retry_handler(lock_protocol::lockid_t lid,
 	}
 	pthread_mutex_unlock(&mutex);
 
-	// if(cache_map[lid] == RETRYING){
-	// 	printf("[retry after RETRY]lock %lld client %s\n", 
-	// 		lid, this->id.c_str());
-	// 	cache_map[lid] = FREE;
-	// 	info_map[lid].is_retried = true;		
-	// 	pthread_cond_signal(&cv_map[lid]);
-	// 	pthread_mutex_unlock(&mutex);
-	// } else {
-	// 	printf("[retry before RETRY]lock %lld client %s\n", 
-	// 		lid, this->id.c_str());
-	// 	//if the retry rpc comes before the lock arrives
-	// 	info_map[lid].is_retried = true;		
-	// 	ret = rlock_protocol::OK;
-	// 	printf("retry ACQ [c] %s [t] %u\n", 
-	// 		this->id.c_str(), (unsigned int) pthread_self());
-	// 	cache_map[lid] = LOCKED;
-	// 	pthread_mutex_unlock(&mutex);
-	// }
 	return rlock_protocol::OK;
 }

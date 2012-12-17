@@ -7,20 +7,4 @@ max_readahead=0x00020000
    max_readahead=0x00020000
    max_write=0x00020000
    unique: 1, error: 0 (Success), outsize: 40
-unique: 2, opcode: GETATTR (3), nodeid: 1, insize: 56
-get_attr start
-getattr 0000000000000001 0
-lock 0000000000000001 is new in the client 127.0.0.1:36714
-retry lock 1 client 127.0.0.1:36714
-[retry after RETRY]lock 1 client 127.0.0.1:36714
-lock 0000000000000001 [RETRY is_retried] client 127.0.0.1:36714
-getdir 0000000000000001
-release request from thread 127.0.0.1:36714
-[send signal] thread 127.0.0.1:36714
-[send signal out] thread 127.0.0.1:36714
-   getattr -> 1354461748 1354461715 1354461715
-   unique: 2, error: 0 (Success), outsize: 112
-	127.0.0.1:36714 revoke lock 1 status 3
-	127.0.0.1:36714 revoke lock 1 status 3
-	127.0.0.1:36714 revoke lock 1 exist LOCKED
-unique: 3, opcode: FORGET (2), nodeid: 1, insize: 48
+unique: 2, opcode: FORGET (2), nodeid: 1, insize: 48
