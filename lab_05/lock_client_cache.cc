@@ -8,6 +8,16 @@
 #include <stdio.h>
 #include "tprintf.h"
 
+_lock_release_user::_lock_release_user(class extent_client *_ec)
+:ec(_ec)
+{
+}
+
+void
+_lock_release_user::dorelease(lock_protocol::lockid_t lid)
+{
+	VERIFY(ec->flush(lid) == extent_protocol::OK);
+}
 
 lock_client_cache::lock_client_cache(std::string xdst, 
 		class lock_release_user *_lu)
@@ -126,6 +136,7 @@ lock_client_cache::release(lock_protocol::lockid_t lid)
 
 		if(cache_map[lid] == RELEASING) {
 			printf("release to remote %s\n", this->id.c_str());
+			lu->dorelease(lid);
 			pthread_mutex_unlock(&mutex);
 			cl->call(lock_protocol::release, lid, id, r);
 			pthread_mutex_lock(&mutex);
@@ -157,6 +168,7 @@ lock_client_cache::revoke_handler(lock_protocol::lockid_t lid,
 			cache_map[lid] = NONE;
 			info_map[lid] = false;
 			int r;
+			lu->dorelease(lid);
 			pthread_mutex_unlock(&mutex);
 			cl->call(lock_protocol::release, lid, id, r);
 			return rlock_protocol::OK;

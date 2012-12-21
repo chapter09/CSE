@@ -12,6 +12,7 @@
 class yfs_client {
 	extent_client *ec;
 	lock_client_cache *lc;
+	_lock_release_user *lu;
 	public:
 
 	typedef unsigned long long inum;

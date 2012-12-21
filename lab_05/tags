@@ -452,6 +452,8 @@ _ind	CSE/lab_04/rpc/marshall.h	/^		int _ind;       \/\/ Read\/write head positio
 _ind	CSE/lab_04/rpc/marshall.h	/^		int _ind;$/;"	m	class:unmarshall
 _ind	rpc/marshall.h	/^		int _ind;       \/\/ Read\/write head position$/;"	m	class:marshall
 _ind	rpc/marshall.h	/^		int _ind;$/;"	m	class:unmarshall
+_lock_release_user	lock_client_cache.cc	/^_lock_release_user::_lock_release_user(class extent_client *_ec)$/;"	f	class:_lock_release_user
+_lock_release_user	lock_client_cache.h	/^class _lock_release_user : public lock_release_user {$/;"	c
 _ok	CSE/lab_01/rpc/marshall.h	/^		bool _ok;$/;"	m	class:unmarshall
 _ok	CSE/lab_02/rpc/marshall.h	/^		bool _ok;$/;"	m	class:unmarshall
 _ok	CSE/lab_03/rpc/marshall.h	/^		bool _ok;$/;"	m	class:unmarshall
@@ -836,7 +838,7 @@ cl	CSE/lab_03/lock_client.h	/^  rpcc *cl;$/;"	m	class:lock_client
 cl	CSE/lab_04/extent_client.h	/^  rpcc *cl;$/;"	m	class:extent_client
 cl	CSE/lab_04/handle.h	/^  rpcc *cl;$/;"	m	struct:hinfo
 cl	CSE/lab_04/lock_client.h	/^  rpcc *cl;$/;"	m	class:lock_client
-cl	extent_client.h	/^  rpcc *cl;$/;"	m	class:extent_client
+cl	extent_client.h	/^		rpcc *cl;$/;"	m	class:extent_client
 cl	handle.h	/^  rpcc *cl;$/;"	m	struct:hinfo
 cl	lock_client.h	/^  rpcc *cl;$/;"	m	class:lock_client
 cl_mutex	CSE/lab_04/handle.h	/^  pthread_mutex_t cl_mutex;$/;"	m	struct:hinfo
@@ -1059,6 +1061,7 @@ ctime	CSE/lab_04/yfs_client.h	/^		unsigned long ctime;$/;"	m	struct:yfs_client::
 ctime	extent_protocol.h	/^    unsigned int ctime;$/;"	m	struct:extent_protocol::attr
 ctime	yfs_client.h	/^		unsigned long ctime;$/;"	m	struct:yfs_client::dirinfo
 ctime	yfs_client.h	/^		unsigned long ctime;$/;"	m	struct:yfs_client::fileinfo
+ctnt_cmap	extent_client.h	/^		std::map<extent_protocol::extentid_t, std::string> ctnt_cmap;$/;"	m	class:extent_client
 ctnt_map	CSE/lab_02/extent_server.h	/^		std::map<extent_protocol::extentid_t, std::string> ctnt_map;$/;"	m	class:extent_server
 ctnt_map	CSE/lab_03/extent_server.h	/^		std::map<extent_protocol::extentid_t, std::string> ctnt_map;$/;"	m	class:extent_server
 ctnt_map	CSE/lab_04/extent_server.h	/^		std::map<extent_protocol::extentid_t, std::string> ctnt_map;$/;"	m	class:extent_server
@@ -1181,6 +1184,7 @@ dirinfo	CSE/lab_02/yfs_client.h	/^	struct dirinfo {$/;"	s	class:yfs_client
 dirinfo	CSE/lab_03/yfs_client.h	/^	struct dirinfo {$/;"	s	class:yfs_client
 dirinfo	CSE/lab_04/yfs_client.h	/^	struct dirinfo {$/;"	s	class:yfs_client
 dirinfo	yfs_client.h	/^	struct dirinfo {$/;"	s	class:yfs_client
+dirty	extent_protocol.h	/^	bool dirty;$/;"	m	struct:extent_protocol::attr
 dispatch	CSE/lab_01/rpc/rpc.cc	/^rpcs::dispatch(djob_t *j)$/;"	f	class:rpcs
 dispatch	CSE/lab_02/rpc/rpc.cc	/^rpcs::dispatch(djob_t *j)$/;"	f	class:rpcs
 dispatch	CSE/lab_03/rpc/rpc.cc	/^rpcs::dispatch(djob_t *j)$/;"	f	class:rpcs
@@ -1213,6 +1217,7 @@ done	CSE/lab_04/rpc/rpc.h	/^			bool done;$/;"	m	struct:rpcc::caller
 done	rpc/rpc.h	/^			bool done;$/;"	m	struct:rpcc::caller
 done_handle	CSE/lab_04/handle.cc	/^handle_mgr::done_handle(struct hinfo *h)$/;"	f	class:handle_mgr
 done_handle	handle.cc	/^handle_mgr::done_handle(struct hinfo *h)$/;"	f	class:handle_mgr
+dorelease	lock_client_cache.cc	/^_lock_release_user::dorelease(lock_protocol::lockid_t lid)$/;"	f	class:_lock_release_user
 dst	CSE/lab_01/lock_demo.cc	/^std::string dst;$/;"	v
 dst	CSE/lab_01/lock_tester.cc	/^std::string dst;$/;"	v
 dst	CSE/lab_01/rpc/rpctest.cc	/^struct sockaddr_in dst; \/\/server's ip address$/;"	v	typeref:struct:sockaddr_in
@@ -1241,6 +1246,7 @@ dup_req_	rpc/rpc.h	/^		struct request dup_req_;$/;"	m	class:rpcc	typeref:struct:
 ec	CSE/lab_02/yfs_client.h	/^	extent_client *ec;$/;"	m	class:yfs_client
 ec	CSE/lab_03/yfs_client.h	/^	extent_client *ec;$/;"	m	class:yfs_client
 ec	CSE/lab_04/yfs_client.h	/^	extent_client *ec;$/;"	m	class:yfs_client
+ec	lock_client_cache.h	/^		class extent_client *ec;$/;"	m	class:_lock_release_user	typeref:class:_lock_release_user::extent_client
 ec	yfs_client.h	/^	extent_client *ec;$/;"	m	class:yfs_client
 enq	CSE/lab_01/rpc/fifo.h	/^fifo<T>::enq(T e, bool blocking)$/;"	f	class:fifo
 enq	CSE/lab_02/rpc/fifo.h	/^fifo<T>::enq(T e, bool blocking)$/;"	f	class:fifo
@@ -1331,6 +1337,7 @@ filename	CSE/lab_02/yfs_client.cc	/^yfs_client::filename(inum inum)$/;"	f	class:
 filename	CSE/lab_03/yfs_client.cc	/^yfs_client::filename(inum inum)$/;"	f	class:yfs_client
 filename	CSE/lab_04/yfs_client.cc	/^yfs_client::filename(inum inum)$/;"	f	class:yfs_client
 filename	yfs_client.cc	/^yfs_client::filename(inum inum)$/;"	f	class:yfs_client
+flush	extent_client.cc	/^extent_client::flush(extent_protocol::extentid_t eid)$/;"	f	class:extent_client
 free_reply_window	CSE/lab_01/rpc/rpc.cc	/^rpcs::free_reply_window(void)$/;"	f	class:rpcs
 free_reply_window	CSE/lab_02/rpc/rpc.cc	/^rpcs::free_reply_window(void)$/;"	f	class:rpcs
 free_reply_window	CSE/lab_03/rpc/rpc.cc	/^rpcs::free_reply_window(void)$/;"	f	class:rpcs
@@ -1585,6 +1592,7 @@ ind	CSE/lab_02/rpc/marshall.h	/^		int ind() { return _ind;}$/;"	f	class:unmarsha
 ind	CSE/lab_03/rpc/marshall.h	/^		int ind() { return _ind;}$/;"	f	class:unmarshall
 ind	CSE/lab_04/rpc/marshall.h	/^		int ind() { return _ind;}$/;"	f	class:unmarshall
 ind	rpc/marshall.h	/^		int ind() { return _ind;}$/;"	f	class:unmarshall
+info_cmap	extent_client.h	/^		std::map<extent_protocol::extentid_t, extent_protocol::attr> info_cmap;$/;"	m	class:extent_client
 info_map	CSE/lab_02/extent_server.h	/^		std::map<extent_protocol::extentid_t, extent_protocol::attr> info_map;$/;"	m	class:extent_server
 info_map	CSE/lab_03/extent_server.h	/^		std::map<extent_protocol::extentid_t, extent_protocol::attr> info_map;$/;"	m	class:extent_server
 info_map	CSE/lab_04/extent_server.h	/^		std::map<extent_protocol::extentid_t, extent_protocol::attr> info_map;$/;"	m	class:extent_server
@@ -1836,6 +1844,7 @@ lossytest_	rpc/rpc.h	/^	int lossytest_; $/;"	m	class:rpcs
 lu	CSE/lab_04/lock_client_cache.h	/^		class lock_release_user *lu;$/;"	m	class:lock_client_cache	typeref:class:lock_client_cache::lock_release_user
 lu	lock_client_cache.h	/^		class lock_release_user *lu;$/;"	m	class:lock_client_cache	typeref:class:lock_client_cache::lock_release_user
 lu	test/lock_client_cache.h	/^		class lock_release_user *lu;$/;"	m	class:lock_client_cache	typeref:class:lock_client_cache::lock_release_user
+lu	yfs_client.h	/^	_lock_release_user *lu;$/;"	m	class:yfs_client
 m	CSE/lab_01/rpc/method_thread.h	/^				void (C::*m)(A1 a1, A2 a2);$/;"	m	class:__anon2::XXX
 m	CSE/lab_01/rpc/rpc.h	/^			pthread_mutex_t m;$/;"	m	struct:rpcc::caller
 m	CSE/lab_02/rpc/method_thread.h	/^				void (C::*m)(A1 a1, A2 a2);$/;"	m	class:__anon8::XXX
@@ -2027,6 +2036,7 @@ mutex	CSE/lab_04/extent_server.h	/^		pthread_mutex_t mutex;$/;"	m	class:extent_s
 mutex	CSE/lab_04/lock_client_cache.h	/^		pthread_mutex_t mutex;	\/\/lock_client global lock$/;"	m	class:lock_client_cache
 mutex	CSE/lab_04/lock_server.h	/^		pthread_mutex_t mutex;$/;"	m	class:lock_server
 mutex	CSE/lab_04/lock_server_cache.h	/^		pthread_mutex_t mutex;$/;"	m	class:lock_server_cache
+mutex	extent_client.h	/^		pthread_mutex_t mutex;		$/;"	m	class:extent_client
 mutex	extent_server.h	/^		pthread_mutex_t mutex;$/;"	m	class:extent_server
 mutex	lock_client_cache.h	/^		pthread_mutex_t mutex;	\/\/lock_client global lock$/;"	m	class:lock_client_cache
 mutex	lock_server.h	/^		pthread_mutex_t mutex;$/;"	m	class:lock_server
@@ -2220,6 +2230,7 @@ operator >>	rpc/rpc.cc	/^operator>>(unmarshall &u, unsigned char &x)$/;"	f
 operator >>	rpc/rpc.cc	/^operator>>(unmarshall &u, unsigned int &x)$/;"	f
 operator >>	rpc/rpc.cc	/^operator>>(unmarshall &u, unsigned long long &x)$/;"	f
 operator >>	rpc/rpc.cc	/^operator>>(unmarshall &u, unsigned short &x)$/;"	f
+os	5test.py	/^import os, sys$/;"	i
 os	CSE/lab_04/test.py	/^import sys,os$/;"	i
 os	CSE/lab_04/test_yfs.py	/^import sys,os$/;"	i
 os	test.py	/^import sys,os$/;"	i
@@ -2635,6 +2646,7 @@ rsm_tester	CSE/lab_02/GNUmakefile	/^rsm_tester=rsm_tester.cc rsmtest_client.cc$/
 rsm_tester	CSE/lab_03/GNUmakefile	/^rsm_tester=rsm_tester.cc rsmtest_client.cc$/;"	m
 rsm_tester	CSE/lab_04/GNUmakefile	/^rsm_tester=rsm_tester.cc rsmtest_client.cc$/;"	m
 rsm_tester	GNUmakefile	/^rsm_tester=rsm_tester.cc rsmtest_client.cc$/;"	m
+s	5test.py	/^s = int(sys.argv[1])$/;"	v
 safebind	CSE/lab_04/handle.cc	/^handle::safebind()$/;"	f	class:handle
 safebind	handle.cc	/^handle::safebind()$/;"	f	class:handle
 send	CSE/lab_01/rpc/connection.cc	/^connection::send(char *b, int sz)$/;"	f	class:connection
@@ -2785,6 +2797,7 @@ str	CSE/lab_02/rpc/marshall.h	/^		std::string str() {$/;"	f	class:marshall
 str	CSE/lab_03/rpc/marshall.h	/^		std::string str() {$/;"	f	class:marshall
 str	CSE/lab_04/rpc/marshall.h	/^		std::string str() {$/;"	f	class:marshall
 str	rpc/marshall.h	/^		std::string str() {$/;"	f	class:marshall
+sys	5test.py	/^import os, sys$/;"	i
 sys	CSE/lab_04/test.py	/^import sys,os$/;"	i
 sys	CSE/lab_04/test_yfs.py	/^import sys,os$/;"	i
 sys	test.py	/^import sys,os$/;"	i
@@ -2804,6 +2817,7 @@ sz	CSE/lab_04/rpc/rpc.h	/^		int sz;$/;"	m	struct:rpcs::djob_t
 sz	rpc/connection.h	/^			int sz;$/;"	m	struct:connection::charbuf
 sz	rpc/rpc.h	/^		int sz;         \/\/ the size of reply buffer$/;"	m	struct:rpcs::reply_t
 sz	rpc/rpc.h	/^		int sz;$/;"	m	struct:rpcs::djob_t
+t	5test.py	/^t = int(sys.argv[2])$/;"	v
 t	CSE/lab_04/test.py	/^t = int(sys.argv[2])$/;"	v
 t	CSE/lab_04/test_yfs.py	/^t = int(sys.argv[1])$/;"	v
 t	test.py	/^t = int(sys.argv[2])$/;"	v
@@ -3249,6 +3263,7 @@ yyy	rpc/method_thread.h	/^				static void *yyy(void *vvv) {$/;"	f	class:__anon26
 ~ThrPool	CSE/lab_03/rpc/thr_pool.cc	/^ThrPool::~ThrPool()$/;"	f	class:ThrPool
 ~ThrPool	CSE/lab_04/rpc/thr_pool.cc	/^ThrPool::~ThrPool()$/;"	f	class:ThrPool
 ~ThrPool	rpc/thr_pool.cc	/^ThrPool::~ThrPool()$/;"	f	class:ThrPool
+~_lock_release_user	lock_client_cache.h	/^		~_lock_release_user() {};$/;"	f	class:_lock_release_user
 ~aio_callback	CSE/lab_01/rpc/pollmgr.h	/^		virtual ~aio_callback() {}$/;"	f	class:aio_callback
 ~aio_callback	CSE/lab_02/rpc/pollmgr.h	/^		virtual ~aio_callback() {}$/;"	f	class:aio_callback
 ~aio_callback	CSE/lab_03/rpc/pollmgr.h	/^		virtual ~aio_callback() {}$/;"	f	class:aio_callback

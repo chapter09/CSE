@@ -1,7 +1,7 @@
 // yfs client.  implements FS operations using extent and lock server
 #include "yfs_client.h"
 #include "extent_client.h"
-#include "lock_client.h"
+#include "lock_client_cache.h"
 #include <sstream>
 #include <iostream>
 #include <stdio.h>
@@ -16,7 +16,8 @@
 yfs_client::yfs_client(std::string extent_dst, std::string lock_dst)
 {
 	ec = new extent_client(extent_dst);
-	lc = new lock_client_cache(lock_dst);
+	lu = new _lock_release_user(ec);
+	lc = new lock_client_cache(lock_dst, lu);
 	srandom(time(NULL));
 	build_root();
 }
@@ -33,8 +34,10 @@ yfs_client::n2i(std::string n)
 void
 yfs_client::build_root()
 {
-	inum num =  0x0000000000000001;
+	inum num = 0x0000000000000001;
+	lc->acquire(num);
 	VERIFY(ec->put(num, "") == extent_protocol::OK);
+	lc->release(num);
 }
 
 std::string
@@ -69,7 +72,7 @@ yfs_client::getfile(inum inum, fileinfo &fin)
 	printf("getfile %016llx\n", inum);
 	extent_protocol::attr a;
 	if (ec->getattr(inum, a) != extent_protocol::OK) {
-		r = IOERR;
+		r = NOENT;
 		goto release;
 	}
 
@@ -95,7 +98,7 @@ yfs_client::getdir(inum inum, dirinfo &din)
 	printf("getdir %016llx\n", inum);
 	extent_protocol::attr a;
 	if (ec->getattr(inum, a) != extent_protocol::OK) {
-		r = IOERR;
+		r = NOENT;
 		goto release;
 	}
 	din.atime = a.atime;
@@ -115,14 +118,15 @@ yfs_client::create(inum dir_inum, const char *name, inum &f, bool is_f)
 	std::string value;
 	lc->acquire(dir_inum);
 	if (ec->getattr(dir_inum, a) != extent_protocol::OK) {
-		r = IOERR;
+		r = NOENT;
 		printf("directory %016llx does not exist\n", dir_inum);
 		goto release;
 	}
 	
 	extent_protocol::status ret;
 	printf("[i] create_yfs_client\n");	
-	ret = ec->get(dir_inum, value);
+	//ret = ec->get(dir_inum, value);
+	VERIFY(ec->get(dir_inum, value) == extent_protocol::OK);
 	inum f_inum;
 
 	if(yfs_lookup(dir_inum, name, f_inum)) {
@@ -261,7 +265,7 @@ yfs_client::unlink(inum p_inum, const char *name)
 		r = IOERR;
 		goto release; 
 	} else {
-		VERIFY(ec->remove(f) == OK);
+		VERIFY(ec->remove(f) == extent_protocol::OK);
 		
 		std::string value;
 		size_t found;
@@ -295,7 +299,10 @@ yfs_client::yfs_read_dir(inum dir_inum, std::list<struct yfs_client::dirent> &li
 	std::string value = "";
 	printf("[i] readdir_yfs_client\n");	
 	printf("[i] %016llx\n", dir_inum);
-	ec->get(dir_inum, value);
+//	VERIFY(ec->get(dir_inum, value) == extent_protocol::OK);
+	if(ec->get(dir_inum, value) != extent_protocol::OK) {
+		return extent_protocol::OK;
+	}
 
 	std::string line;
 	std::stringstream stream;
@@ -322,7 +329,8 @@ yfs_client::yfs_lookup(inum dir_inum, const char *name, inum &f_inum)
 	std::list<struct yfs_client::dirent> list_dir;
 	std::list<struct yfs_client::dirent>::iterator dir_it;
 	std::string s = name;
-	VERIFY(yfs_read_dir(dir_inum, list_dir) == extent_protocol::OK);
+	//VERIFY(yfs_read_dir(dir_inum, list_dir) == extent_protocol::OK);
+	yfs_read_dir(dir_inum, list_dir);
 	
 	for(dir_it = list_dir.begin(); dir_it != list_dir.end(); dir_it++) {
 		if((*dir_it).name == s) {
@@ -344,67 +352,12 @@ release:
 bool
 yfs_client::lookup(inum dir_inum, const char *name, inum &f_inum)
 {
-	lc->acquire(dir_inum);
 	bool r;
+	lc->acquire(dir_inum);
 	r = yfs_lookup(dir_inum, name, f_inum);
 	lc->release(dir_inum);
 	return r;
 
-	/*bool r;
-	std::string value;
-	printf("[LOOK UP] under dir %016llx\n", dir_inum);
-	printf("[i] look up %s\n", name);
-	std::list<struct yfs_client::dirent> list_dir;
-	std::list<struct yfs_client::dirent>::iterator dir_it;
-	std::string s = name;
-	VERIFY(read_dir(dir_inum, list_dir) == extent_protocol::OK);
-	
-	for(dir_it = list_dir.begin(); dir_it != list_dir.end(); dir_it++) {
-		if((*dir_it).name == s) {
-			f_inum = (*dir_it).inum;
-			printf("have found %s %016llx\n", (*dir_it).name.c_str(), f_inum);
-			r = true;
-			goto release;
-		}
-	}
-
-	VERIFY(ec->get(dir_inum, value) == extent_protocol::OK);
-	
-	printf("[value]\n");
-	printf("%s\n", value.c_str());
-	printf("[value]\n");
-	std::string t_str;
-	t_str.push_back(':');
-	t_str.append(name);
-	t_str.append("\n");
-	found = value.find(t_str);
-	printf("[LOOKUP] found = %d", found);
-	if(found != std::string::npos) {
-		r = true;
-		printf("have found %s off %d\n", value.c_str(), found);
-		
-		std::string line;
-		std::stringstream stream;
-		stream << value;
-		while(getline(stream, line)) {
-			size_t pos;
-			struct dirent dir_ent;
-			if(line.find(name) !=std::string::npos) {
-				pos = line.find(':');
-				f_inum = n2i(line.substr(0, pos));
-				break;
-			}
-		}
-		printf("have found %s\n", name);
-		printf("have found %016llx\n", f_inum);
-		//f_inum = n2i(value.substr(found-11, 10));
-//		goto release;
-	printf("have not found %s\n", name);
-	r = false;
-	goto release;
-
-release:
-	return r;*/
 }
 
 yfs_client::inum

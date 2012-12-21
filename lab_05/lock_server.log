@@ -1,13 +1,4 @@
-2863478507:	handler_mgr::get_handle trying to bind...127.0.0.1:56543
-2863478508:	handle_mgr::get_handle bind succeeded 127.0.0.1:56543
-2863478509:	handler_mgr::get_handle trying to bind...127.0.0.1:54212
-2863478510:	handle_mgr::get_handle bind succeeded 127.0.0.1:54212
-RPC STATS: 1:2 7001:17 7002:6 
-RPC STATS: 1:2 7001:42 7002:6 
-RPC STATS: 1:2 7001:67 7002:6 
-RPC STATS: 1:2 7001:92 7002:6 
-RPC STATS: 1:2 7001:117 7002:6 
-RPC STATS: 1:2 7001:142 7002:6 
-RPC STATS: 1:2 7001:167 7002:6 
-RPC STATS: 1:2 7001:192 7002:6 
-RPC STATS: 1:2 7001:217 7002:6 
+2954982469:	handler_mgr::get_handle trying to bind...127.0.0.1:42279
+2954982470:	handle_mgr::get_handle bind succeeded 127.0.0.1:42279
+2954982472:	handler_mgr::get_handle trying to bind...127.0.0.1:37535
+2954982472:	handle_mgr::get_handle bind succeeded 127.0.0.1:37535
