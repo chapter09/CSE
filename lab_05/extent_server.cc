@@ -24,6 +24,7 @@ int extent_server::put(extent_protocol::extentid_t id, std::string buf, int &)
 	// Set mtime and ctime
 //	printf("[PUT] buf is %s \n", buf.c_str());
 //	return extent_protocol::IOERR;
+	pthread_mutex_lock(&mutex);
 	if(info_map.find(id) == info_map.end()) {
 		printf("[PUT] create %016llx\n", id);
 		extent_protocol::attr a;
@@ -31,14 +32,12 @@ int extent_server::put(extent_protocol::extentid_t id, std::string buf, int &)
 		a.ctime = time(NULL);
 		a.atime = time(NULL);
 		a.size = buf.size();
-		pthread_mutex_lock(&mutex);
 		info_map[id] = a;	
 		ctnt_map[id] = buf; 
 		pthread_mutex_unlock(&mutex);
 		return extent_protocol::OK;
 	} else {
 		printf("[PUT] update %016llx\n", id);
-		pthread_mutex_lock(&mutex);
 		info_map[id].mtime = time(NULL);
 		info_map[id].ctime = time(NULL);
 		info_map[id].size = buf.size();
@@ -54,11 +53,12 @@ int extent_server::get(extent_protocol::extentid_t id, std::string &buf)
 	// You fill this in for Lab 2.
 	// Set atime
 	//return extent_protocol::IOERR;
+	pthread_mutex_lock(&mutex);		
 	if(info_map.count(id) == 0) {
 		printf("[GET] not found %s \n", buf.c_str());
+		pthread_mutex_unlock(&mutex);		
 		return extent_protocol::NOENT;
 	}
-	pthread_mutex_lock(&mutex);		
 	info_map[id].atime = time(NULL);
 	buf = ctnt_map[id];
 	printf("[GET] buf is %s \n", buf.c_str());
@@ -73,12 +73,15 @@ int extent_server::getattr(extent_protocol::extentid_t id, extent_protocol::attr
 	// You replace this with a real implementation. We send a phony response
 	// for now because it's difficult to get FUSE to do anything (including
 	// unmount) if getattr fails.
+	pthread_mutex_lock(&mutex);		
 	if(info_map.count(id) == 0) {
 		printf("[E] extent_server %016llx no attr found\n", id);
+		pthread_mutex_unlock(&mutex);		
 		return extent_protocol::NOENT;
 	} else {
 		printf("[E] extent_server %016llx getattr success\n", id);
 		a = info_map[id];
+		pthread_mutex_unlock(&mutex);		
 		return extent_protocol::OK;
 	}
 }
@@ -86,10 +89,11 @@ int extent_server::getattr(extent_protocol::extentid_t id, extent_protocol::attr
 int extent_server::remove(extent_protocol::extentid_t id, int &)
 {
 	// You fill this in for Lab 2.
+	pthread_mutex_lock(&mutex);
 	if(info_map.find(id) == info_map.end()) {
+		pthread_mutex_unlock(&mutex);		
 		return extent_protocol::IOERR;
 	} else {
-		pthread_mutex_lock(&mutex);
 		info_map.erase(id);
 		ctnt_map.erase(id);
 	//How to deal with the file name under the directory

@@ -123,15 +123,17 @@ yfs_client::create(inum dir_inum, const char *name, inum &f, bool is_f)
 		goto release;
 	}
 	
-	extent_protocol::status ret;
+	//extent_protocol::status ret;
 	printf("[i] create_yfs_client\n");	
 	//ret = ec->get(dir_inum, value);
 	VERIFY(ec->get(dir_inum, value) == extent_protocol::OK);
 	inum f_inum;
 
+//	lc->acquire(f_inum);
 	if(yfs_lookup(dir_inum, name, f_inum)) {
 		f = f_inum;
 		r = EXIST;
+		//lc->release(f_inum);
 		goto release;
 	} else {
 		f = gen_inum(is_f);	//generate dir inum or not
@@ -140,8 +142,11 @@ yfs_client::create(inum dir_inum, const char *name, inum &f, bool is_f)
 		value.append(name);
 		value.append("\n");
 		ec->put(dir_inum, value);	
+		lc->acquire(f);
 		ec->put(f, "");	
+		lc->release(f);
 		r = OK;	
+//		lc->release(f_inum);
 		goto release;
 	}
 release:

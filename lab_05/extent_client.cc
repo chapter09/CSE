@@ -53,6 +53,7 @@ extent_client::getattr(extent_protocol::extentid_t eid,
 		printf("[EC] attr to remote %016llx\n", eid);
 		ret = cl->call(extent_protocol::getattr, eid, attr);
 		if(ret == extent_protocol::OK) {
+			printf("[EC] success attr remote %016llx\n", eid);
 			attr.dirty = false;
 			info_cmap[eid] = attr;
 		}
